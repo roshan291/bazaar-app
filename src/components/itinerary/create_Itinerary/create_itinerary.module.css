@@ -1,0 +1,102 @@
+.create_itinerary_page {
+    margin-top: 80px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 30px 16px;
+}
+
+.create_itinerary_page h5 {
+    padding: 16px 0;
+}
+
+.circleArrowUp {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    cursor: pointer;
+}
+.circleArrowUp button {
+    border-radius: 50%;
+    border: none;
+    -webkit-box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.45);
+    box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.45);
+}
+.circleArrowUp button:hover {
+    box-shadow: none;
+    color: #0067ff;
+    background-color: initial;
+    border-color: initial;
+}
+.circleArrowUp svg {
+    transform: scale(2.5);
+    right: 50px;
+}
+
+.daywise_block_main_wrapper {
+    /* border: 1px solid red; */
+}
+.daywise_block_wrapper {
+    border-left: 2px solid #ddd;
+    min-height: 150px;
+    position: relative;
+    margin-top: 30px;
+    padding-left: 15px;
+    margin-left: 42px;
+}
+.daywise_block_wrapper:after {
+    /* content: ""; */
+    background-color: #ddd;
+    width: 4px;
+    height: 75%;
+    position: absolute;
+    left: 8px;
+}
+.dayPlanCountDelete {
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.dayPlan {
+    position: absolute;
+    top: -20px;
+    left: -2px;
+    font-weight: 500;
+}
+
+.dayPlan svg {
+    color: crimson;
+    cursor: pointer;
+}
+
+.dayDescription {
+
+}
+
+.dayMeal ul {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.dayMeal ul li {
+    margin-right: 15px;
+}
+
+.dayMeal ul li svg {
+    color: dodgerblue;
+}
+
+.dayMeal p {
+    margin-bottom: .5rem;
+}
+
+.dayTransportation label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dayHotel {
+    
+}

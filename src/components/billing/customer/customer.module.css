@@ -1,0 +1,21 @@
+.update_customer {
+    width: 60%;
+    margin: 5rem auto;
+}
+.update_customer_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+.update_customer button {
+    margin-right: 1.5rem;
+}
+
+.addnewcustomer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}

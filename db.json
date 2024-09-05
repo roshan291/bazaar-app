@@ -1,0 +1,319 @@
+{
+  "createlead": [
+    {
+      "id": "HB1629",
+      "createdDate": "8/24/2024, 12:05:50 AM",
+      "leadTitle": "New title",
+      "paymentmode": "Cheque",
+      "customerName": "Pavani jaya",
+      "getRequirement": "Group Tour Package",
+      "noOfInfants": "3",
+      "typeOfHoliday": "Corporate / Event",
+      "dateANDtime": "",
+      "pickUpPoint": "",
+      "dropPoint": "",
+      "noOfAdults": "2",
+      "noOfKids": "1",
+      "groupTourPackageList": "EUR (European euro)",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": false,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": true,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": true,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "vehicleType": "",
+      "noOfRooms": "",
+      "startDate": "2024-08-23",
+      "endDate": "2024-08-28",
+      "checkIN": "",
+      "checkOUT": "",
+      "destination": "Bangalore",
+      "country": "",
+      "noOfDays": "",
+      "typeOfVisa": "",
+      "coupleList": "Couple",
+      "currencyType": "NZD (New Zealand dollar)",
+      "budgetForTrip": "1000",
+      "requiredDocuments": "",
+      "shortNote": "",
+      "hotelPreferences": "2 Star",
+      "leadstatus": "Pending"
+    },
+    {
+      "id": "HB6482",
+      "createdDate": "8/27/2024, 10:40:05 PM",
+      "leadTitle": "New title",
+      "paymentmode": "Cheque",
+      "customerName": "pavani jaya",
+      "getRequirement": "FIT (Customised) Tour Package",
+      "noOfInfants": "3",
+      "typeOfHoliday": "Beach / Hill Stations",
+      "dateANDtime": "",
+      "pickUpPoint": "",
+      "dropPoint": "",
+      "noOfAdults": "2",
+      "noOfKids": "3",
+      "groupTourPackageList": "",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": true,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": false,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": false,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "vehicleType": "",
+      "noOfRooms": "",
+      "startDate": "2024-08-27",
+      "endDate": "2024-09-05",
+      "checkIN": "",
+      "checkOUT": "",
+      "destination": "Bangalore",
+      "country": "",
+      "noOfDays": "",
+      "typeOfVisa": "",
+      "coupleList": "Per Person",
+      "currencyType": "USD (United States dollar)",
+      "budgetForTrip": "1000",
+      "requiredDocuments": "",
+      "shortNote": "Short Note Short Note Short Note Short Note Short Note Short Note Short Note Short Note Short Note ",
+      "hotelPreferences": "3 Star",
+      "leadstatus": "Confirmed"
+    }
+  ],
+  "updatelead": [],
+  "deletelead": [],
+  "viewlead": [],
+  "createcustomer": [
+    {
+      "id": "HB3235",
+      "createdDate": "8/27/2024, 11:43:32 PM",
+      "customerFirstName": "Roshan ",
+      "customerLastName": "Syed 1",
+      "customerEmail": "roshan@gmail.com",
+      "customerMobile": "898989898",
+      "country": "India",
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "zipcode": "560038"
+    },
+    {
+      "id": "HB5816",
+      "createdDate": "8/27/2024, 11:44:15 PM",
+      "customerFirstName": "Rajesh My Friend",
+      "customerLastName": "Karnati",
+      "customerEmail": "rajesh@gmail.com",
+      "customerMobile": "8989898989",
+      "country": "India",
+      "state": "Telangana",
+      "city": "Hyderabad KPHP",
+      "zipcode": "909809"
+    },
+    {
+      "id": "HB8684",
+      "createdDate": "8/27/2024, 11:47:08 PM",
+      "customerFirstName": "Hemanth",
+      "customerLastName": "Danala BB",
+      "customerEmail": "hemanth@gmail.com",
+      "customerMobile": "9999998998",
+      "country": "Iceland",
+      "state": "Goochi",
+      "city": "Machuu",
+      "zipcode": "9999909"
+    },
+    {
+      "id": "HB4129",
+      "createdDate": "8/31/2024, 9:38:43 PM",
+      "customerFirstName": "Adhi H",
+      "customerLastName": "Narayana",
+      "customerEmail": "adinarayana@gmail.com",
+      "customerMobile": "9999999999",
+      "country": "India",
+      "state": "Hyderabad",
+      "city": "Talamudipi",
+      "zipcode": "514508"
+    }
+  ],
+  "updatecustomer": [],
+  "deletecustomer": [],
+  "viewcustomer": [],
+  "createitinerary": [],
+  "updateitinerary": [],
+  "deleteitinerary": [],
+  "viewitinerary": [],
+  "createinvoice": [
+    {
+      "id": "bfaa",
+      "currencyType": "usd",
+      "paymentMode": "cheque",
+      "customerName": "undefined undefined",
+      "invoieStatus": "partpaid",
+      "invoiceParticulars": [],
+      "grandTotalAmount": 0,
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing note",
+      "isProformaInvoice": false,
+      "invoiceNumber": "HB9233",
+      "createdDate": "8/31/2024, 11:22:48 PM"
+    },
+    {
+      "id": "1afc",
+      "currencyType": "usd",
+      "paymentMode": "cheque",
+      "customerName": "Rajesh My Friend Karnati",
+      "invoieStatus": "senttocustomer",
+      "invoiceParticulars": [
+        {
+          "particularName": "Hello",
+          "particularRate": "1",
+          "particularQuantity": "1",
+          "particularDiscount": "1",
+          "particularHSN": "1",
+          "particularGST": "1",
+          "particularTotalAmount": "1"
+        }
+      ],
+      "grandTotalAmount": 2.01,
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing note",
+      "isProformaInvoice": true,
+      "invoiceNumber": "HB8341",
+      "createdDate": "8/31/2024, 11:34:17 PM"
+    }
+  ],
+  "updateinvoice": [],
+  "deleteinvoice": [],
+  "viewinvoice": []
+}

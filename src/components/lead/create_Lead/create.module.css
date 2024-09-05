@@ -1,0 +1,14 @@
+.customer_details_title {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
+}
+
+.lead_wrapper {
+    background-color: #fff;
+    padding: 16px 12px;
+    margin-top: 20px !important;
+    border: 1px solid #e1e6e9;
+    border-radius: 6px !important;
+    margin-bottom: 20px; 
+    overflow: hidden;
+}

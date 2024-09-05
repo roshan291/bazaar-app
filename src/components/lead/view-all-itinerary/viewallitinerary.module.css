@@ -1,0 +1,25 @@
+.viewAllItineraryPage {
+    background-color: #fff;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    position: relative;
+}
+.viewAllItinerarySearch {
+    right: 0;
+    position: absolute;
+    width: 350px!important;
+    top: 0;
+}
+
+.viewAllItinerarySearch .searchForm {
+    position: relative;
+}
+.viewAllItinerarySearch .searchForm input {
+    padding-right: 40px;
+}
+.viewAllItinerarySearch .searchForm .searchIcon {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: #ddd;
+}
