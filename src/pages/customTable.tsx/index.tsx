@@ -22,7 +22,10 @@ const CustomTable = (props: any) => {
         localStorage.setItem("page", title)
         navigate(url)  
     }
+
+    console.log("CustomTable",props)
   return (
+    
     <>
         <h5 className={styles.title}>{props?.title} Status</h5>
         <table className={styles.tableWrapper}>

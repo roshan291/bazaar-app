@@ -58,6 +58,16 @@ export const leadStatus = [
     },
 ]
 
+export const invoiceStatusCommon = {
+    all: "All",
+    gnerated: "Generated (Not sent to customer)",
+    sentToCustomer: "Sent to Customer (Due)",
+    partPaid: "Part Paid",
+    fullyPaid:"Fully Paid",
+    completed: "Completed",
+    canceled: "Canceled",
+}
+
 export const usersDetails =  [
     {
       "firstName": "Venkat",

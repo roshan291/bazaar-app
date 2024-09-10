@@ -1,11 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "../components/billing/invoice/invoice.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { NoDataFound } from '../pages/NoDataFound'
-const ViewInvoice = (props: any) => {
+import DeleteSelectedItem from './deleteSelectedItem'
+import { useNavigate } from 'react-router-dom'
+import { PDFDownloadLink, Document } from '@react-pdf/renderer'
+import DownloadBill from '../components/billing/download-bill'
+const ViewInvoice = ({ data, isDelete } : any) => {
+
+    const [selectedJourney] = useState("invoice");
+    const [selectedId, setSelectedId] = useState("" as any)
+    const [changeModalshow, setChangeModalShow] = useState(false);
+    const navigate = useNavigate();
+    
+    const handleDelteInvoice = (id: any) => {
+        console.log("id", id);
+        setSelectedId(id)
+        setChangeModalShow(true)
+        // isDelete(true)
+    }
+    const handleChangeClose = () => setChangeModalShow(false);
+
+    useEffect(() => {
+        isDelete()
+        console.log("TEST___________", changeModalshow, isDelete(true))
+    }, [changeModalshow])
+
+    const handleUpdateInvoice = (id:any) => {
+        navigate(`/invoice/update/${id}`);
+    }
+    const handleDownloadInvoice = (id:any) => {
+
+    }
+
+    const MyDoc = (pdfdata: any) => (
+        <Document>
+            <DownloadBill billData = {pdfdata}/>
+        </Document>
+    );
   return (
-    <div className={styles.invoice_wrapper}>
+    <>
+    <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
+   
+    <div className={`${styles.invoice_wrapper} container`}>
         <table>
             <thead>
                 <tr>
@@ -19,7 +57,7 @@ const ViewInvoice = (props: any) => {
             </thead>
             <tbody>
                 {
-                    props?.data?.map((item: any, index: any) => <tr>
+                    data?.map((item: any, index: any) => <tr>
                         <td>{index + 1}</td>
                         <td>{item?.createdDate}</td>
                         <td>{item?.customerName}</td>
@@ -27,18 +65,24 @@ const ViewInvoice = (props: any) => {
                         <td>{item?.invoieStatus}</td>
                          
                         <td>
-                            <FontAwesomeIcon icon={faDownload} />
-                            <FontAwesomeIcon icon={faPenToSquare} />
-                            <FontAwesomeIcon icon={faXmark} />
+                            <FontAwesomeIcon icon={faPenToSquare}  className='edit_icon' onClick={() => handleUpdateInvoice(item?.id)}/>
+                            {/* <FontAwesomeIcon icon={faDownload} className='download_icon' onClick={() => handleDownloadInvoice(item?.id)}/> */}
+                            <PDFDownloadLink document={<MyDoc pdfdata = {item} />} fileName={item?.customerName}>
+                            {({ loading }) =>
+                                loading ? 'Loading...' : <FontAwesomeIcon icon={faDownload} />
+                            }
+                            </PDFDownloadLink>
+                            <FontAwesomeIcon icon={faXmark}  className='delete_icon' onClick={() => handleDelteInvoice(item?.id)}/>
                         </td>
                     </tr>)
                 }
             </tbody>
         </table>
         { 
-            !props?.data?.length && <NoDataFound /> 
+            !data?.length && <NoDataFound /> 
           }
     </div>
+    </>
   )
 }
 

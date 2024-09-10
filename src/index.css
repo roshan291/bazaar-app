@@ -156,7 +156,7 @@ body {
   cursor: pointer;
 }
 
-.display_table_main_wrapper.customer_page table svg:first-child {
+.display_table_main_wrapper.customer_page table svg:first-child, .display_table_main_wrapper.customer_page table svg:last-child {
   color: #0067ff;
 }
 
@@ -215,6 +215,18 @@ body {
 
 .itinerary_actin_wrapper a svg {
   color: #0067ff !important;
+}
+
+.edit_icon {
+  color: #0067ff
+}
+
+.download_icon {
+  color: #0067ff
+}
+
+.delete_icon {
+  color: #e7505a;
 }
 
 .loading-container {
@@ -467,4 +479,11 @@ table tr, .table tr label {
 
 .button.default:hover {
   background-color: #6c6a6a;
+}
+
+.view_my_customer_wrapper .col span {
+  color: #bdb9b9;
+  width: 130px;
+  display: block;
+  margin-top: 10px;
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Table from 'react-bootstrap/esm/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPenToSquare, faSquarePlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare, faSquarePlus, faXmark, faEye } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CreateNewCustomer from '../../../Utilities/CreateNewCustomer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,11 +12,14 @@ import DeleteSelectedItem from '../../../Utilities/deleteSelectedItem';
 import { NoDataFound } from '../../../pages/NoDataFound';
 import { useNavigate } from 'react-router-dom';
 import styles from "./customer.module.css"
+import ViewMyCustomer from '../../../Utilities/ViewMyCustomer';
 
 const MyCustomer = () => {
   const [data, setData] = useState([])
   const [createNewCustomerModalShow, setCreateNewCustomerModalShow] = useState(false as any);
   const [changeModalshow, setChangeModalShow] = useState(false);
+  const [viewCustomer, setViewCustomer] = useState(false)
+  const [viewCustomerData, setViewCustomerData] = useState([] as any)
   const [selectedJourney, setSelectedJourney] = useState<string>("");
   const [selectedId, setselectedId] = useState<string>("");
   const navigate = useNavigate();
@@ -66,8 +69,16 @@ const MyCustomer = () => {
 
   const handleChangeClose = () => setChangeModalShow(false);
 
+  const viewHandler = (data: any) => {
+    setViewCustomer(true)
+    setViewCustomerData(data)
+  }
+
+  const handleViewClose = () => setViewCustomer(false);
+  
   return (
     <>
+    <ViewMyCustomer show = {viewCustomer} onHide = {handleViewClose} data = {viewCustomerData} />
     <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
     <div className='manage_top_view'>
      
@@ -103,6 +114,7 @@ const MyCustomer = () => {
                 <td>
                     <FontAwesomeIcon icon={faPenToSquare} onClick = {() => handleUpdateCustomer(item.id)}/>
                     <FontAwesomeIcon icon={faXmark} onClick = {() => handleDeleteCustomer("mycustomer",item.id)}/>
+                    <FontAwesomeIcon icon={faEye} onClick = {() => viewHandler(item)}/>
                 </td>
               </tr>)
             }

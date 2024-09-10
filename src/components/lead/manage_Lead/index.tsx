@@ -85,8 +85,10 @@ const ManageLead = () => {
     setActiveForMenu(false)
     setmanagedleadDefaultViewMore(false)
   };
-
-  const currentSelectedFilter = localStorage.getItem("page");
+  let currentSelectedFilter : any;
+  if (typeof(Storage) !== "undefined") {
+    currentSelectedFilter = localStorage.getItem("page");
+  }
   useEffect(() => {
     console.log("currentSelectedFilter", currentSelectedFilter)
     handleStatusClick(currentSelectedFilter);
@@ -130,8 +132,19 @@ const ManageLead = () => {
 
   const {
     createLead,
+    updateLead,
 } = navigationURL;
 
+
+const handleLeadsMoreList = (listItem: any, id: any) => {
+  console.log("listItem", listItem, id);
+  if(listItem?.navTitle === "Change Lead Status" || listItem?.navTitle === "Remove Lead" ) {
+    handleLeadStatusChangeShow(listItem, id)
+  } 
+  if(listItem?.navTitle === "Edit Lead") {
+    navigate(`${updateLead}/${id}`);
+  }
+}
   return (
     <>
     {/* <ManageLeadSideNavMore show={manageLeadSideNavMoreModalShow} onHide={() => {
@@ -253,13 +266,16 @@ const ManageLead = () => {
                 {
                     manageLeadSideNavMoreList?.map((navList: any, index: any) => 
                     <Col xs={6} md={4} key = {index}>
-                        { navList?.navTitle === "Change Lead Status" ? <h6 
+                        {
+                          <h6 onClick={()=>handleLeadsMoreList(navList, showSingleView["id"])}><span>{navList.icon} &nbsp;</span>{navList?.navTitle}</h6> 
+                        }
+                        {/* { navList?.navTitle === "Change Lead Status" ? <h6 
                           onClick = {() => handleLeadStatusChangeShow(navList?.navTitle, showSingleView["id"])}>
                           <span>{navList.icon} &nbsp;</span>{navList?.navTitle}
                         </h6> : navList?.navTitle === "Remove Lead" ? <h6 
                           onClick = {() => handleLeadStatusChangeShow(navList?.navTitle, showSingleView["id"])}>
                           <span>{navList.icon} &nbsp;</span>{navList?.navTitle}
-                        </h6> : <h6><span>{navList.icon} &nbsp;</span>{navList?.navTitle}</h6> }
+                        </h6>  } */}
                     </Col> )
                 }
                 </Row> 

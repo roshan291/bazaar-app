@@ -3,7 +3,7 @@ import { Col, Container, Form, Row, Table } from 'react-bootstrap'
 import Button from '../../buttons'
 import styles from "./invoice.module.css"
 import { generateCurrentDateAndTime, generateUniqueId } from '../../../Utilities/Utils'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { navigationURL } from '../../../constants'
 import axios from 'axios'
 import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.'
@@ -12,6 +12,7 @@ const CreateInvoice = () => {
   
   let navigate = useNavigate(); 
   const history = useNavigate();
+  const { slag } = useParams();
 
   const [validated, setValidated] = useState(false);
   const [userList, setUserList] = useState([] as any);
@@ -26,8 +27,9 @@ const CreateInvoice = () => {
     gstNummber: "36AAPCS5625R1ZE",
     panNummber: "BLUPA2358A",
     billingNote: "",
-    invoiceNumber: `HB${generateUniqueId()}`,
+    id: `HB${generateUniqueId()}`,
     createdDate: generateCurrentDateAndTime(),
+    invoiceType: ""
 })
 
 useEffect(() => {
@@ -35,6 +37,16 @@ useEffect(() => {
   const customer = res.data;
   setUserList(customer);
 });
+},[])
+
+useEffect(() => {
+  if(!!slag) {
+    axios.get(`http://localhost:8000/createinvoice/${slag}`).then((res: any) => {
+      const selectedInvoice = res.data;
+      console.log("selectedInvoice", selectedInvoice)
+      setCreateInvoice(selectedInvoice);
+    });
+  }
 },[])
 
 const { 
@@ -47,7 +59,7 @@ const {
   gstNummber, 
   billingNote,  
   createdDate,
-  invoiceNumber,
+  id,
   grandTotalAmount,
 } = createInvoice;
 
@@ -66,6 +78,7 @@ const {
 const navigateToBack = () => {
   navigate(invoice)
 }
+
 
 const handleChangeCurrency = (e: any) => {
   const target = e.target;
@@ -89,14 +102,20 @@ const handleSubmit = (event: any) => {
     event.stopPropagation();
     console.log("validattin")
   }  else {
-    axios.post(`http://localhost:8000/createinvoice`, createInvoice) 
+    if(!!slag) {
+      axios.put(`http://localhost:8000/createinvoice/${slag}`, createInvoice);
+    } else {
+      axios.post(`http://localhost:8000/createinvoice`, createInvoice);
+    }    
     console.log("handleSubmit", createInvoice);
   }
   setValidated(true);
 //  console.log("grandTotal",grandTotal)
 };
-
+console.log("handleSubmit 1", createInvoice);
+console.log("Roshan slag", !!slag)
 const addNewParticular = () => {
+
   const updatedParticulars = {
     particularName:"",
     particularRate: "",
@@ -166,7 +185,7 @@ const countGrandTotal = () => {
             <div className={styles.invoiceDateWrapper}>
               <div>
                 <span>Invoice Number</span>
-                <h4>{invoiceNumber}</h4>
+                <h4>{slag}</h4>
               </div>
               <div>
                 <span>Date of Issue</span>
@@ -225,32 +244,33 @@ const countGrandTotal = () => {
                 <Form.Label>Currency*</Form.Label>
                 <Form.Select aria-label="Default select" value={currencyType} onChange={handleChangeCurrency} name="currencyType" required>
                   <option value="">Select Currency...</option>
-                  <option value="inr">INR (Indian rupee)</option>
-                  <option value="usd">USD (United States dollar)</option>
-                  <option value="eur">EUR (European euro)</option>
-                  <option value="aud">AUD (Australian dollar)</option>
-                  <option value="nzd">NZD (New Zealand dollar)</option>
+                  <option value="INR">INR (Indian rupee)</option>
+                  <option value="USD">USD (United States dollar)</option>
+                  <option value="EUR">EUR (European euro)</option>
+                  <option value="AUD">AUD (Australian dollar)</option>
+                  <option value="NZD">NZD (New Zealand dollar)</option>
                 </Form.Select>
               </Form.Group>
               <Form.Group as={Col} md="3" controlId="validationCustom02">
                 <Form.Label>Payment Mode*</Form.Label>
                 <Form.Select aria-label="Default select"  value={paymentMode} onChange={handleChangeCurrency} name="paymentMode" required>
                   <option value="">Select Payment...</option>
-                  <option value="cash">Cash</option>
-                  <option value="cheque">Cheque</option>
-                  <option value="neft">RTGS / NEFT / IMPS</option>
-                  <option value="paymentgateway">Payment Gateway</option> 
+                  <option value="Cash">Cash</option>
+                  <option value="Cheque">Cheque</option>
+                  <option value="RTGS / NEFT / IMPS">RTGS / NEFT / IMPS</option>
+                  <option value="Payment Gateway">Payment Gateway</option> 
                 </Form.Select>
               </Form.Group>
               <Form.Group as={Col} md="3" controlId="validationCustom02">
                 <Form.Label>Status*</Form.Label>
                 <Form.Select aria-label="Default select" value={invoieStatus} onChange={handleChangeCurrency} name="invoieStatus" required>
                   <option value="">Select Payment...</option>
-                  <option value="generated">Generated (Not sent to customer)</option>
-                  <option value="senttocustomer">Sent to Customer (Due)</option>
-                  <option value="partpaid">Part Paid</option>
-                  <option value="fullpaid">Fully Paid</option> 
-                  <option value="canceled">Canceled</option>
+                  <option value="Generated (Not sent to customer)">Generated (Not sent to customer)</option>
+                  <option value="Sent to Customer (Due)">Sent to Customer (Due)</option>
+                  <option value="Part Paid">Part Paid</option>
+                  <option value="Fully Paid">Fully Paid</option> 
+                  <option value="Completed">Completed</option> 
+                  <option value="Canceled">Canceled</option>
                 </Form.Select>
               </Form.Group>
             </Row>

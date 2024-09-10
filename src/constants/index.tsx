@@ -174,6 +174,7 @@ export const selectHotelPreferences = [
 export const navigationURL = {
     createLead: "/lead/create",
     manageLead: "/lead/manageLead",
+    updateLead: "/lead/update",
     suggestedLead: "",
     viewAllItinerary: "",
     createItinerary: "/itinerary/create",

@@ -11,11 +11,25 @@ const DeleteSelectedItem = (props: any) => {
 const [statusCode, setStatusCode] = useState("" as any) 
 const [showToast, setshowToast] = useState(false) 
 
-const handleDelete = async (id: any, journey: any) => {
-    console.log(id, journey)
+console.log("DeleteSelectedItem", props)
+
+const dynamicURL = () => {
+  let endpointurl = ""
+  // createcustomer
+  if(props?.journey === "mycustomer") {
+    endpointurl = "createcustomer";
+  }
+  if(props?.journey === "invoice") {
+    endpointurl = "createinvoice";
+  }
+  
+  return endpointurl;
+}
+const handleDelete = async (id: any) => {
+    // console.log(id, journey)
     props?.closeModal(false);
     try {
-        const response = await axios.delete(`http://localhost:8000/createcustomer/${id}`);
+        const response = await axios.delete(`http://localhost:8000/${dynamicURL()}/${id}`);
         console.log('Resource deleted:', response.data);
         if (response.status === 200) {
           setStatusCode("success")
@@ -24,7 +38,7 @@ const handleDelete = async (id: any, journey: any) => {
           setStatusCode("success")
           setshowToast(true)
         } else { 
-          setStatusCode("success")
+          setStatusCode("danger")
           setshowToast(true)
         }
     } catch (error) { 
@@ -51,7 +65,7 @@ return (
         <Button variant="secondary" onClick={props?.onHide}>
         Cancel
         </Button>
-        <Button variant="primary" onClick={() => handleDelete(props?.id, props?.journey)}>
+        <Button variant="primary" onClick={() => handleDelete(props?.id)}>
         Delete
         </Button>
     </Modal.Footer>

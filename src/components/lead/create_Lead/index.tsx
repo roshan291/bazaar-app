@@ -26,6 +26,7 @@ import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.';
 
 import axios from 'axios';
 import { selectCountries } from '../../../constants/countries';
+import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 const CreateLead = () => {
@@ -33,6 +34,7 @@ const CreateLead = () => {
 const dispatch = useDispatch();
 // const uniqueId = useId(); 
 // const navigate = useNavigate();
+const { id } = useParams();
 
 const createNewCustomerData = useSelector(
   (state: any) => state?.data
@@ -96,6 +98,8 @@ const [createLead, setCreateLead] = useState({
     shortNote: "",
     hotelPreferences: "",
     leadstatus: "All", 
+    invoice: [],
+    itinerary: []
 })
 
 const { 
@@ -155,26 +159,31 @@ const handleSubmit = (event: any) => {
   if (form.checkValidity() === false) {
     event.stopPropagation();
   } else {
-    axios.post(`http://localhost:8000/createlead`, createLead).then((response: any) => {
-      console.log("onAddCustomerSubmit", response?.status)
-      if (response.status === 200) {
-        console.log('Success:', response.data);
-        setStatusCode("success")
-        setshowToast(true)
-      } else if (response.status === 201) {
-        console.log('Resource created:', response.data);
-        setStatusCode("success")
-        setshowToast(true)
-      } else {
-        console.log('Other status code:', response.status);
-        setStatusCode("danger")
-        setshowToast(true)
-      }
-  }).catch(function (error) {
-    console.log(error);
-    setStatusCode("danger")
-    setshowToast(true)
-  });
+    if(!!id) {
+      axios.put(`http://localhost:8000/createlead/${id}`, createLead);
+    } else {
+      axios.post(`http://localhost:8000/createlead`, createLead).then((response: any) => {
+        console.log("onAddCustomerSubmit", response?.status)
+        if (response.status === 200) {
+          console.log('Success:', response.data);
+          setStatusCode("success")
+          setshowToast(true)
+        } else if (response.status === 201) {
+          console.log('Resource created:', response.data);
+          setStatusCode("success")
+          setshowToast(true)
+        } else {
+          console.log('Other status code:', response.status);
+          setStatusCode("danger")
+          setshowToast(true)
+        }
+    }).catch(function (error) {
+      console.log(error);
+      setStatusCode("danger")
+      setshowToast(true)
+    });
+    }  
+    
     console.log("handleSubmit", createLead);
     // handleClose();
     // history("/lead-board/supervise")
@@ -253,6 +262,18 @@ console.log("createLead", createLead);
     setshowToast(false)
   }
  }, [])
+
+ console.log("laed upate id",id)
+
+ useEffect(() => {
+  if(!!id) {
+    axios.get(`http://localhost:8000/createlead/${id}`).then((res: any) => {
+      const selectedLead = res.data;
+      console.log("selectedInvoice", selectedLead)
+      setCreateLead(selectedLead);
+    });
+  }
+},[])
   
   return (
     <> 
@@ -268,6 +289,7 @@ console.log("createLead", createLead);
             </label>
         
         ))}  */}
+        <div>Update lead {id}</div>
     <CustomToast showToast = {showToast} variantType = {statusCode}/>
 
     <CreateServiceIncluded show={serviceIncludedModalShow} onHide={() => setServiceIncludedModalShow(false)} />

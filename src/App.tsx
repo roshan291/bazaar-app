@@ -15,6 +15,7 @@ import ProformaInvoice from './components/billing/proformaInvoice';
 import { navigationURL } from './constants';
 import CreateInvoice from './components/billing/invoice/create';
 import UpdateCustomer from './components/billing/customer/update';
+import UpdateLead from './components/lead/update_Lead';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Route path="/" element={<Dashboard />}/>
       <Route path="/lead/create" element={<CreateLead />}/>
       <Route path="/lead/manageLead" element={<ManageLead />}/>
+      <Route path="/lead/update/:id" element={<CreateLead />}/>
       {/* <Route path="/lead-board/update/:id" element={<UpdateLead />}/> */}
       {/* <Route path="/customer/create" element={<CreateCustomer />}/>
       <Route path="/customer/supervise" element={<SuperviseCustomer />}/>
@@ -49,6 +51,7 @@ function App() {
       <Route path="/customer" element={<MyCustomer />}/>
       <Route path="/invoice" element={<Invoice />}/>
       <Route path="/invoice/create" element={<CreateInvoice />}/>
+      <Route path="/invoice/update/:slag" element={<CreateInvoice />}/>
       <Route path="/invoice/proforma" element={<ProformaInvoice />}/>
       {/* <Route path={navigationURL.createinvoice} element={<CreateInvoice />}/> */}
       <Route path="/customer/create" element={<MyCustomer />} />
