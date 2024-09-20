@@ -1,24 +1,24 @@
 {
   "createlead": [
     {
-      "id": "HB1629",
-      "createdDate": "8/24/2024, 12:05:50 AM",
+      "id": "HB3951",
+      "createdDate": "9/15/2024, 6:44:13 PM",
       "leadTitle": "New title",
       "paymentmode": "Cheque",
-      "customerName": "Pavani jaya",
+      "customerName": "Roshan  Syed 1",
       "getRequirement": "Group Tour Package",
-      "noOfInfants": "3",
-      "typeOfHoliday": "Corporate / Event",
+      "noOfInfants": "2",
+      "typeOfHoliday": "Adventure / Camping",
       "dateANDtime": "",
       "pickUpPoint": "",
       "dropPoint": "",
       "noOfAdults": "2",
-      "noOfKids": "1",
-      "groupTourPackageList": "EUR (European euro)",
+      "noOfKids": "2",
+      "groupTourPackageList": "AUD (Australian dollar)",
       "serviceList": [
         {
           "id": 1,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Airfare"
         },
         {
@@ -38,7 +38,7 @@
         },
         {
           "id": 5,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Visa Fees"
         },
         {
@@ -89,36 +89,38 @@
       ],
       "vehicleType": "",
       "noOfRooms": "",
-      "startDate": "2024-08-23",
-      "endDate": "2024-08-28",
+      "startDate": "2024-09-16",
+      "endDate": "2024-09-24",
       "checkIN": "",
       "checkOUT": "",
       "destination": "Bangalore",
       "country": "",
       "noOfDays": "",
       "typeOfVisa": "",
-      "coupleList": "Couple",
-      "currencyType": "NZD (New Zealand dollar)",
-      "budgetForTrip": "1000",
+      "coupleList": "Per Person",
+      "currencyType": "EUR (European euro)",
+      "budgetForTrip": "50000",
       "requiredDocuments": "",
-      "shortNote": "",
-      "hotelPreferences": "2 Star",
-      "leadstatus": "Pending"
+      "shortNote": "Short note 7",
+      "hotelPreferences": "5 Star",
+      "leadstatus": "New",
+      "invoice": [],
+      "itinerary": []
     },
     {
-      "id": "HB6482",
-      "createdDate": "8/27/2024, 10:40:05 PM",
-      "leadTitle": "New title",
+      "id": "HB3780",
+      "createdDate": "9/15/2024, 6:45:43 PM",
+      "leadTitle": "First Test",
       "paymentmode": "Cheque",
-      "customerName": "pavani jaya",
+      "customerName": "Hemanth Danala BB",
       "getRequirement": "FIT (Customised) Tour Package",
-      "noOfInfants": "3",
+      "noOfInfants": "2",
       "typeOfHoliday": "Beach / Hill Stations",
       "dateANDtime": "",
       "pickUpPoint": "",
       "dropPoint": "",
       "noOfAdults": "2",
-      "noOfKids": "3",
+      "noOfKids": "2",
       "groupTourPackageList": "",
       "serviceList": [
         {
@@ -143,7 +145,7 @@
         },
         {
           "id": 5,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Visa Fees"
         },
         {
@@ -163,7 +165,7 @@
         },
         {
           "id": 9,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Free Goodies"
         },
         {
@@ -183,7 +185,7 @@
         },
         {
           "id": 13,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Tour Manager"
         },
         {
@@ -194,21 +196,130 @@
       ],
       "vehicleType": "",
       "noOfRooms": "",
-      "startDate": "2024-08-27",
-      "endDate": "2024-09-05",
+      "startDate": "2024-09-16",
+      "endDate": "2024-09-18",
       "checkIN": "",
       "checkOUT": "",
-      "destination": "Bangalore",
+      "destination": "Bangalore vulva",
       "country": "",
       "noOfDays": "",
       "typeOfVisa": "",
       "coupleList": "Per Person",
-      "currencyType": "USD (United States dollar)",
-      "budgetForTrip": "1000",
+      "currencyType": "THB (Thai Baht)",
+      "budgetForTrip": "50000",
       "requiredDocuments": "",
-      "shortNote": "Short Note Short Note Short Note Short Note Short Note Short Note Short Note Short Note Short Note ",
-      "hotelPreferences": "3 Star",
-      "leadstatus": "Confirmed"
+      "shortNote": "Short note",
+      "hotelPreferences": "2 Star",
+      "leadstatus": "All",
+      "invoice": [],
+      "itinerary": []
+    },
+    {
+      "id": "HB3789",
+      "createdDate": "9/15/2024, 6:45:43 PM",
+      "leadTitle": "First Test 22",
+      "paymentmode": "Cheque",
+      "customerName": "Hemanth Danala BB",
+      "getRequirement": "FIT (Customised) Tour Package",
+      "noOfInfants": "2",
+      "typeOfHoliday": "Beach / Hill Stations",
+      "dateANDtime": "",
+      "pickUpPoint": "",
+      "dropPoint": "",
+      "noOfAdults": "2",
+      "noOfKids": "2",
+      "groupTourPackageList": "",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": true,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": true,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": true,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": true,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "vehicleType": "",
+      "noOfRooms": "",
+      "startDate": "2024-09-16",
+      "endDate": "2024-09-18",
+      "checkIN": "",
+      "checkOUT": "",
+      "destination": "Bangalore vulva",
+      "country": "",
+      "noOfDays": "",
+      "typeOfVisa": "",
+      "coupleList": "Per Person",
+      "currencyType": "THB (Thai Baht)",
+      "budgetForTrip": "50000",
+      "requiredDocuments": "",
+      "shortNote": "Short note",
+      "hotelPreferences": "2 Star",
+      "leadstatus": "All",
+      "invoice": [],
+      "itinerary": []
     }
   ],
   "updatelead": [],
@@ -228,18 +339,6 @@
       "zipcode": "560038"
     },
     {
-      "id": "HB5816",
-      "createdDate": "8/27/2024, 11:44:15 PM",
-      "customerFirstName": "Rajesh My Friend",
-      "customerLastName": "Karnati",
-      "customerEmail": "rajesh@gmail.com",
-      "customerMobile": "8989898989",
-      "country": "India",
-      "state": "Telangana",
-      "city": "Hyderabad KPHP",
-      "zipcode": "909809"
-    },
-    {
       "id": "HB8684",
       "createdDate": "8/27/2024, 11:47:08 PM",
       "customerFirstName": "Hemanth",
@@ -252,16 +351,16 @@
       "zipcode": "9999909"
     },
     {
-      "id": "HB4129",
-      "createdDate": "8/31/2024, 9:38:43 PM",
-      "customerFirstName": "Adhi H",
-      "customerLastName": "Narayana",
-      "customerEmail": "adinarayana@gmail.com",
-      "customerMobile": "9999999999",
+      "id": "HB1308",
+      "createdDate": "9/7/2024, 11:24:40 PM",
+      "customerFirstName": "Rajesh",
+      "customerLastName": "Karnati",
+      "customerEmail": "rajesh@gmail.com",
+      "customerMobile": "90098098",
       "country": "India",
-      "state": "Hyderabad",
-      "city": "Talamudipi",
-      "zipcode": "514508"
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "zipcode": "560037"
     }
   ],
   "updatecustomer": [],
@@ -273,44 +372,85 @@
   "viewitinerary": [],
   "createinvoice": [
     {
-      "id": "bfaa",
+      "id": "HB4787",
+      "currencyType": "USD",
+      "paymentMode": "RTGS / NEFT / IMPS",
+      "customerName": "Rajesh Karnati",
+      "invoieStatus": "Part Paid",
+      "invoiceParticulars": [],
+      "grandTotalAmount": "",
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing note",
+      "createdDate": "9/10/2024, 10:48:13 PM",
+      "invoiceType": ""
+    },
+    {
+      "id": "HB2048",
       "currencyType": "usd",
-      "paymentMode": "cheque",
-      "customerName": "undefined undefined",
-      "invoieStatus": "partpaid",
+      "paymentMode": "cash",
+      "customerName": "Roshan  Syed 1",
+      "invoieStatus": "Generated (Not sent to customer)",
+      "invoiceParticulars": [
+        {
+          "particularName": "Test",
+          "particularRate": "2",
+          "particularQuantity": "1",
+          "particularDiscount": "11",
+          "particularHSN": "1",
+          "particularGST": "11",
+          "particularTotalAmount": "1120"
+        }
+      ],
+      "grandTotalAmount": 1111.12,
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoe",
+      "createdDate": "9/10/2024, 11:07:11 PM",
+      "invoiceType": ""
+    },
+    {
+      "id": "HB4198",
+      "currencyType": "USD",
+      "paymentMode": "RTGS / NEFT / IMPS",
+      "customerName": "Hemanth Danala BB",
+      "invoieStatus": "Completed",
+      "invoiceParticulars": [],
+      "grandTotalAmount": "",
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing note",
+      "createdDate": "9/10/2024, 11:21:53 PM",
+      "invoiceType": ""
+    },
+    {
+      "id": "HB9915",
+      "currencyType": "USD",
+      "paymentMode": "Payment Gateway",
+      "customerName": "Hemanth Danala BB",
+      "invoieStatus": "Canceled",
+      "invoiceParticulars": [],
+      "grandTotalAmount": "",
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "test",
+      "createdDate": "9/15/2024, 10:43:19 PM",
+      "invoiceType": ""
+    },
+    {
+      "id": "8938",
+      "currencyType": "INR",
+      "paymentMode": "RTGS / NEFT / IMPS",
+      "customerName": "Roshan  Syed 1",
+      "invoieStatus": "Sent to Customer (Due)",
       "invoiceParticulars": [],
       "grandTotalAmount": 0,
       "gstNummber": "36AAPCS5625R1ZE",
       "panNummber": "BLUPA2358A",
       "billingNote": "Billing note",
-      "isProformaInvoice": false,
-      "invoiceNumber": "HB9233",
-      "createdDate": "8/31/2024, 11:22:48 PM"
-    },
-    {
-      "id": "1afc",
-      "currencyType": "usd",
-      "paymentMode": "cheque",
-      "customerName": "Rajesh My Friend Karnati",
-      "invoieStatus": "senttocustomer",
-      "invoiceParticulars": [
-        {
-          "particularName": "Hello",
-          "particularRate": "1",
-          "particularQuantity": "1",
-          "particularDiscount": "1",
-          "particularHSN": "1",
-          "particularGST": "1",
-          "particularTotalAmount": "1"
-        }
-      ],
-      "grandTotalAmount": 2.01,
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "Billing note",
-      "isProformaInvoice": true,
-      "invoiceNumber": "HB8341",
-      "createdDate": "8/31/2024, 11:34:17 PM"
+      "invoiceId": "HB102",
+      "createdDate": "9/20/2024, 3:29:29 PM",
+      "invoiceType": ""
     }
   ],
   "updateinvoice": [],

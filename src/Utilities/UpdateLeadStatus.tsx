@@ -10,14 +10,16 @@ import CustomDropdown from './CustomDropdown';
 
 const UpdateLeadStatus = (props: any) => { 
 
-  const [leadData, setLeadData] = useState([] as any)
+  // const [leadData, setLeadData] = useState([] as any)
   const [leadstatus, setLeadstatus] = useState([] as any)
   const [statusCode, setStatusCode] = useState("" as any) 
   const [showToast, setshowToast] = useState(false) 
 
-  useEffect(() => {
-    axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
-  }, [])
+  // useEffect(() => {
+  //   axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
+  // }, [])
+
+  // console.log("leadData ------", leadData)
 
   const handleUpdateLead = async (updateLead: any) => {
     props?.closeModal(false);
@@ -72,11 +74,11 @@ const UpdateLeadStatus = (props: any) => {
 
 const handleOnchangeStatus = (e: any) => {
     const target = e.target;
-    const value = target.value; 
+    const value = target.value;                 
     setLeadstatus(value);
 }
 
-console.log("leadSelectedData", leadstatus)
+console.log("leadSelectedData", leadstatus, props)
 useEffect(() => {
   
   return () => {
@@ -84,14 +86,13 @@ useEffect(() => {
   }
  }, [])
 
-  console.log("leadData from delete", leadData)
+  // console.log("leadData from delete", leadData)
 
   return (
     <>
     <CustomToast showToast = {showToast} variantType = {statusCode}/>
-   
     <Modal show={props?.show} onHide={props?.onHide}>
-        { props?.selectedItem === "Change Lead Status" ? <><Modal.Header closeButton>
+        { props?.selectedItem?.navTitle === "Change Lead Status" ? <><Modal.Header closeButton>
           <Modal.Title><h5>Change the lead status - {props?.id}</h5></Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -106,7 +107,7 @@ useEffect(() => {
           </Button>
         </Modal.Footer> </>: <></>}
 
-        { props?.selectedItem === "Remove Lead" ? <><Modal.Header closeButton>
+        { props?.selectedItem?.navTitle === "Remove Lead" ? <><Modal.Header closeButton>
           <Modal.Title><h5>Are you sure you want to delete this lead - {props?.id}? </h5></Modal.Title>
         </Modal.Header>
         <Modal.Footer>

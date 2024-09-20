@@ -106,7 +106,7 @@ const Dashboard = () => {
       },
       {
           id: 7,
-          title: "Cancelled",
+          title: "Canceled",
           url: manageLead,
           count: cancelledCount,
       },
@@ -162,7 +162,7 @@ const Dashboard = () => {
       },
       {
           id: 7,
-          title: "Cancelled",
+          title: "Canceled",
           url: navigationURL?.invoice,
           count: cancelledCount,
       },

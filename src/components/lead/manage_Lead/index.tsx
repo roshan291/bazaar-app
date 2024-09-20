@@ -133,6 +133,7 @@ const ManageLead = () => {
   const {
     createLead,
     updateLead,
+    invoice,
 } = navigationURL;
 
 
@@ -143,6 +144,9 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
   } 
   if(listItem?.navTitle === "Edit Lead") {
     navigate(`${updateLead}/${id}`);
+  }
+  if(listItem?.navTitle === "Invoices") {
+    navigate(`${invoice}/${id}`);
   }
 }
   return (
@@ -343,6 +347,9 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
                 </Col>
                 <Col xs={6} md={4} className={`${styles.defaultViewItems} mb-2`}>
                   <span>Currency</span> {!!showSingleView?.currencyType ? showSingleView?.currencyType : "-"}
+                </Col>
+                <Col xs={12} md={12} className={`${styles.defaultViewItems} mb-2`}>
+                  <span>Short Note</span> {!!showSingleView?.shortNote ? showSingleView?.shortNote : "-"}
                 </Col>
                 <Col xs={12} md={12} className={`${styles.defaultViewItems} mb-2`}>
                   <br />

@@ -106,6 +106,14 @@ const handleBillingNavigation = (page: any) => {
     }
 }
 
+const clearpageStorate = () => {
+  localStorage.setItem("page", "All");
+}
+
+const clearInvpocepageStorate = () => {
+  localStorage.setItem("invoice_page", "All");
+}
+
 
   return (
     <nav className={`navbar ${isMenuOpen ? "active" : ""}`}>
@@ -141,6 +149,7 @@ const handleBillingNavigation = (page: any) => {
                     setIsActiveLeadSubItem(subItem);
                     handleSubMenuClick();
                     handleLeadNavigation(subItem);
+                    clearpageStorate()
                 }}
                 >
                     {subItem}
@@ -181,6 +190,7 @@ const handleBillingNavigation = (page: any) => {
                     setIsActiveBillingSubItem(subItem);
                     handleSubMenuClick();
                     handleBillingNavigation(subItem);
+                    clearInvpocepageStorate();
                 }}
                 >
                     {subItem}

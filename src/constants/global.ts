@@ -52,7 +52,7 @@ export const leadStatus = [
     },
     {
         id: 7,
-        title: "Cancelled",
+        title: "Canceled",
         url: "",
         count: 9,
     },

@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from "./table.module.css"
 import { useNavigate } from 'react-router-dom';
-import { navigationURL } from '../../constants';
+import { navigationURL } from '../../constants'; 
+// import { encryptMessage } from '../../Utilities/storages/encryption';
 
 const CustomTable = (props: any) => {
 
@@ -19,9 +20,19 @@ const CustomTable = (props: any) => {
     } = navigationURL;
     
     const handleNavigation = (url: any, title: any) => {
-        localStorage.setItem("page", title)
+      // console.log("encryptMessage",encryptMessage("All"))
+      // const encrypt = encryptMessage(title)
+      console.log("Roshan  encryptMessage", title)
+        if(props?.title === "Lead") {
+          localStorage.setItem("page", title)
+        } else {
+          localStorage.setItem("invoice_page", title)
+        }
         navigate(url)  
     }
+
+ 
+    
 
     console.log("CustomTable",props)
   return (

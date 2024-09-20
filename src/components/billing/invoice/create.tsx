@@ -12,7 +12,9 @@ const CreateInvoice = () => {
   
   let navigate = useNavigate(); 
   const history = useNavigate();
-  const { slag } = useParams();
+  const { slag, id } = useParams();
+
+  console.log("CreateInvoice", id)
 
   const [validated, setValidated] = useState(false);
   const [userList, setUserList] = useState([] as any);
@@ -27,7 +29,7 @@ const CreateInvoice = () => {
     gstNummber: "36AAPCS5625R1ZE",
     panNummber: "BLUPA2358A",
     billingNote: "",
-    id: `HB${generateUniqueId()}`,
+    invoiceId: `HB${generateUniqueId()}`,
     createdDate: generateCurrentDateAndTime(),
     invoiceType: ""
 })
@@ -59,7 +61,7 @@ const {
   gstNummber, 
   billingNote,  
   createdDate,
-  id,
+  invoiceId,
   grandTotalAmount,
 } = createInvoice;
 
@@ -78,6 +80,7 @@ const {
 const navigateToBack = () => {
   navigate(invoice)
 }
+ 
 
 
 const handleChangeCurrency = (e: any) => {
@@ -102,8 +105,8 @@ const handleSubmit = (event: any) => {
     event.stopPropagation();
     console.log("validattin")
   }  else {
-    if(!!slag) {
-      axios.put(`http://localhost:8000/createinvoice/${slag}`, createInvoice);
+    if(!id === undefined) {
+      axios.patch(`http://localhost:8000/createinvoice/${id}`, createInvoice);
     } else {
       axios.post(`http://localhost:8000/createinvoice`, createInvoice);
     }    

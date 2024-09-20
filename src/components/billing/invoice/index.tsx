@@ -6,9 +6,9 @@ import styles from "./invoice.module.css"
 import Button from '../../buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Form } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 const Invoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
   const [invoiceRowData, setInvoiceRowData] = useState([] as any)
@@ -19,6 +19,10 @@ const Invoice = () => {
   const [selectedStatus, setSelectedStatus] = useState("All" as any)
   
   const navigate = useNavigate(); 
+
+  const { id } = useParams();
+
+  console.log(" Invoice id", id)
   
   const {
     createLead,
@@ -34,7 +38,7 @@ const Invoice = () => {
   } = navigationURL;
 
   const handleCreateInvoice = () => {
-    navigate(createinvoice);
+    navigate(`${createinvoice}/${id}`);
   }
 
   useEffect(() => {
@@ -69,7 +73,7 @@ const handleInvoceStatus = (e: any) => {
   setSelectedStatus(selected);
   handleStatusClick(selected);
   if (typeof(Storage) !== "undefined") {
-    localStorage.removeItem("page");
+    localStorage.removeItem("invoice_page");
   }
 }
 
@@ -88,7 +92,7 @@ const handleStatusClick = (selectedItem: any) => {
   
 let currentSelectedFilter : any;
   if (typeof(Storage) !== "undefined") {
-    currentSelectedFilter = localStorage.getItem("page");
+    currentSelectedFilter = localStorage.getItem("invoice_page");
   }
   useEffect(() => { 
     setSelectedStatus(currentSelectedFilter)
@@ -97,17 +101,16 @@ let currentSelectedFilter : any;
   }, [currentSelectedFilter, invoiceRowData])
 
   return (
-    <div className='manage_top_view'>
+    <>
+    <div className={styles.invoiceFilterWrapperTop}>
       <div className={`${styles.invoice_header} container`}>
-        <h5>
-        Invoice
-        </h5>
-        {/* {isDeleted && <p>Invoice has been marked for deletion.</p>} */}
-        
-      </div>
-       
-      <div className={styles.invoiceFilterWrapperTop}>
-        <div className={`${styles.invoiceFilterWrapper} container`}>
+      <Row style={{alignItems: "center"}}>
+          <Col className={styles.invoice_header} xs={12} md={4}>
+            <h5>
+               Invoice
+            </h5>
+        </Col>
+        <Col xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
         <div className={styles.invoiceSelectStatus}>
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleInvoceStatus(e)}>
             <option value="All">All</option>
@@ -128,10 +131,15 @@ let currentSelectedFilter : any;
         </div>
         <Button variant="primary" onClick={handleCreateInvoice}>Create Invoice
         </Button>
-        </div>
+        </Col>
+        </Row>
+        
+        
+      </div>
+       
       </div>
       <ViewInvoice  data = {rowData} isDelete = {updateParentState} />
-    </div>
+      </>
   )
 }
 

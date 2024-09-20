@@ -30,7 +30,7 @@ export const leadStatus = [
     "In Progress",
     "Confirmed",
     "Completed",
-    "Cancelled", 
+    "Canceled", 
 ]
 
 export const itineraryStatus = [
@@ -48,7 +48,7 @@ export const changeLeadStatus = [
     "Inprogress",
     "Confirmed",
     "Completed",
-    "Cancelled", 
+    "Canceled", 
 ]
 
 export const selectRequirementDefault = {

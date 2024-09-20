@@ -16,6 +16,7 @@ import { navigationURL } from './constants';
 import CreateInvoice from './components/billing/invoice/create';
 import UpdateCustomer from './components/billing/customer/update';
 import UpdateLead from './components/lead/update_Lead';
+import EncryptionDemo from './components/encryption';
 
 
 function App() {
@@ -49,8 +50,10 @@ function App() {
       <Route path="/billing/supervise" element={<SuperviseInvoice />}/>
       <Route path="/billing/update/:id" element={<UpdateInvoice />}/>*/}
       <Route path="/customer" element={<MyCustomer />}/>
+      <Route path="/invoice/:id" element={<Invoice />}/>
       <Route path="/invoice" element={<Invoice />}/>
       <Route path="/invoice/create" element={<CreateInvoice />}/>
+      <Route path="/invoice/create/:id" element={<CreateInvoice />}/>
       <Route path="/invoice/update/:slag" element={<CreateInvoice />}/>
       <Route path="/invoice/proforma" element={<ProformaInvoice />}/>
       {/* <Route path={navigationURL.createinvoice} element={<CreateInvoice />}/> */}
@@ -60,6 +63,7 @@ function App() {
       <Route path="/itinerary/group" element={<GroupItinerary />}/>
       <Route path="/itinerary/ready" element={<ReadyItinerary />}/>
       <Route path="/customer/update/:id" element={<UpdateCustomer />}/>
+      <Route path="/encryption" element = {<EncryptionDemo />} />
       {/* <Route path="/" element={<Dashboard />}/>
       <Route path="/" element={<Dashboard />}/>
       <Route path="/" element={<Dashboard />}/>

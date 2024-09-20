@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Table from 'react-bootstrap/esm/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPenToSquare, faSquarePlus, faXmark, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare, faSquarePlus, faXmark, faEye, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CreateNewCustomer from '../../../Utilities/CreateNewCustomer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import { NoDataFound } from '../../../pages/NoDataFound';
 import { useNavigate } from 'react-router-dom';
 import styles from "./customer.module.css"
 import ViewMyCustomer from '../../../Utilities/ViewMyCustomer';
+import { Col, Form, Row } from 'react-bootstrap';
 
 const MyCustomer = () => {
   const [data, setData] = useState([])
@@ -80,16 +81,42 @@ const MyCustomer = () => {
     <>
     <ViewMyCustomer show = {viewCustomer} onHide = {handleViewClose} data = {viewCustomerData} />
     <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
-    <div className='manage_top_view'>
+    <div className=''>
      
       <CreateNewCustomer closeModal = {setCreateNewCustomerModalShow} show = {createNewCustomerModalShow} onHide={() => setCreateNewCustomerModalShow(false)} />
-      <div className="display_table_main_wrapper container customer_page">
+      <div className={styles.invoiceFilterWrapperTop}>
+      <div className={`container`}>
+      <Row style={{alignItems: "center"}}>
+          <Col className={styles.invoice_header} xs={12} md={4}>
+            <h5>
+            Customer
+            </h5>
+        </Col>
+        <Col xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+         
+        <div className={styles.searchForm}>
+          <Form.Control
+            type="text"
+            placeholder="Search..."
+          />
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </div>
+        <Button variant="primary" onClick={handleCreateNewCustomer}>New Customer
+        </Button>
+        </Col>
+        </Row>
+        
+        
+      </div>
        
+      </div>
+      <div className="display_table_main_wrapper container customer_page">
+      
         <div className={styles.addnewcustomer}>
-        <h5>Customer</h5>
+        {/* <h5>Customer</h5>
         <Button variant="primary" type="button" onClick={() => handleCreateNewCustomer()}>
           New Customer <FontAwesomeIcon icon={faSquarePlus} />
-        </Button>
+        </Button> */}
 
         </div>
         <table>
