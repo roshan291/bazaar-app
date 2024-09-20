@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from "../invoice/invoice.module.css"
 import { Col, Form, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 
 const ProformaInvoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
@@ -85,7 +85,7 @@ const ProformaInvoice = () => {
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
-        <Button variant="primary" onClick={handleCreateInvoice}>Create Proforma Invoice
+        <Button variant="primary" onClick={handleCreateInvoice}>Create Proforma Invoice <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
         </Col>
         </Row>

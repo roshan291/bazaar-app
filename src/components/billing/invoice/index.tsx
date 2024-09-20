@@ -5,7 +5,7 @@ import ViewInvoice from '../../../Utilities/ViewInvoice';
 import styles from "./invoice.module.css"
 import Button from '../../buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Col, Form, Row } from 'react-bootstrap';
@@ -129,7 +129,7 @@ let currentSelectedFilter : any;
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
-        <Button variant="primary" onClick={handleCreateInvoice}>Create Invoice
+        <Button variant="primary" onClick={handleCreateInvoice}>Create Invoice <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
         </Col>
         </Row>

@@ -366,7 +366,40 @@
   "updatecustomer": [],
   "deletecustomer": [],
   "viewcustomer": [],
-  "createitinerary": [],
+  "createitinerary": [
+    {
+      "customerName": "Mahesh Babu",
+      "dateOfIssue": "9/7/2024, 11:24:40 PM",
+      "itineraryTitle": "Bangalore Trip",
+      "mobileNumber": "90909090909",
+      "budgetForTrip": "40000",
+      "changestatus": "In process"
+    },
+    {
+      "customerName": "Mahesh",
+      "dateOfIssue": "9/7/2024, 11:24:40 PM",
+      "itineraryTitle": "Bangalore Trip",
+      "mobileNumber": "90909090909",
+      "budgetForTrip": "49000",
+      "changestatus": "In process"
+    },
+    {
+      "customerName": "Narasimha",
+      "dateOfIssue": "9/7/2024, 11:24:40 PM",
+      "itineraryTitle": "Bangalore Trip",
+      "mobileNumber": "90909090909",
+      "budgetForTrip": "30000",
+      "changestatus": "In process"
+    },
+    {
+      "customerName": "kaanth",
+      "dateOfIssue": "9/7/2024, 11:24:40 PM",
+      "itineraryTitle": "Bangalore Trip",
+      "mobileNumber": "90909090909",
+      "budgetForTrip": "400",
+      "changestatus": "In process"
+    }
+  ],
   "updateitinerary": [],
   "deleteitinerary": [],
   "viewitinerary": [],
@@ -450,6 +483,31 @@
       "billingNote": "Billing note",
       "invoiceId": "HB102",
       "createdDate": "9/20/2024, 3:29:29 PM",
+      "invoiceType": ""
+    },
+    {
+      "id": "e26f",
+      "currencyType": "USD",
+      "paymentMode": "Cash",
+      "customerName": "Hemanth Danala BB",
+      "invoieStatus": "Fully Paid",
+      "invoiceParticulars": [
+        {
+          "particularName": "Test invoice",
+          "particularRate": "2",
+          "particularQuantity": "2",
+          "particularDiscount": "2",
+          "particularHSN": "2",
+          "particularGST": "2",
+          "particularTotalAmount": "2"
+        }
+      ],
+      "grandTotalAmount": 6.08,
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing note",
+      "invoiceId": "HB3058",
+      "createdDate": "9/20/2024, 8:01:52 PM",
       "invoiceType": ""
     }
   ],

@@ -139,11 +139,9 @@ body {
   margin-top: 70px;
 }
 
-/* .display_table_main_wrapper table thead tr th {
-  font-weight: 500;
-  background-color: #0067ff;
-  color: #fff;
-} */
+.display_table_main_wrapper {
+  margin: 2rem 0 0 3rem;
+}
 
 .display_table_main_wrapper table {
   font-size: 14px;
@@ -487,3 +485,25 @@ table tr, .table tr label {
   display: block;
   margin-top: 10px;
 }
+
+.page_top_banner {
+  border-bottom: 1px solid #ddd;
+  background-color: #f3f3f3;
+  padding: 10px 0;
+}
+.top_banner_searchForm {
+  position: relative;
+  margin-right: 1rem;
+  margin-left: 1rem
+}
+
+.top_banner_searchForm svg {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  color: #bdb9b9;
+}
+.top_banner_searchForm input {
+  border-radius: 50px;
+  padding-right: 50px;
+} 

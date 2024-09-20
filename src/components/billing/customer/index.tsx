@@ -101,7 +101,7 @@ const MyCustomer = () => {
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
-        <Button variant="primary" onClick={handleCreateNewCustomer}>New Customer
+        <Button variant="primary" onClick={handleCreateNewCustomer}>New Customer <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
         </Col>
         </Row>
@@ -111,14 +111,7 @@ const MyCustomer = () => {
        
       </div>
       <div className="display_table_main_wrapper container customer_page">
-      
-        <div className={styles.addnewcustomer}>
-        {/* <h5>Customer</h5>
-        <Button variant="primary" type="button" onClick={() => handleCreateNewCustomer()}>
-          New Customer <FontAwesomeIcon icon={faSquarePlus} />
-        </Button> */}
-
-        </div>
+     
         <table>
         <thead>
             <tr>

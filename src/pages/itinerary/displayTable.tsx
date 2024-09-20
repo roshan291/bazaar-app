@@ -40,7 +40,7 @@ const DisplayTable = (props: any) => {
         <tbody>
             {
                  props?.rowData?.map((item: any, index : any) => <tr key={index}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td>{item.dateOfIssue}</td>
                     <td>{item.itineraryTitle}</td>
                     <td>{item.customerName}</td>
