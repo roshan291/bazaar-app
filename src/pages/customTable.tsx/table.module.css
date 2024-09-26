@@ -1,11 +1,13 @@
 .tableWrapper tr {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     border: 1px solid #ddd;
     padding: 3px 5px;
 }
 
 .tableWrapper tr td, .tableWrapper tr td label {
     cursor: pointer;
+}
+
+.tableWrapper tr td:last-child {
+    width: 4rem;
+    text-align: center;
 }

@@ -4,4 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+.nodataFound img {
+    max-width: 150px;
+}
+.nodataFound h5 {
+    color: #8a96a3;
 }

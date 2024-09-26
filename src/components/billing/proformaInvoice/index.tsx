@@ -8,6 +8,8 @@ import styles from "../invoice/invoice.module.css"
 import { Col, Form, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import CommonSearch from '../../../Utilities/commonSearch';
+import { invoiceSearch, invoiceStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
 
 const ProformaInvoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
@@ -16,6 +18,7 @@ const ProformaInvoice = () => {
   const [isInvoice, setInvoice] = useState(true)
   const [isAllInvoice, setAllInvoice] = useState(false)
   const [selectedStatus, setSelectedStatus] = useState("All" as any)
+  const [searchResults, setSearchResults] = useState("");
   const navigate = useNavigate(); 
   
   const {
@@ -39,12 +42,14 @@ const ProformaInvoice = () => {
     axios.get('http://localhost:8000/createinvoice').then((res: any) => {
     const customer = res.data;
     setInvoiceRowData(customer);
+    setrowData(customer);
   });
   },[])
 
   const handleInvoceStatus = (e: any) => {
     const selected = e.target.value;
     setSelectedStatus(selected);
+    filterData(selected, searchResults)
   }
   const updateParentState = () => {
    
@@ -54,6 +59,20 @@ const ProformaInvoice = () => {
     });
 };
 
+const handleSearch = (query: any) => {
+  setSearchResults(query) 
+  filterData(selectedStatus, query)
+};
+
+const filterData = (dropdownValue: any, searchValue: any) => {
+  console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const results = invoiceRowData.filter((item: any) => {
+    const matchesSearch = searchValue ? invoiceSearch(item, searchValue) : true;
+    const matchesDropdown = dropdownValue ? invoiceStatusFilter(item, dropdownValue) : true;
+    return matchesSearch && matchesDropdown;
+  });
+  setrowData(results);
+}
 
   console.log("invoiceRowData", rowData, invoiceRowData)
   return (
@@ -79,11 +98,10 @@ const ProformaInvoice = () => {
           </Form.Select>
         </div>
         <div className={styles.searchForm}>
-          <Form.Control
-            type="text"
-            placeholder="Search..."
-          />
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <CommonSearch 
+              onSearch={handleSearch} 
+              searchResult= {setSearchResults}
+            />
         </div>
         <Button variant="primary" onClick={handleCreateInvoice}>Create Proforma Invoice <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
@@ -92,7 +110,7 @@ const ProformaInvoice = () => {
         </div>
       </div>
       
-      <ViewInvoice  data = {invoiceRowData} isDelete = {updateParentState} />
+      <ViewInvoice  data = {rowData} isDelete = {updateParentState} />
     </div>
   )
 }

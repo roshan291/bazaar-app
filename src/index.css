@@ -166,7 +166,7 @@ body {
   border: 1px solid #ddd;
 }
 
-.display_table_main_wrapper.customer_page table tr th {
+.display_table_main_wrapper table tr th {
   padding: 5px;
   background-color: #0d6efd;
   color: #fff;
@@ -458,12 +458,12 @@ body {
 table {
   width: 100%;
 }
-table tbody tr:hover {
-  color: #ff7315;
-  
-}
+ 
 table tr, .table tr label {
   cursor: pointer;
+}
+li.nav-item.disabled {
+  opacity: .5; 
 }
  table tr {
   border: 1px solid #ddd;
@@ -497,6 +497,12 @@ table tr, .table tr label {
   margin-left: 1rem
 }
 
+.top_banner_dropdown select {
+  border-radius: 50px;
+  padding-right: 50px;
+  width: 16rem;
+}
+
 .top_banner_searchForm svg {
   position: absolute;
   right: 15px;
@@ -506,4 +512,9 @@ table tr, .table tr label {
 .top_banner_searchForm input {
   border-radius: 50px;
   padding-right: 50px;
+  width: 16rem;
 } 
+
+.btn-close {
+  color: #ff7315 !important;
+}

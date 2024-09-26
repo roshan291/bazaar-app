@@ -34,8 +34,8 @@ export const leadStatus = [
 ]
 
 export const itineraryStatus = [
-    "In process",
-    "new",
+    "In Progress",
+    "New",
     "Completed Tour",
     "Sent to customer",
     "Confirmed",

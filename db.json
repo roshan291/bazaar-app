@@ -1,20 +1,20 @@
 {
   "createlead": [
     {
-      "id": "HB3951",
-      "createdDate": "9/15/2024, 6:44:13 PM",
+      "id": "HB547",
+      "createdDate": "9/26/2024, 4:27:10 PM",
       "leadTitle": "New title",
       "paymentmode": "Cheque",
-      "customerName": "Roshan  Syed 1",
-      "getRequirement": "Group Tour Package",
+      "customerName": "Roshan  Syed",
+      "getRequirement": "FIT (Customised) Tour Package",
       "noOfInfants": "2",
-      "typeOfHoliday": "Adventure / Camping",
+      "typeOfHoliday": "Beach / Hill Stations",
       "dateANDtime": "",
       "pickUpPoint": "",
       "dropPoint": "",
       "noOfAdults": "2",
       "noOfKids": "2",
-      "groupTourPackageList": "AUD (Australian dollar)",
+      "groupTourPackageList": "",
       "serviceList": [
         {
           "id": 1,
@@ -23,17 +23,17 @@
         },
         {
           "id": 2,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Internal Transportation"
         },
         {
           "id": 3,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Hotel Stay"
         },
         {
           "id": 4,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Sightseeing"
         },
         {
@@ -43,17 +43,17 @@
         },
         {
           "id": 6,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Government Tax"
         },
         {
           "id": 7,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Surcharge"
         },
         {
           "id": 8,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Cruise Stay"
         },
         {
@@ -63,17 +63,17 @@
         },
         {
           "id": 10,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "APAI - Stay & All Meals"
         },
         {
           "id": 11,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Passport Fees"
         },
         {
           "id": 12,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "CP - Stay & Breakfast"
         },
         {
@@ -83,14 +83,14 @@
         },
         {
           "id": 14,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "MAP - Stay, Breakfast & Dinner"
         }
       ],
       "vehicleType": "",
       "noOfRooms": "",
-      "startDate": "2024-09-16",
-      "endDate": "2024-09-24",
+      "startDate": "2024-09-26",
+      "endDate": "2024-10-03",
       "checkIN": "",
       "checkOUT": "",
       "destination": "Bangalore",
@@ -101,223 +101,9 @@
       "currencyType": "EUR (European euro)",
       "budgetForTrip": "50000",
       "requiredDocuments": "",
-      "shortNote": "Short note 7",
-      "hotelPreferences": "5 Star",
-      "leadstatus": "New",
-      "invoice": [],
-      "itinerary": []
-    },
-    {
-      "id": "HB3780",
-      "createdDate": "9/15/2024, 6:45:43 PM",
-      "leadTitle": "First Test",
-      "paymentmode": "Cheque",
-      "customerName": "Hemanth Danala BB",
-      "getRequirement": "FIT (Customised) Tour Package",
-      "noOfInfants": "2",
-      "typeOfHoliday": "Beach / Hill Stations",
-      "dateANDtime": "",
-      "pickUpPoint": "",
-      "dropPoint": "",
-      "noOfAdults": "2",
-      "noOfKids": "2",
-      "groupTourPackageList": "",
-      "serviceList": [
-        {
-          "id": 1,
-          "isChecked": true,
-          "serviceName": "Airfare"
-        },
-        {
-          "id": 2,
-          "isChecked": false,
-          "serviceName": "Internal Transportation"
-        },
-        {
-          "id": 3,
-          "isChecked": false,
-          "serviceName": "Hotel Stay"
-        },
-        {
-          "id": 4,
-          "isChecked": false,
-          "serviceName": "Sightseeing"
-        },
-        {
-          "id": 5,
-          "isChecked": true,
-          "serviceName": "Visa Fees"
-        },
-        {
-          "id": 6,
-          "isChecked": false,
-          "serviceName": "Government Tax"
-        },
-        {
-          "id": 7,
-          "isChecked": false,
-          "serviceName": "Surcharge"
-        },
-        {
-          "id": 8,
-          "isChecked": false,
-          "serviceName": "Cruise Stay"
-        },
-        {
-          "id": 9,
-          "isChecked": true,
-          "serviceName": "Free Goodies"
-        },
-        {
-          "id": 10,
-          "isChecked": false,
-          "serviceName": "APAI - Stay & All Meals"
-        },
-        {
-          "id": 11,
-          "isChecked": false,
-          "serviceName": "Passport Fees"
-        },
-        {
-          "id": 12,
-          "isChecked": false,
-          "serviceName": "CP - Stay & Breakfast"
-        },
-        {
-          "id": 13,
-          "isChecked": true,
-          "serviceName": "Tour Manager"
-        },
-        {
-          "id": 14,
-          "isChecked": false,
-          "serviceName": "MAP - Stay, Breakfast & Dinner"
-        }
-      ],
-      "vehicleType": "",
-      "noOfRooms": "",
-      "startDate": "2024-09-16",
-      "endDate": "2024-09-18",
-      "checkIN": "",
-      "checkOUT": "",
-      "destination": "Bangalore vulva",
-      "country": "",
-      "noOfDays": "",
-      "typeOfVisa": "",
-      "coupleList": "Per Person",
-      "currencyType": "THB (Thai Baht)",
-      "budgetForTrip": "50000",
-      "requiredDocuments": "",
       "shortNote": "Short note",
-      "hotelPreferences": "2 Star",
-      "leadstatus": "All",
-      "invoice": [],
-      "itinerary": []
-    },
-    {
-      "id": "HB3789",
-      "createdDate": "9/15/2024, 6:45:43 PM",
-      "leadTitle": "First Test 22",
-      "paymentmode": "Cheque",
-      "customerName": "Hemanth Danala BB",
-      "getRequirement": "FIT (Customised) Tour Package",
-      "noOfInfants": "2",
-      "typeOfHoliday": "Beach / Hill Stations",
-      "dateANDtime": "",
-      "pickUpPoint": "",
-      "dropPoint": "",
-      "noOfAdults": "2",
-      "noOfKids": "2",
-      "groupTourPackageList": "",
-      "serviceList": [
-        {
-          "id": 1,
-          "isChecked": true,
-          "serviceName": "Airfare"
-        },
-        {
-          "id": 2,
-          "isChecked": false,
-          "serviceName": "Internal Transportation"
-        },
-        {
-          "id": 3,
-          "isChecked": false,
-          "serviceName": "Hotel Stay"
-        },
-        {
-          "id": 4,
-          "isChecked": false,
-          "serviceName": "Sightseeing"
-        },
-        {
-          "id": 5,
-          "isChecked": true,
-          "serviceName": "Visa Fees"
-        },
-        {
-          "id": 6,
-          "isChecked": false,
-          "serviceName": "Government Tax"
-        },
-        {
-          "id": 7,
-          "isChecked": false,
-          "serviceName": "Surcharge"
-        },
-        {
-          "id": 8,
-          "isChecked": false,
-          "serviceName": "Cruise Stay"
-        },
-        {
-          "id": 9,
-          "isChecked": true,
-          "serviceName": "Free Goodies"
-        },
-        {
-          "id": 10,
-          "isChecked": false,
-          "serviceName": "APAI - Stay & All Meals"
-        },
-        {
-          "id": 11,
-          "isChecked": false,
-          "serviceName": "Passport Fees"
-        },
-        {
-          "id": 12,
-          "isChecked": false,
-          "serviceName": "CP - Stay & Breakfast"
-        },
-        {
-          "id": 13,
-          "isChecked": true,
-          "serviceName": "Tour Manager"
-        },
-        {
-          "id": 14,
-          "isChecked": false,
-          "serviceName": "MAP - Stay, Breakfast & Dinner"
-        }
-      ],
-      "vehicleType": "",
-      "noOfRooms": "",
-      "startDate": "2024-09-16",
-      "endDate": "2024-09-18",
-      "checkIN": "",
-      "checkOUT": "",
-      "destination": "Bangalore vulva",
-      "country": "",
-      "noOfDays": "",
-      "typeOfVisa": "",
-      "coupleList": "Per Person",
-      "currencyType": "THB (Thai Baht)",
-      "budgetForTrip": "50000",
-      "requiredDocuments": "",
-      "shortNote": "Short note",
-      "hotelPreferences": "2 Star",
-      "leadstatus": "All",
+      "hotelPreferences": "3 Star",
+      "leadstatus": "Completed",
       "invoice": [],
       "itinerary": []
     }
@@ -327,40 +113,16 @@
   "viewlead": [],
   "createcustomer": [
     {
-      "id": "HB3235",
-      "createdDate": "8/27/2024, 11:43:32 PM",
+      "id": "HB1272",
+      "createdDate": "9/26/2024, 4:27:10 PM",
       "customerFirstName": "Roshan ",
-      "customerLastName": "Syed 1",
+      "customerLastName": "Syed",
       "customerEmail": "roshan@gmail.com",
-      "customerMobile": "898989898",
+      "customerMobile": "9090909090",
       "country": "India",
-      "state": "Karnataka",
-      "city": "Bangalore",
-      "zipcode": "560038"
-    },
-    {
-      "id": "HB8684",
-      "createdDate": "8/27/2024, 11:47:08 PM",
-      "customerFirstName": "Hemanth",
-      "customerLastName": "Danala BB",
-      "customerEmail": "hemanth@gmail.com",
-      "customerMobile": "9999998998",
-      "country": "Iceland",
-      "state": "Goochi",
-      "city": "Machuu",
-      "zipcode": "9999909"
-    },
-    {
-      "id": "HB1308",
-      "createdDate": "9/7/2024, 11:24:40 PM",
-      "customerFirstName": "Rajesh",
-      "customerLastName": "Karnati",
-      "customerEmail": "rajesh@gmail.com",
-      "customerMobile": "90098098",
-      "country": "India",
-      "state": "Karnataka",
-      "city": "Bangalore",
-      "zipcode": "560037"
+      "state": "Telangana",
+      "city": "Hyderabad",
+      "zipcode": "894590"
     }
   ],
   "updatecustomer": [],
@@ -368,149 +130,252 @@
   "viewcustomer": [],
   "createitinerary": [
     {
-      "customerName": "Mahesh Babu",
-      "dateOfIssue": "9/7/2024, 11:24:40 PM",
-      "itineraryTitle": "Bangalore Trip",
-      "mobileNumber": "90909090909",
-      "budgetForTrip": "40000",
-      "changestatus": "In process"
+      "id": ":r1:",
+      "iteneraryId": "HB8393",
+      "createdDate": "9/25/2024, 11:30:27 PM",
+      "itineraryTitle": "",
+      "destination": "",
+      "typeOfHoliday": "",
+      "noOfAdults": "",
+      "noOfKids": "",
+      "startDate": "",
+      "endDate": "",
+      "coupleList": "",
+      "currencyType": "",
+      "budgetForTrip": "",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": false,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": false,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": false,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "noOfNights": "",
+      "travellers": "",
+      "welcomenote": "",
+      "customerName": "",
+      "emailId": "",
+      "mobileNumber": "",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "postalCode": "",
+      "birthDate": "",
+      "anniversaryDate": "",
+      "note": "",
+      "inclusion": "",
+      "exclusion": "",
+      "cost": "",
+      "termsConditions": "",
+      "tips": "",
+      "otherVisaInformation": "",
+      "thankyounote": "",
+      "changestatus": "",
+      "dayWisePlanFinal": [
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        }
+      ]
     },
     {
-      "customerName": "Mahesh",
-      "dateOfIssue": "9/7/2024, 11:24:40 PM",
-      "itineraryTitle": "Bangalore Trip",
-      "mobileNumber": "90909090909",
-      "budgetForTrip": "49000",
-      "changestatus": "In process"
-    },
-    {
-      "customerName": "Narasimha",
-      "dateOfIssue": "9/7/2024, 11:24:40 PM",
-      "itineraryTitle": "Bangalore Trip",
-      "mobileNumber": "90909090909",
-      "budgetForTrip": "30000",
-      "changestatus": "In process"
-    },
-    {
-      "customerName": "kaanth",
-      "dateOfIssue": "9/7/2024, 11:24:40 PM",
-      "itineraryTitle": "Bangalore Trip",
-      "mobileNumber": "90909090909",
-      "budgetForTrip": "400",
-      "changestatus": "In process"
+      "id": ":rd:",
+      "iteneraryId": "HB7287",
+      "createdDate": "9/25/2024, 11:30:56 PM",
+      "itineraryTitle": "",
+      "destination": "",
+      "typeOfHoliday": "",
+      "noOfAdults": "",
+      "noOfKids": "",
+      "startDate": "",
+      "endDate": "",
+      "coupleList": "",
+      "currencyType": "",
+      "budgetForTrip": "",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": false,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": false,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": false,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "noOfNights": "",
+      "travellers": "",
+      "welcomenote": "",
+      "customerName": "",
+      "emailId": "",
+      "mobileNumber": "",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "postalCode": "",
+      "birthDate": "",
+      "anniversaryDate": "",
+      "note": "",
+      "inclusion": "",
+      "exclusion": "",
+      "cost": "",
+      "termsConditions": "",
+      "tips": "",
+      "otherVisaInformation": "",
+      "thankyounote": "",
+      "changestatus": "Sent to customer",
+      "dayWisePlanFinal": [
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        }
+      ]
     }
   ],
   "updateitinerary": [],
   "deleteitinerary": [],
   "viewitinerary": [],
-  "createinvoice": [
-    {
-      "id": "HB4787",
-      "currencyType": "USD",
-      "paymentMode": "RTGS / NEFT / IMPS",
-      "customerName": "Rajesh Karnati",
-      "invoieStatus": "Part Paid",
-      "invoiceParticulars": [],
-      "grandTotalAmount": "",
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "Billing note",
-      "createdDate": "9/10/2024, 10:48:13 PM",
-      "invoiceType": ""
-    },
-    {
-      "id": "HB2048",
-      "currencyType": "usd",
-      "paymentMode": "cash",
-      "customerName": "Roshan  Syed 1",
-      "invoieStatus": "Generated (Not sent to customer)",
-      "invoiceParticulars": [
-        {
-          "particularName": "Test",
-          "particularRate": "2",
-          "particularQuantity": "1",
-          "particularDiscount": "11",
-          "particularHSN": "1",
-          "particularGST": "11",
-          "particularTotalAmount": "1120"
-        }
-      ],
-      "grandTotalAmount": 1111.12,
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "Billing ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoeBilling ntoe",
-      "createdDate": "9/10/2024, 11:07:11 PM",
-      "invoiceType": ""
-    },
-    {
-      "id": "HB4198",
-      "currencyType": "USD",
-      "paymentMode": "RTGS / NEFT / IMPS",
-      "customerName": "Hemanth Danala BB",
-      "invoieStatus": "Completed",
-      "invoiceParticulars": [],
-      "grandTotalAmount": "",
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "Billing note",
-      "createdDate": "9/10/2024, 11:21:53 PM",
-      "invoiceType": ""
-    },
-    {
-      "id": "HB9915",
-      "currencyType": "USD",
-      "paymentMode": "Payment Gateway",
-      "customerName": "Hemanth Danala BB",
-      "invoieStatus": "Canceled",
-      "invoiceParticulars": [],
-      "grandTotalAmount": "",
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "test",
-      "createdDate": "9/15/2024, 10:43:19 PM",
-      "invoiceType": ""
-    },
-    {
-      "id": "8938",
-      "currencyType": "INR",
-      "paymentMode": "RTGS / NEFT / IMPS",
-      "customerName": "Roshan  Syed 1",
-      "invoieStatus": "Sent to Customer (Due)",
-      "invoiceParticulars": [],
-      "grandTotalAmount": 0,
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "Billing note",
-      "invoiceId": "HB102",
-      "createdDate": "9/20/2024, 3:29:29 PM",
-      "invoiceType": ""
-    },
-    {
-      "id": "e26f",
-      "currencyType": "USD",
-      "paymentMode": "Cash",
-      "customerName": "Hemanth Danala BB",
-      "invoieStatus": "Fully Paid",
-      "invoiceParticulars": [
-        {
-          "particularName": "Test invoice",
-          "particularRate": "2",
-          "particularQuantity": "2",
-          "particularDiscount": "2",
-          "particularHSN": "2",
-          "particularGST": "2",
-          "particularTotalAmount": "2"
-        }
-      ],
-      "grandTotalAmount": 6.08,
-      "gstNummber": "36AAPCS5625R1ZE",
-      "panNummber": "BLUPA2358A",
-      "billingNote": "Billing note",
-      "invoiceId": "HB3058",
-      "createdDate": "9/20/2024, 8:01:52 PM",
-      "invoiceType": ""
-    }
-  ],
+  "createinvoice": [],
   "updateinvoice": [],
   "deleteinvoice": [],
   "viewinvoice": []

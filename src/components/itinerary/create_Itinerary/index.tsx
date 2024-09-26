@@ -10,7 +10,7 @@ import { itineraryStatus, selectCouple, selectCurrency, selectThankyouNote, sele
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import CustomDatePicker from '../../../Utilities/CustomDatePicker';
 import CustomNumberInput from '../../../Utilities/CustomNumberInput';
-import { onKeyPress } from '../../../Utilities/Utils';
+import { generateCurrentDateAndTime, generateUniqueId, onKeyPress } from '../../../Utilities/Utils';
 import CustomEmailInput from '../../../Utilities/CustomEmailInput';
 import CustomeTextarea from '../../../Utilities/CustomeTextarea';
 import Stack from 'react-bootstrap/Stack';
@@ -64,6 +64,8 @@ const CreateItinerary = () => {
 
     const [createItinerary, setCreateItinerary] = useState({
         id: uniqueId,
+        iteneraryId: `HB${generateUniqueId()}`,
+        createdDate: generateCurrentDateAndTime(),
         itineraryTitle: "",
         destination: "",
         typeOfHoliday: "",
@@ -332,6 +334,41 @@ useEffect(() => {
 
   return (
 <>
+<div className="page_top_banner">
+        <div className={`container`}>
+          <Row style={{alignItems: "center"}}>
+          <Col className="top_banner_left_panel" xs={12} md={4}>
+            <h5>
+                Your Tour Itinerary
+            </h5>
+        </Col>
+        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <div className="top_banner_dropdown">
+          {/* <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
+            <option value="All">All</option>
+            {
+              itineraryStatus?.map((list: any) => <option value={list}>{list}</option>)
+            }
+          </Form.Select> */}
+        </div>
+        <div className="top_banner_searchForm">
+          {/* <Form.Control
+            type="text"
+            placeholder="Search..."
+          />
+          <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
+          {/* <CommonSearch 
+            onSearch={handleSearch} 
+            searchResult= {setSearchResults}
+          /> */}
+        </div>
+        <Button variant="secondary" size="sm" >Preview Web view <FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
+        <Button variant="secondary" size="sm" className='ms-2' disabled>Send To Customer <FontAwesomeIcon icon={faEnvelope} /></Button>
+        </Col>
+        </Row>
+        </div>
+      </div>
+
     <NextDay show = {opeNextDay} onHide = {() => setOpeNextDay(false)} getnextDayData = {setNextDayData}/>
     <Meal show = {openMeal} onHide = {() => setOpenMeal(false)} getDayMeal = {setDayMeal}/>
     <Description show = {openDescription} onHide = {() => setOpenDescription(false)} getDayDescription = {setDayDescription}/>
@@ -341,25 +378,6 @@ useEffect(() => {
     <Hotel show = {openHotel} onHide = {() => setOpenHotel(false)} getDayHotel = {setDayHotel}/>
                    
     <Container className={`${styles.create_itinerary_page} manage_top_view`}>
-         <Container className="mb-3">
-            <Row className='d-flex align-items-center justify-content-center'>
-                <Col><h5 className='mb-0'>YOUR TOUR ITINERARY </h5></Col>
-                {/* ROSHAN BANGALORE PACKAGE (#HBHITR78) */}
-                <Col className='d-flex align-items-center justify-content-end'>
-                    <Button variant="outline-secondary" size="sm" >Preview Web view <FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                    {/* <Button variant="outline-secondary" size="sm" className='ms-2'>Preview PDF <FontAwesomeIcon icon={faMagnifyingGlass} /></Button> */}
-                    {/* <Button variant="outline-secondary" size="sm" className='ms-2'>
-                        <PDFDownloadLink document={<MyDoc />} fileName="syed.pdf">
-                            {({ blob, url, loading, error }) =>
-                                loading ? 'Loading...' : 'Preview pdf'
-                            }
-                        </PDFDownloadLink><FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </Button> */}
-                    <Button variant="outline-secondary" size="sm" className='ms-2' disabled>Send To Customer <FontAwesomeIcon icon={faEnvelope} /></Button>
-                </Col>
-            </Row>
-        </Container>
-       <Container>
         <Row>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <div className="p-2 mb-3 tab_default_style">Summary</div>
@@ -591,7 +609,7 @@ useEffect(() => {
                 </Row>
                 <br />
                 <div className="p-2 mb-4 tab_default_style">Day Wise Plan</div>
-                 
+                    
                 <div className={styles.daywise_block_main_wrapper}>     
                     {
                         dayWisePlan?.filter((item: any) => item.day !== "").map((item:any, index: any) => <div key = {item.index} className={styles.daywise_block_wrapper}>
@@ -834,7 +852,6 @@ useEffect(() => {
                 <Button variant="primary" type='submit'>Save & Submit</Button>
             </Form>
         </Row>
-       </Container>
     </Container>
     </>
   )

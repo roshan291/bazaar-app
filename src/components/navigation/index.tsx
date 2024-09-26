@@ -199,7 +199,7 @@ const clearInvpocepageStorate = () => {
           </ul>
         </li>
         <li
-          className={`nav-item ${activeMenu === "tools" ? "active" : ""}`}
+          className={`nav-item disabled ${activeMenu === "tools" ? "active" : ""}`}
           onClick={() => handleMenuClick("tools")}
         >
           <a className="nav-link">
@@ -207,7 +207,7 @@ const clearInvpocepageStorate = () => {
           </a>
         </li>
         <li
-          className={`nav-item ${activeMenu === "help" ? "active" : ""}`}
+          className={`nav-item disabled ${activeMenu === "help" ? "active" : ""}`}
           onClick={() => handleMenuClick("help")}
         >
           <a  className="nav-link">
