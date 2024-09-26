@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy, faEye, faDownload, faXmark, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import Daywiseplan from './dayWisePlan';
+import { NoDataFound } from '../NoDataFound';
 
 const DisplayTable = (props: any) => {
 
@@ -41,7 +42,7 @@ const DisplayTable = (props: any) => {
             {
                  props?.rowData?.map((item: any, index : any) => <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{item.dateOfIssue}</td>
+                    <td>{item.createdDate}</td>
                     <td>{item.itineraryTitle}</td>
                     <td>{item.customerName}</td>
                     <td>{item.mobileNumber}</td>
@@ -59,8 +60,12 @@ const DisplayTable = (props: any) => {
                     </td>
                  </tr>)
             }
+            
         </tbody>
         </Table>
+        { 
+            !props?.rowData?.length && <NoDataFound /> 
+        }
     </div>
   )
 }

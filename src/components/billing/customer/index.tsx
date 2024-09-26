@@ -14,21 +14,27 @@ import { useNavigate } from 'react-router-dom';
 import styles from "./customer.module.css"
 import ViewMyCustomer from '../../../Utilities/ViewMyCustomer';
 import { Col, Form, Row } from 'react-bootstrap';
+import CommonSearch from '../../../Utilities/commonSearch';
 
 const MyCustomer = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [rowdata, setRowData] = useState([] as any)
   const [createNewCustomerModalShow, setCreateNewCustomerModalShow] = useState(false as any);
   const [changeModalshow, setChangeModalShow] = useState(false);
   const [viewCustomer, setViewCustomer] = useState(false)
   const [viewCustomerData, setViewCustomerData] = useState([] as any)
   const [selectedJourney, setSelectedJourney] = useState<string>("");
   const [selectedId, setselectedId] = useState<string>("");
+  const [_searchResults, setSearchResults] = useState("");
   const navigate = useNavigate();
   
+  const dispatch = useDispatch(); 
+
   useEffect(() => {
       axios.get('http://localhost:8000/createcustomer').then((res: any) => {
       const customer = res.data;
       setData(customer);
+      setRowData(customer);
     });
   },[])
 
@@ -36,10 +42,15 @@ const MyCustomer = () => {
     axios.get('http://localhost:8000/createcustomer').then((res: any) => {
     const customer = res.data;
     setData(customer);
+    setRowData(customer);
   });
-},[changeModalshow, createNewCustomerModalShow])
+  },[changeModalshow, createNewCustomerModalShow])
 
-  const dispatch = useDispatch(); 
+  const handleSearch = (query: any) => {
+    const search = data?.filter((item: any) => item?.customerFirstName?.toLowerCase().includes(query.toLowerCase()) || item?.customerLastName?.toLowerCase().includes(query.toLowerCase()));
+    console.log("handleSearch 001", query, search);
+    setRowData(search);
+  };
 
   const createNewCustomerData = useSelector(
     (state: any) => state?.data
@@ -95,11 +106,10 @@ const MyCustomer = () => {
         <Col xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
          
         <div className={styles.searchForm}>
-          <Form.Control
-            type="text"
-            placeholder="Search..."
+          <CommonSearch 
+            onSearch={handleSearch} 
+            searchResult= {setSearchResults}
           />
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <Button variant="primary" onClick={handleCreateNewCustomer}>New Customer <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
@@ -112,7 +122,7 @@ const MyCustomer = () => {
       </div>
       <div className="display_table_main_wrapper container customer_page">
      
-        <table>
+        <Table striped bordered hover>
         <thead>
             <tr>
                 <th> # No</th>
@@ -125,7 +135,7 @@ const MyCustomer = () => {
         </thead>
         <tbody>
             {
-              data?.map((item: any, index: any) => <tr key={index + 1}>
+              rowdata?.map((item: any, index: any) => <tr key={index + 1}>
                 <td>{index + 1}</td>
                 <td>{item?.createdDate}</td>
                 <td>{item.customerFirstName} {item.customerLastName} </td>
@@ -139,9 +149,9 @@ const MyCustomer = () => {
               </tr>)
             }
         </tbody>
-        </table>
+        </Table>
           { 
-            !data?.length && <NoDataFound /> 
+            !rowdata?.length && <NoDataFound /> 
           }
       </div>
     </div>

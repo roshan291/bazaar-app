@@ -7,6 +7,7 @@ import DeleteSelectedItem from './deleteSelectedItem'
 import { useNavigate } from 'react-router-dom'
 import { PDFDownloadLink, Document } from '@react-pdf/renderer'
 import DownloadBill from '../components/billing/download-bill'
+import { Table } from 'react-bootstrap'
 const ViewInvoice = ({ data, isDelete } : any) => {
 
     const [selectedJourney] = useState("invoice");
@@ -44,7 +45,7 @@ const ViewInvoice = ({ data, isDelete } : any) => {
     <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
    
     <div className={`${styles.invoice_wrapper} container`}>
-        <table>
+        <Table striped bordered hover>
             <thead>
                 <tr>
                     <th># No</th>
@@ -77,7 +78,7 @@ const ViewInvoice = ({ data, isDelete } : any) => {
                     </tr>)
                 }
             </tbody>
-        </table>
+        </Table>
         { 
             !data?.length && <NoDataFound /> 
           }

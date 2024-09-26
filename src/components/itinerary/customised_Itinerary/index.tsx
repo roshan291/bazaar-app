@@ -5,25 +5,63 @@ import { Col, Form, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../buttons'
-import { navigationURL } from '../../../constants'
+import { itineraryStatus, navigationURL } from '../../../constants'
+import { itinerarySearch, itineraryStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch'
+import CommonSearch from '../../../Utilities/commonSearch'
+import { useNavigate } from 'react-router-dom'
 
 const CustomisedItinerary = () => {
   const [selectedStatus, setSelectedStatus] = useState("All" as any);
   const [navigateUrl, setNavigateUrlUrl] = useState("")
   const [data, setData] = useState([])
+  const [rowdata,setRowData] = useState([] as any)
+  const [searchResults, setSearchResults] = useState("");
+  const navigate = useNavigate(); 
+  
+  const {
+    createLead,
+    manageLead,
+    dashboard,
+    customisedItinerary,
+    groupItinerary,
+    readyItinerary,
+    proformainvoice,
+    invoice,
+    customerView,
+    createinvoice,
+    createItinerary,
+  } = navigationURL;
+
   const handleNavigation = () => {
-    setNavigateUrlUrl(navigationURL.createItinerary)
+      navigate(`${createItinerary}`);
   }
 
-  useEffect(() => {
-    axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-    const customer = res.data;
-    setData(customer);
-  });
+  const handleSearch = (query: any) => {
+    setSearchResults(query) 
+    filterData(selectedStatus, query)
+  };
+
+    useEffect(() => {
+      axios.get('http://localhost:8000/createitinerary').then((res: any) => {
+      const customer = res.data;
+      setData(customer);
+      setRowData(customer)
+    });
   },[])
 
   const handleSelectedStatus = (e: any) => {
-    setSelectedStatus(e.target.value)
+    setSelectedStatus(e.target.value) 
+    filterData(e.target.value, searchResults)
+  }
+  
+  const filterData = (dropdownValue: any, searchValue: any) => {
+    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+    const results = data.filter((item: any) => {
+      const matchesSearch = searchValue ? itinerarySearch(item, searchValue) : true;
+      const matchesDropdown = dropdownValue ? itineraryStatusFilter(item, dropdownValue) : true;
+      return matchesSearch && matchesDropdown;
+    });
+    setRowData(results);
   }
 
   return (
@@ -40,20 +78,16 @@ const CustomisedItinerary = () => {
         <div className="top_banner_dropdown">
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>
-            <option value="Generated (Not sent to customer)">Generated (Not sent to customer)</option>
-            <option value="Sent to Customer (Due)">Sent to Customer (Due)</option>
-            <option value="Part Paid">Part Paid</option>
-            <option value="Fully Paid">Fully Paid</option> 
-            <option value="Completed">Completed</option> 
-            <option value="Canceled">Canceled</option>
+            {
+              itineraryStatus?.map((list: any) => <option value={list}>{list}</option>)
+            }
           </Form.Select>
         </div>
         <div className="top_banner_searchForm">
-          <Form.Control
-            type="text"
-            placeholder="Search..."
+          <CommonSearch 
+            onSearch={handleSearch} 
+            searchResult= {setSearchResults}
           />
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <Button variant="primary" onClick={handleNavigation}>Create Customised Itinerary <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
@@ -62,7 +96,7 @@ const CustomisedItinerary = () => {
         </div>
       </div>
   
-    <DisplayTable rowData = {data}/>
+    <DisplayTable rowData = {rowdata}/>
     </>
     
   )

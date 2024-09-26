@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./table.module.css"
 import { useNavigate } from 'react-router-dom';
 import { navigationURL } from '../../constants'; 
+import { Table } from 'react-bootstrap';
 // import { encryptMessage } from '../../Utilities/storages/encryption';
 
 const CustomTable = (props: any) => {
@@ -39,7 +40,7 @@ const CustomTable = (props: any) => {
     
     <>
         <h5 className={styles.title}>{props?.title} Status</h5>
-        <table className={styles.tableWrapper}>
+        <Table striped bordered hover className={styles.tableWrapper}>
           <tbody>
           {
             props?.data?.map((item: any) => <tr key={item.id} className={styles.cardItem} onClick={() => handleNavigation(item?.url, item?.title)}>
@@ -52,7 +53,7 @@ const CustomTable = (props: any) => {
             </tr>)
           }
           </tbody>
-        </table>
+        </Table>
     </>
   )
 }

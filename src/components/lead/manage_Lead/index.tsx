@@ -16,6 +16,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { NoDataFound } from '../../../pages/NoDataFound';
 import { dateDifference, dateFormat } from '../../../Utilities/Utils';
+import CommonSearch from '../../../Utilities/commonSearch';
+import { itineraryStatusFilter, leadSearch, leadStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
 
 const ManageLead = () => {
 
@@ -35,6 +37,7 @@ const ManageLead = () => {
   const [leadDataRow, setLeadDataRow] = useState([] as any)
   const [chnageLeadStatusModalshow, setChnageLeadStatusModalShow] = useState(false);
   const [open, setOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
@@ -73,17 +76,19 @@ const ManageLead = () => {
    
   }
 
-  const handleStatusClick = (status: any) => {
+  const handleStatusClick = (e: any) => {
+    const status = e.target.value;
     setActiveStatus(status)
     if(status === "All") { 
       setLeadDataRow(leadData);
     } else {
-      const filterData = leadData?.filter((filterList: any) => filterList?.leadstatus === status)
-      setLeadDataRow(filterData);
+      console.log("filterData status", status, searchResults)
+      filterData(status, searchResults)
     }
     setActiveSideViewOfLead(false)
     setActiveForMenu(false)
     setmanagedleadDefaultViewMore(false)
+   
   };
   let currentSelectedFilter : any;
   if (typeof(Storage) !== "undefined") {
@@ -91,7 +96,8 @@ const ManageLead = () => {
   }
   useEffect(() => {
     console.log("currentSelectedFilter", currentSelectedFilter)
-    handleStatusClick(currentSelectedFilter);
+    setActiveStatus(currentSelectedFilter)
+    filterData(currentSelectedFilter, searchResults)
   }, [currentSelectedFilter, leadData])
 
   useEffect(() => {
@@ -136,6 +142,21 @@ const ManageLead = () => {
     invoice,
 } = navigationURL;
 
+const handleSearch = (query: any) => {
+  setSearchResults(query) 
+  filterData(activeStatus, query)
+};
+
+const filterData = (dropdownValue: any, searchValue: any) => {
+  console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const results = leadData.filter((item: any) => {
+    const matchesSearch = searchValue ? leadSearch(item, searchValue) : true;
+    const matchesDropdown = dropdownValue ? leadStatusFilter(item, dropdownValue) : true;
+    return matchesSearch && matchesDropdown;
+  });
+  setLeadDataRow(results);
+}
+
 
 const handleLeadsMoreList = (listItem: any, id: any) => {
   console.log("listItem", listItem, id);
@@ -156,10 +177,37 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
       setActiveForMenu(false)
       }} /> */}
       <UpdateLeadStatus closeModal = {setChnageLeadStatusModalShow} show = {chnageLeadStatusModalshow} onHide = {handleLeadStatusChangeClose} selectedItem = {selectedNavItem} id = {selectedId} />
+      <div className="page_top_banner">
+        <div className={`container`}>
+          <Row style={{alignItems: "center"}}>
+          <Col className="top_banner_left_panel" xs={12} md={4}>
+            <h5>
+              Manage lead
+            </h5>
+        </Col>
+        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <div className="top_banner_dropdown">
+          <Form.Select aria-label="Default select example" value = {activeStatus} onChange={(e) => handleStatusClick(e)}>
+            {
+              leadStatus?.map((list: any) => <option value={list}>{list}</option>)
+            }
+          </Form.Select>
+        </div>
+        <div className="top_banner_searchForm">
+          <CommonSearch 
+            onSearch={handleSearch} 
+            searchResult= {setSearchResults}
+          />
+        </div>
+        <Button variant="primary" onClick={() => navigate(createLead)}>New Lead <FontAwesomeIcon icon={faSquarePlus} />
+        </Button>
+        </Col>
+        </Row>
+        </div>
+      </div>
     <Container fluid className={`${styles.managelead_wrapper} manage_top_view`}>
-      <Container>
-        <Row className='align-items-center justify-content-between'>
-          {/* <Col xs lg="2"><h6>Manage Leads</h6></Col> */}
+      {/* <Container>
+        <Row className='align-items-center justify-content-between'> 
           <Col xs lg="9">
             <ul>
               {
@@ -179,22 +227,23 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
             
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </Container>
-    <Container fluid className={styles.managelead_selectFilter}>
+    {/* <Container fluid className={styles.managelead_selectFilter}>
       <Container>
         <Row className="align-items-center">
-          <Col><label>{activeStatus} Leads</label></Col>
+          <Col><h5>{activeStatus} Leads</h5></Col>
           <Col xs lg="3">
           <Form className={styles.searchForm}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Control type="email" placeholder="Search..." /><FontAwesomeIcon icon={faMagnifyingGlass} />
-            </Form.Group>
+            <CommonSearch 
+              onSearch={handleSearch} 
+              searchResult= {setSearchResults}
+            />
            </Form>
         </Col>
         </Row>
       </Container>
-    </Container>
+    </Container> */}
     <Container fluid>
       <Container className={styles.managelead_items_wrapper}>
         { activeFullViewOfLead ? <></> : <div className={`${styles.managelead_main_left} ${activeSideViewOfLead ? styles.managelead_main_left_dynamic : ""}`}>

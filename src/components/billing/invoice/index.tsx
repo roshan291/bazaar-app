@@ -9,6 +9,8 @@ import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@forta
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Col, Form, Row } from 'react-bootstrap';
+import CommonSearch from '../../../Utilities/commonSearch';
+import { invoiceSearch, invoiceStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
 const Invoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
   const [invoiceRowData, setInvoiceRowData] = useState([] as any)
@@ -17,7 +19,8 @@ const Invoice = () => {
   const [isDeleted, setDeleted] = useState(false)
   const [isAllInvoice, setAllInvoice] = useState(false)
   const [selectedStatus, setSelectedStatus] = useState("All" as any)
-  
+  const [searchResults, setSearchResults] = useState("");
+
   const navigate = useNavigate(); 
 
   const { id } = useParams();
@@ -81,13 +84,7 @@ const handleInvoceStatus = (e: any) => {
 
 const handleStatusClick = (selectedItem: any) => {
   setSelectedStatus(selectedItem)
-  if(selectedItem === "All" || selectedItem === "" || !selectedItem ) {
-    setrowData(invoiceRowData);
-  } else {
-    const filteredData = invoiceRowData?.filter((item: any) => item.invoieStatus === selectedItem )
-    console.log("invoiceRowData", invoiceRowData, selectedItem, filteredData)
-    setrowData(filteredData)
-  }
+  filterData(selectedItem, searchResults)
 }
   
 let currentSelectedFilter : any;
@@ -99,6 +96,21 @@ let currentSelectedFilter : any;
     console.log("currentSelectedFilter", currentSelectedFilter)
     handleStatusClick(currentSelectedFilter);
   }, [currentSelectedFilter, invoiceRowData])
+
+  const handleSearch = (query: any) => {
+    setSearchResults(query) 
+    filterData(selectedStatus, query)
+  };
+  
+  const filterData = (dropdownValue: any, searchValue: any) => {
+    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+    const results = invoiceRowData.filter((item: any) => {
+      const matchesSearch = searchValue ? invoiceSearch(item, searchValue) : true;
+      const matchesDropdown = dropdownValue ? invoiceStatusFilter(item, dropdownValue) : true;
+      return matchesSearch && matchesDropdown;
+    });
+    setrowData(results);
+  }
 
   return (
     <>
@@ -123,11 +135,10 @@ let currentSelectedFilter : any;
           </Form.Select>
         </div>
         <div className={styles.searchForm}>
-          <Form.Control
-            type="text"
-            placeholder="Search..."
-          />
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <CommonSearch 
+              onSearch={handleSearch} 
+              searchResult= {setSearchResults}
+            />
         </div>
         <Button variant="primary" onClick={handleCreateInvoice}>Create Invoice <FontAwesomeIcon icon={faSquarePlus} />
         </Button>
