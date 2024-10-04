@@ -97,14 +97,13 @@ const {
 
   const handleHotelSearch = (e: any) => {
     e.preventDefault();
-    console.log("searchHotel", searchHotel)
+ 
   }
 
   const onSubmitHotel = (event: any) => {
     event.preventDefault();
       const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        console.log("All date Not Verified handleCreateNewCustomer");
+      if (form.checkValidity() === false) { 
         event.stopPropagation();
       } else {
         props?.getDayHotel([hotel])

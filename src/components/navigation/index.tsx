@@ -73,7 +73,7 @@ const navigate = useNavigate();
     setIsSubMenuOpen2(true)
   };
 
-  console.log("isSubMenuOpen", isSubMenuOpen)
+ 
 
 const navigateToHome = () => {
     navigate(dashboard);
@@ -144,7 +144,7 @@ const clearInvpocepageStorate = () => {
           </a>
           <ul className={`sub-menu ${activeMenu === "lead" ? "open" : ""}`}>
             {
-                ["Create new lead", "Manage leads"].map((subItem: any) => <li className={`sub-link ${isActiveLeadSubItem === subItem ? "subMenuActive" : ""}`} 
+                ["Create new lead", "Manage leads"].map((subItem: any, index: any) => <li key = {index} className={`sub-link ${isActiveLeadSubItem === subItem ? "subMenuActive" : ""}`} 
                 onClick={() => {
                     setIsActiveLeadSubItem(subItem);
                     handleSubMenuClick();
@@ -166,7 +166,7 @@ const clearInvpocepageStorate = () => {
           </a>
           <ul className={`sub-menu ${activeMenu === "itinerary" ? "open" : ""}`}>
             {
-                ["Customized Itinerary", "Group Itinerary", " Ready Itinerary" ].map((subItem: any) => <li className={`sub-link ${isActiveItinerarySubItem === subItem ? "subMenuActive" : ""}`} onClick={() => {
+                ["Customized Itinerary", "Group Itinerary", " Ready Itinerary" ].map((subItem: any, index: any) => <li key ={index} className={`sub-link ${isActiveItinerarySubItem === subItem ? "subMenuActive" : ""}`} onClick={() => {
                     setIsActiveItinerarySubItem(subItem);
                     handleSubMenuClick();
                     handleItineraryNavigation(subItem);
@@ -185,7 +185,7 @@ const clearInvpocepageStorate = () => {
           </a>
           <ul className={`sub-menu ${activeMenu === "billing" ? "open" : ""}`}>
             {
-                ["Invoice", "Proforma Invoice","My Customers"].map((subItem: any) => <li className={`sub-link ${isActiveBillingSubItem === subItem ? "subMenuActive" : ""}`} 
+                ["Invoice", "Proforma Invoice","My Customers"].map((subItem: any, index: any) => <li key = {index} className={`sub-link ${isActiveBillingSubItem === subItem ? "subMenuActive" : ""}`} 
                 onClick={() => {
                     setIsActiveBillingSubItem(subItem);
                     handleSubMenuClick();

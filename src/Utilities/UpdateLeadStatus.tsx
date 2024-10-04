@@ -19,7 +19,6 @@ const UpdateLeadStatus = (props: any) => {
   //   axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
   // }, [])
 
-  // console.log("leadData ------", leadData)
 
   const handleUpdateLead = async (updateLead: any) => {
     props?.closeModal(false);
@@ -45,17 +44,12 @@ const UpdateLeadStatus = (props: any) => {
     }
   }
 
-  // const handleRemoveLead = (deleteLead: any) => {
-  //   console.log("deleteLead", deleteLead)
-  //   const updatedLeads = leadData.filter((lead: any) => lead.id !== deleteLead);
-  //   setLeadData(updatedLeads);
-  // }
 
   async function handleRemoveLead(deleteLead: any) {
     props?.closeModal(false);
     try {
         const response = await axios.delete(`http://localhost:8000/createlead/${deleteLead}`);
-        console.log('Resource deleted:', response.data);
+       
         if (response.status === 200) {
           setStatusCode("success")
           setshowToast(true)
@@ -78,7 +72,7 @@ const handleOnchangeStatus = (e: any) => {
     setLeadstatus(value);
 }
 
-console.log("leadSelectedData", leadstatus, props)
+ 
 useEffect(() => {
   
   return () => {
@@ -86,7 +80,6 @@ useEffect(() => {
   }
  }, [])
 
-  // console.log("leadData from delete", leadData)
 
   return (
     <>

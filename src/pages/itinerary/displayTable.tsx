@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from 'react-bootstrap/esm/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy, faEye, faDownload, faXmark, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import Daywiseplan from './dayWisePlan';
 import { NoDataFound } from '../NoDataFound';
+import DeleteSelectedItem from '../../Utilities/deleteSelectedItem';
+import { useNavigate } from 'react-router-dom';
 
 const DisplayTable = (props: any) => {
 
-    console.log("props", props?.rowData);
+    const [changeModalshow, setChangeModalShow] = useState(false);
+    const [selectedJourney, setSelectedJourney] = useState<string>("");
+    const [selectedId, setselectedId] = useState<string>("");
+
+    const navigate = useNavigate(); 
 
     const handleView = (item: any) => {
-
+        navigate("/itineray/view");
     }
-    // const pdfdownload = (item: any) => {
-    //     console.log("pdfdownload", item);
-    // }
 
     const MyDoc = (pdfdata: any) => (
         <Document>
@@ -23,7 +26,19 @@ const DisplayTable = (props: any) => {
         </Document>
     );
     
+    const handleDeleteItinerary = (journey: any, id: any) => {
+        setChangeModalShow(true)
+        setSelectedJourney(journey)
+        setselectedId(id)
+    }
+    const handleChangeClose = () => setChangeModalShow(false);
+
+   
+
   return (
+    <>
+    <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
+    
     <div className="display_table_main_wrapper container">
         <Table striped bordered hover>
         <thead>
@@ -56,7 +71,7 @@ const DisplayTable = (props: any) => {
                                 loading ? 'Loading...' : <FontAwesomeIcon icon={faDownload} />
                             }
                         </PDFDownloadLink>
-                        <FontAwesomeIcon icon={faXmark} />
+                        <FontAwesomeIcon icon={faXmark} onClick = {() => handleDeleteItinerary("itinerary", item?.id)}/>
                     </td>
                  </tr>)
             }
@@ -67,6 +82,7 @@ const DisplayTable = (props: any) => {
             !props?.rowData?.length && <NoDataFound /> 
         }
     </div>
+    </>
   )
 }
 

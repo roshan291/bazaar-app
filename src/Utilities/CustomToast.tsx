@@ -7,7 +7,7 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 import { selectToastMessage } from '../constants';
 
 const CustomToast = (props: any) => {
-  console.log("props", props)
+ 
   const [show, setShow] = useState(props?.showToast);
 
   useEffect(() => {

@@ -21,9 +21,8 @@ const CustomTable = (props: any) => {
     } = navigationURL;
     
     const handleNavigation = (url: any, title: any) => {
-      // console.log("encryptMessage",encryptMessage("All"))
       // const encrypt = encryptMessage(title)
-      console.log("Roshan  encryptMessage", title)
+ 
         if(props?.title === "Lead") {
           localStorage.setItem("page", title)
         } else {
@@ -35,7 +34,7 @@ const CustomTable = (props: any) => {
  
     
 
-    console.log("CustomTable",props)
+ 
   return (
     
     <>

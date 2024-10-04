@@ -16,7 +16,6 @@ const ViewInvoice = ({ data, isDelete } : any) => {
     const navigate = useNavigate();
     
     const handleDelteInvoice = (id: any) => {
-        console.log("id", id);
         setSelectedId(id)
         setChangeModalShow(true)
         // isDelete(true)
@@ -25,7 +24,6 @@ const ViewInvoice = ({ data, isDelete } : any) => {
 
     useEffect(() => {
         isDelete()
-        console.log("TEST___________", changeModalshow, isDelete(true))
     }, [changeModalshow])
 
     const handleUpdateInvoice = (id:any) => {

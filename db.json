@@ -1,14 +1,15 @@
 {
   "createlead": [
     {
-      "id": "HB547",
-      "createdDate": "9/26/2024, 4:27:10 PM",
+      "id": "HB1278",
+      "createdDate": "9/26/2024, 11:31:01 PM",
+      "global_id": 17167,
       "leadTitle": "New title",
       "paymentmode": "Cheque",
       "customerName": "Roshan  Syed",
-      "getRequirement": "FIT (Customised) Tour Package",
+      "getRequirement": "Hotel Stay",
       "noOfInfants": "2",
-      "typeOfHoliday": "Beach / Hill Stations",
+      "typeOfHoliday": "",
       "dateANDtime": "",
       "pickUpPoint": "",
       "dropPoint": "",
@@ -23,74 +24,74 @@
         },
         {
           "id": 2,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Internal Transportation"
         },
         {
           "id": 3,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Hotel Stay"
         },
         {
           "id": 4,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Sightseeing"
         },
         {
           "id": 5,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Visa Fees"
         },
         {
           "id": 6,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Government Tax"
         },
         {
           "id": 7,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Surcharge"
         },
         {
           "id": 8,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Cruise Stay"
         },
         {
           "id": 9,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Free Goodies"
         },
         {
           "id": 10,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "APAI - Stay & All Meals"
         },
         {
           "id": 11,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Passport Fees"
         },
         {
           "id": 12,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "CP - Stay & Breakfast"
         },
         {
           "id": 13,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "Tour Manager"
         },
         {
           "id": 14,
-          "isChecked": true,
+          "isChecked": false,
           "serviceName": "MAP - Stay, Breakfast & Dinner"
         }
       ],
       "vehicleType": "",
-      "noOfRooms": "",
+      "noOfRooms": "2",
       "startDate": "2024-09-26",
-      "endDate": "2024-10-03",
+      "endDate": "2024-09-26",
       "checkIN": "",
       "checkOUT": "",
       "destination": "Bangalore",
@@ -98,12 +99,12 @@
       "noOfDays": "",
       "typeOfVisa": "",
       "coupleList": "Per Person",
-      "currencyType": "EUR (European euro)",
-      "budgetForTrip": "50000",
+      "currencyType": "CHF (Swiss franc)",
+      "budgetForTrip": "2",
       "requiredDocuments": "",
       "shortNote": "Short note",
-      "hotelPreferences": "3 Star",
-      "leadstatus": "Completed",
+      "hotelPreferences": "5 Star",
+      "leadstatus": "All",
       "invoice": [],
       "itinerary": []
     }
@@ -113,16 +114,16 @@
   "viewlead": [],
   "createcustomer": [
     {
-      "id": "HB1272",
-      "createdDate": "9/26/2024, 4:27:10 PM",
+      "id": "HB4037",
+      "createdDate": "9/27/2024, 10:34:53 PM",
       "customerFirstName": "Roshan ",
-      "customerLastName": "Syed",
+      "customerLastName": "Jaya II",
       "customerEmail": "roshan@gmail.com",
       "customerMobile": "9090909090",
-      "country": "India",
-      "state": "Telangana",
-      "city": "Hyderabad",
-      "zipcode": "894590"
+      "country": "Austrian Empire",
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "zipcode": "898989"
     }
   ],
   "updatecustomer": [],
@@ -130,23 +131,22 @@
   "viewcustomer": [],
   "createitinerary": [
     {
-      "id": ":r1:",
-      "iteneraryId": "HB8393",
-      "createdDate": "9/25/2024, 11:30:27 PM",
-      "itineraryTitle": "",
-      "destination": "",
-      "typeOfHoliday": "",
-      "noOfAdults": "",
-      "noOfKids": "",
-      "startDate": "",
-      "endDate": "",
-      "coupleList": "",
-      "currencyType": "",
-      "budgetForTrip": "",
+      "id": 5243,
+      "createdDate": "10/3/2024, 11:17:44 AM",
+      "itineraryTitle": "Pdf design",
+      "destination": "Bangalore",
+      "typeOfHoliday": "Adventure / Camping",
+      "noOfAdults": "2",
+      "noOfKids": "2",
+      "startDate": "2024-10-03",
+      "endDate": "2024-10-24",
+      "coupleList": "Per Person",
+      "currencyType": "USD (United States dollar)",
+      "budgetForTrip": "2000000",
       "serviceList": [
         {
           "id": 1,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Airfare"
         },
         {
@@ -166,7 +166,7 @@
         },
         {
           "id": 5,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Visa Fees"
         },
         {
@@ -186,7 +186,7 @@
         },
         {
           "id": 9,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Free Goodies"
         },
         {
@@ -206,7 +206,7 @@
         },
         {
           "id": 13,
-          "isChecked": false,
+          "isChecked": true,
           "serviceName": "Tour Manager"
         },
         {
@@ -215,28 +215,28 @@
           "serviceName": "MAP - Stay, Breakfast & Dinner"
         }
       ],
-      "noOfNights": "",
-      "travellers": "",
-      "welcomenote": "",
-      "customerName": "",
-      "emailId": "",
-      "mobileNumber": "",
-      "address": "",
-      "country": "",
-      "state": "",
-      "city": "",
-      "postalCode": "",
-      "birthDate": "",
-      "anniversaryDate": "",
-      "note": "",
-      "inclusion": "",
-      "exclusion": "",
-      "cost": "",
-      "termsConditions": "",
-      "tips": "",
-      "otherVisaInformation": "",
-      "thankyounote": "",
-      "changestatus": "",
+      "noOfNights": "3",
+      "travellers": "5",
+      "welcomenote": "Welcome Note 3",
+      "customerName": "Roshan  Syed",
+      "emailId": "roshan@gmail.com",
+      "mobileNumber": "9642345291",
+      "address": "Address",
+      "country": "Afghanistan",
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "postalCode": "560037",
+      "birthDate": "2024-10-18",
+      "anniversaryDate": "2024-10-09",
+      "note": "Note",
+      "inclusion": "Inclusion",
+      "exclusion": "Exclusion",
+      "cost": "Cost",
+      "termsConditions": "Terms & Condition",
+      "tips": "Tips",
+      "otherVisaInformation": "Other visa Information",
+      "thankyounote": "Thankyou Note 2",
+      "changestatus": "New",
       "dayWisePlanFinal": [
         {
           "id": 1,
@@ -247,135 +247,208 @@
           "checkoutHotel": [],
           "sightseeing": [],
           "meal": []
-        }
-      ]
-    },
-    {
-      "id": ":rd:",
-      "iteneraryId": "HB7287",
-      "createdDate": "9/25/2024, 11:30:56 PM",
-      "itineraryTitle": "",
-      "destination": "",
-      "typeOfHoliday": "",
-      "noOfAdults": "",
-      "noOfKids": "",
-      "startDate": "",
-      "endDate": "",
-      "coupleList": "",
-      "currencyType": "",
-      "budgetForTrip": "",
-      "serviceList": [
-        {
-          "id": 1,
-          "isChecked": false,
-          "serviceName": "Airfare"
         },
         {
           "id": 2,
-          "isChecked": false,
-          "serviceName": "Internal Transportation"
+          "day": "Day 1 | 2024-10-03",
+          "description": [
+            {
+              "id": ":r7:",
+              "dayTitleText": "First Day 4",
+              "dayDescriptionText": "Day Description 4"
+            }
+          ],
+          "transportation": [
+            {
+              "id": ":r9:",
+              "transportationTitle": "Travelling to Bangalore 2",
+              "transpotationMode": "Airplane",
+              "departingCountry": "India",
+              "departingCity": "Hyderabad",
+              "startingPoint": "Ammeerpet",
+              "departDate": "Depart Date",
+              "actualDepartureTime": "Depature time",
+              "reportingTime": "reporting time",
+              "arrivalCountry": "India",
+              "arrivalCity": "Bangalore",
+              "endingPoint": "Marathahalli",
+              "arrialDate": "arrial date",
+              "actualArrivalTime": "arrial time",
+              "transpotationNote": "Transportation NOTe 2"
+            }
+          ],
+          "hotel": [
+            {
+              "id": ":rb:",
+              "checkInDate": "2024-10-03",
+              "checkInTime": "9909",
+              "numberOfNights": "33",
+              "adults": "990",
+              "rooms": "9",
+              "childs": "09",
+              "extrabed": "09",
+              "roomTypes": "0",
+              "noteText": "Hotel Room"
+            }
+          ],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": [
+            {
+              "id": ":r5:",
+              "mealTitle": "Meal Title 2",
+              "mealDescription": "Meal Desction 2",
+              "selecdtMeal": [
+                {
+                  "id": 1,
+                  "isChecked": false,
+                  "selectMealType": "Breakfast"
+                },
+                {
+                  "id": 2,
+                  "isChecked": true,
+                  "selectMealType": "Lunch"
+                },
+                {
+                  "id": 3,
+                  "isChecked": true,
+                  "selectMealType": "Dinner"
+                },
+                {
+                  "id": 4,
+                  "isChecked": true,
+                  "selectMealType": "Evening Snacks"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": 3,
-          "isChecked": false,
-          "serviceName": "Hotel Stay"
-        },
-        {
-          "id": 4,
-          "isChecked": false,
-          "serviceName": "Sightseeing"
-        },
-        {
-          "id": 5,
-          "isChecked": false,
-          "serviceName": "Visa Fees"
-        },
-        {
-          "id": 6,
-          "isChecked": false,
-          "serviceName": "Government Tax"
-        },
-        {
-          "id": 7,
-          "isChecked": false,
-          "serviceName": "Surcharge"
-        },
-        {
-          "id": 8,
-          "isChecked": false,
-          "serviceName": "Cruise Stay"
-        },
-        {
-          "id": 9,
-          "isChecked": false,
-          "serviceName": "Free Goodies"
-        },
-        {
-          "id": 10,
-          "isChecked": false,
-          "serviceName": "APAI - Stay & All Meals"
-        },
-        {
-          "id": 11,
-          "isChecked": false,
-          "serviceName": "Passport Fees"
-        },
-        {
-          "id": 12,
-          "isChecked": false,
-          "serviceName": "CP - Stay & Breakfast"
-        },
-        {
-          "id": 13,
-          "isChecked": false,
-          "serviceName": "Tour Manager"
-        },
-        {
-          "id": 14,
-          "isChecked": false,
-          "serviceName": "MAP - Stay, Breakfast & Dinner"
-        }
-      ],
-      "noOfNights": "",
-      "travellers": "",
-      "welcomenote": "",
-      "customerName": "",
-      "emailId": "",
-      "mobileNumber": "",
-      "address": "",
-      "country": "",
-      "state": "",
-      "city": "",
-      "postalCode": "",
-      "birthDate": "",
-      "anniversaryDate": "",
-      "note": "",
-      "inclusion": "",
-      "exclusion": "",
-      "cost": "",
-      "termsConditions": "",
-      "tips": "",
-      "otherVisaInformation": "",
-      "thankyounote": "",
-      "changestatus": "Sent to customer",
-      "dayWisePlanFinal": [
-        {
-          "id": 1,
-          "day": "",
-          "description": [],
-          "transportation": [],
-          "hotel": [],
+          "day": "Day 2 | 2024-10-04",
+          "description": [
+            {
+              "id": ":r7:",
+              "dayTitleText": "First Day 1",
+              "dayDescriptionText": "Day Description"
+            },
+            {
+              "id": ":r7:",
+              "dayTitleText": "First Day 2",
+              "dayDescriptionText": "Day Description 2"
+            },
+            {
+              "id": ":r7:",
+              "dayTitleText": "First Day 3",
+              "dayDescriptionText": "Day Description 3"
+            }
+          ],
+          "transportation": [
+            {
+              "id": ":r9:",
+              "transportationTitle": "Travelling to Bangalore",
+              "transpotationMode": "Airplane",
+              "departingCountry": "India",
+              "departingCity": "Hyderabad",
+              "startingPoint": "Ammeerpet",
+              "departDate": "Depart Date",
+              "actualDepartureTime": "Depature time",
+              "reportingTime": "reporting time",
+              "arrivalCountry": "India",
+              "arrivalCity": "Bangalore",
+              "endingPoint": "Marathahalli",
+              "arrialDate": "arrial date",
+              "actualArrivalTime": "arrial time",
+              "transpotationNote": "Transportation NOTe"
+            }
+          ],
+          "hotel": [
+            {
+              "id": ":rb:",
+              "checkInDate": "2024-10-18",
+              "checkInTime": "9909",
+              "numberOfNights": "33",
+              "adults": "990",
+              "rooms": "9",
+              "childs": "09",
+              "extrabed": "09",
+              "roomTypes": "0",
+              "noteText": "Hotel Room"
+            }
+          ],
           "checkoutHotel": [],
           "sightseeing": [],
-          "meal": []
+          "meal": [
+            {
+              "id": ":r5:",
+              "mealTitle": "Meal Title",
+              "mealDescription": "Meal Desction",
+              "selecdtMeal": [
+                {
+                  "id": 1,
+                  "isChecked": true,
+                  "selectMealType": "Breakfast"
+                },
+                {
+                  "id": 2,
+                  "isChecked": true,
+                  "selectMealType": "Lunch"
+                },
+                {
+                  "id": 3,
+                  "isChecked": true,
+                  "selectMealType": "Dinner"
+                },
+                {
+                  "id": 4,
+                  "isChecked": false,
+                  "selectMealType": "Evening Snacks"
+                }
+              ]
+            }
+          ]
         }
-      ]
+      ],
+      "previousPage": "ItineraryReady"
     }
   ],
   "updateitinerary": [],
   "deleteitinerary": [],
   "viewitinerary": [],
-  "createinvoice": [],
+  "createinvoice": [
+    {
+      "id": "b78c",
+      "currencyType": "INR",
+      "paymentMode": "Cheque",
+      "global_id": "",
+      "customerName": "Roshan  Syed",
+      "invoieStatus": "Generated (Not sent to customer)",
+      "invoiceParticulars": [],
+      "grandTotalAmount": "",
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Billing note",
+      "invoiceId": "HB4230",
+      "createdDate": "9/26/2024, 11:57:33 PM",
+      "invoiceType": ""
+    },
+    {
+      "id": "07f2",
+      "currencyType": "NZD",
+      "paymentMode": "Cheque",
+      "global_id": "17167",
+      "customerName": "Roshan  Syed",
+      "invoieStatus": "Fully Paid",
+      "invoiceParticulars": [],
+      "grandTotalAmount": "",
+      "gstNummber": "36AAPCS5625R1ZE",
+      "panNummber": "BLUPA2358A",
+      "billingNote": "Note",
+      "invoiceId": "HB4930",
+      "createdDate": "9/26/2024, 11:59:24 PM",
+      "invoiceType": ""
+    }
+  ],
   "updateinvoice": [],
   "deleteinvoice": [],
   "viewinvoice": []

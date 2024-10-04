@@ -24,8 +24,6 @@ const Invoice = () => {
   const navigate = useNavigate(); 
 
   const { id } = useParams();
-
-  console.log(" Invoice id", id)
   
   const {
     createLead,
@@ -46,33 +44,30 @@ const Invoice = () => {
 
   useEffect(() => {
     axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-    const customer = res.data;
-    setInvoiceRowData(customer);
-    setrowData(customer);
+    const invoiceData = filterIfPageParamExit(res.data);
+    setInvoiceRowData(invoiceData);
+    setrowData(invoiceData);
   });
   },[])
 
+  const filterIfPageParamExit = (data: any) => {
+      if(id === "" || id === undefined || id === null) {
+          return data;
+      } else {
+          return data?.filter((item: any) => item.global_id === id)
+      }
+  }
   
-  // useEffect(() => {
-  //   axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-  //     const customer = res.data;
-  //     setInvoiceRowData(customer);
-  //     console.log("_____________________________________",isDeleted)
-  //   });
-  // },[isDeleted])
-
   const updateParentState = () => {
-   
     axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-      const customer = res.data;
-      setInvoiceRowData(customer); 
+      const invoiceData = filterIfPageParamExit(res.data);
+      setInvoiceRowData(invoiceData); 
     });
 };
 
 const handleInvoceStatus = (e: any) => {
   
-  const selected = e.target.value;
-  console.log("handleInvoceStatus", selected);
+  const selected = e.target.value; ;
   setSelectedStatus(selected);
   handleStatusClick(selected);
   if (typeof(Storage) !== "undefined") {
@@ -92,8 +87,7 @@ let currentSelectedFilter : any;
     currentSelectedFilter = localStorage.getItem("invoice_page");
   }
   useEffect(() => { 
-    setSelectedStatus(currentSelectedFilter)
-    console.log("currentSelectedFilter", currentSelectedFilter)
+    setSelectedStatus(currentSelectedFilter) 
     handleStatusClick(currentSelectedFilter);
   }, [currentSelectedFilter, invoiceRowData])
 
@@ -102,8 +96,7 @@ let currentSelectedFilter : any;
     filterData(selectedStatus, query)
   };
   
-  const filterData = (dropdownValue: any, searchValue: any) => {
-    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const filterData = (dropdownValue: any, searchValue: any) => { 
     const results = invoiceRowData.filter((item: any) => {
       const matchesSearch = searchValue ? invoiceSearch(item, searchValue) : true;
       const matchesDropdown = dropdownValue ? invoiceStatusFilter(item, dropdownValue) : true;

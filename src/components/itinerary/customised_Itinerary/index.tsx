@@ -8,7 +8,8 @@ import Button from '../../buttons'
 import { itineraryStatus, navigationURL } from '../../../constants'
 import { itinerarySearch, itineraryStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch'
 import CommonSearch from '../../../Utilities/commonSearch'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { SetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate'
 
 const CustomisedItinerary = () => {
   const [selectedStatus, setSelectedStatus] = useState("All" as any);
@@ -17,6 +18,7 @@ const CustomisedItinerary = () => {
   const [rowdata,setRowData] = useState([] as any)
   const [searchResults, setSearchResults] = useState("");
   const navigate = useNavigate(); 
+  const location = useLocation();
   
   const {
     createLead,
@@ -54,8 +56,7 @@ const CustomisedItinerary = () => {
     filterData(e.target.value, searchResults)
   }
   
-  const filterData = (dropdownValue: any, searchValue: any) => {
-    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const filterData = (dropdownValue: any, searchValue: any) => { 
     const results = data.filter((item: any) => {
       const matchesSearch = searchValue ? itinerarySearch(item, searchValue) : true;
       const matchesDropdown = dropdownValue ? itineraryStatusFilter(item, dropdownValue) : true;
@@ -63,6 +64,14 @@ const CustomisedItinerary = () => {
     });
     setRowData(results);
   }
+
+
+  useEffect(() => {
+    // This runs when the component mounts and when the route changes
+    return () => {
+      SetSessionStorageWithoutExcryption("previouspage", location.pathname);
+    };
+}, []);
 
   return (
     <>

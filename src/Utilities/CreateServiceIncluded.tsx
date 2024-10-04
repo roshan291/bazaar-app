@@ -12,8 +12,7 @@ const CreateServiceIncluded = (props: any) => {
         setCreateServiceIncluded(target.value)
     }
 
-    const handleCreateServiceIncluded = () => {
-        console.log("Create Service Included", createServiceIncluded)
+    const handleCreateServiceIncluded = () => { 
         setCreateServiceIncluded("");
     }
 

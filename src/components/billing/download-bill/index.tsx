@@ -6,8 +6,6 @@ const DownloadBill = (props: any) => {
     
    const [rowData, setRowData] = useState([] as any)
 
-   console.log("DownloadBill:", rowData)
-
    useEffect(() => {
        setRowData(props?.billData?.pdfdata)
    }, [props])

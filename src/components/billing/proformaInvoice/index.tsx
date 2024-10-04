@@ -64,8 +64,7 @@ const handleSearch = (query: any) => {
   filterData(selectedStatus, query)
 };
 
-const filterData = (dropdownValue: any, searchValue: any) => {
-  console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+const filterData = (dropdownValue: any, searchValue: any) => { 
   const results = invoiceRowData.filter((item: any) => {
     const matchesSearch = searchValue ? invoiceSearch(item, searchValue) : true;
     const matchesDropdown = dropdownValue ? invoiceStatusFilter(item, dropdownValue) : true;
@@ -73,8 +72,7 @@ const filterData = (dropdownValue: any, searchValue: any) => {
   });
   setrowData(results);
 }
-
-  console.log("invoiceRowData", rowData, invoiceRowData)
+ 
   return (
     <div className=''>
       <div className={styles.invoiceFilterWrapperTop}>

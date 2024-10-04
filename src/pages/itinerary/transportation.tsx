@@ -67,8 +67,7 @@ const Transportation = (props: any) => {
     const onSubmitTransportation = (event: any) => {
         event.preventDefault();
         const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-          console.log("All date Not Verified handleCreateNewCustomer");
+        if (form.checkValidity() === false) { 
           event.stopPropagation();
         } else {
           props?.getDayTransportation([transportation])

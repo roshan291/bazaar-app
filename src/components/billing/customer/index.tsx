@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare, faSquarePlus, faXmark, faEye, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CreateNewCustomer from '../../../Utilities/CreateNewCustomer';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchDataRequest } from '../../../store/actions/createNewCustomer';
 import LoadingSpinner from '../../../Utilities/LoadingSpinner';
 import Button from '../../buttons';
 import DeleteSelectedItem from '../../../Utilities/deleteSelectedItem';
@@ -15,56 +13,49 @@ import styles from "./customer.module.css"
 import ViewMyCustomer from '../../../Utilities/ViewMyCustomer';
 import { Col, Form, Row } from 'react-bootstrap';
 import CommonSearch from '../../../Utilities/commonSearch';
+import PageLoader from '../../../Utilities/pageLoader';
+import { _get } from '../../../API/useApi';
 
 const MyCustomer = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([] as any);
   const [rowdata, setRowData] = useState([] as any)
   const [createNewCustomerModalShow, setCreateNewCustomerModalShow] = useState(false as any);
   const [changeModalshow, setChangeModalShow] = useState(false);
   const [viewCustomer, setViewCustomer] = useState(false)
+  const [loading, setLading] = useState(true)
   const [viewCustomerData, setViewCustomerData] = useState([] as any)
   const [selectedJourney, setSelectedJourney] = useState<string>("");
   const [selectedId, setselectedId] = useState<string>("");
-  const [_searchResults, setSearchResults] = useState("");
+  const [_searchResults, setSearchResults] = useState(""); 
   const navigate = useNavigate();
+
+ 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      setLading(true);
+      const response = await _get('/createcustomer');
+      setData(response.data);
+      setRowData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLading(false);
+    }
+  };
   
-  const dispatch = useDispatch(); 
-
   useEffect(() => {
-      axios.get('http://localhost:8000/createcustomer').then((res: any) => {
-      const customer = res.data;
-      setData(customer);
-      setRowData(customer);
-    });
-  },[])
+    fetchData();
+  }, [changeModalshow, createNewCustomerModalShow])
 
-  useEffect(() => {
-    axios.get('http://localhost:8000/createcustomer').then((res: any) => {
-    const customer = res.data;
-    setData(customer);
-    setRowData(customer);
-  });
-  },[changeModalshow, createNewCustomerModalShow])
 
   const handleSearch = (query: any) => {
     const search = data?.filter((item: any) => item?.customerFirstName?.toLowerCase().includes(query.toLowerCase()) || item?.customerLastName?.toLowerCase().includes(query.toLowerCase()));
-    console.log("handleSearch 001", query, search);
     setRowData(search);
   };
-
-  const createNewCustomerData = useSelector(
-    (state: any) => state?.data
-  );
-
-  useEffect(() => {
-    dispatch(fetchDataRequest());
-  }, []);
-
-  useEffect(() => {
-    if(createNewCustomerData?.length) {
-      setData(createNewCustomerData);
-    }
-  }, [createNewCustomerData])
 
   const handleCreateNewCustomer = () => {
     setCreateNewCustomerModalShow(true)
@@ -90,6 +81,9 @@ const MyCustomer = () => {
   
   return (
     <>
+    {
+      loading ? <PageLoader /> : ""
+    }
     <ViewMyCustomer show = {viewCustomer} onHide = {handleViewClose} data = {viewCustomerData} />
     <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
     <div className=''>

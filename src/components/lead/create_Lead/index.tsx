@@ -18,8 +18,6 @@ import CustomNumberInput from '../../../Utilities/CustomNumberInput';
 import CreateServiceIncluded from '../../../Utilities/CreateServiceIncluded';
 import CreateNewCustomer from '../../../Utilities/CreateNewCustomer';
 import { onKeyPress } from '../../../Utilities/Utils'; 
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchDataRequest } from '../../../store/actions/createNewCustomer';
 import CustomToast from '../../../Utilities/CustomToast';
 import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.';
 // import CopyLineIcon from "../../../assets/icons/copy-line-icon.svg";
@@ -31,28 +29,22 @@ import { useParams } from 'react-router-dom';
 
 const CreateLead = () => {
 
-const dispatch = useDispatch();
-// const uniqueId = useId(); 
-// const navigate = useNavigate();
 const { id } = useParams();
-
-const createNewCustomerData = useSelector(
-  (state: any) => state?.data
-);
-
-
-console.log("createNewCustomerReducer FE lead", createNewCustomerData)
-
+ 
 const generateUniqueId = () => {
   return (Date.now() + Math.floor(Math.random() * 1000)) % 10000;
 };
 
+const generateGlobalUniqueId = () => {
+  return Math.floor(9999 + Math.random() * 9999);
+}
 // Usage
 const uniqueId = generateUniqueId();
 
 const [createLead, setCreateLead] = useState({
     id: `HB${uniqueId}`,
     createdDate: new Date().toLocaleString(),
+    global_id: generateGlobalUniqueId(),
     leadTitle: "",
     paymentmode: "",
     customerName: "",
@@ -163,28 +155,28 @@ const handleSubmit = (event: any) => {
       axios.put(`http://localhost:8000/createlead/${id}`, createLead);
     } else {
       axios.post(`http://localhost:8000/createlead`, createLead).then((response: any) => {
-        console.log("onAddCustomerSubmit", response?.status)
+     
         if (response.status === 200) {
-          console.log('Success:', response.data);
+       
           setStatusCode("success")
           setshowToast(true)
         } else if (response.status === 201) {
-          console.log('Resource created:', response.data);
+        
           setStatusCode("success")
           setshowToast(true)
         } else {
-          console.log('Other status code:', response.status);
+          
           setStatusCode("danger")
           setshowToast(true)
         }
     }).catch(function (error) {
-      console.log(error);
+ 
       setStatusCode("danger")
       setshowToast(true)
     });
     }  
     
-    console.log("handleSubmit", createLead);
+ 
     // handleClose();
     // history("/lead-board/supervise")
   }
@@ -192,7 +184,7 @@ const handleSubmit = (event: any) => {
 };
 
 
-console.log("createLead", createLead);
+ 
 
   const handleChangeLead = (e: any) => {
     const target = e.target;
@@ -200,7 +192,7 @@ console.log("createLead", createLead);
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
   
-    console.log("target.value", target.value)
+ 
 
 
     
@@ -227,19 +219,14 @@ console.log("createLead", createLead);
   },[createNewCustomerModalShow])
 
   const handleCreateNewCustomer = () => {
-    console.log("Create New Customer")
+ 
     setCreateNewCustomerModalShow(true)
   }
 
   const handleAddMoreServices = () => {
-    console.log("Add More Services")
+   
     setServiceIncludedModalShow(true)
   }
- 
-
-  useEffect(() => {
-    dispatch(fetchDataRequest());
-  }, []);
   
   const handleChangeLeadCheckBox = (id:any) => {
     setCreateLead((prevCreateLead: any) => {
@@ -263,13 +250,13 @@ console.log("createLead", createLead);
   }
  }, [])
 
- console.log("laed upate id",id)
+ 
 
  useEffect(() => {
   if(!!id) {
     axios.get(`http://localhost:8000/createlead/${id}`).then((res: any) => {
       const selectedLead = res.data;
-      console.log("selectedInvoice", selectedLead)
+     
       setCreateLead(selectedLead);
     });
   }

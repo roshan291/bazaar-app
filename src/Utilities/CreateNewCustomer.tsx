@@ -14,6 +14,8 @@ import { generateCurrentDateAndTime, generateUniqueId, onKeyPress } from './Util
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
 import CustomToast from './CustomToast';  
+import apiRequest from '../API/apiClient';
+import { _post } from '../API/useApi';
 
 const CreateNewCustomer = (props: any) => {
 
@@ -51,12 +53,9 @@ const CreateNewCustomer = (props: any) => {
 
   const handleOnChangeCreateNewCustomer = (e: any) => {
       const target = e.target;
-  
       const value = target.value;
       const name = target.name;
-    
-      console.log("target.value", target.value)
-
+     
       setCreateNewCustomer({
         ...createNewCustomer,
         [name]: value
@@ -65,35 +64,16 @@ const CreateNewCustomer = (props: any) => {
 
   const isButtonDisabled = Object.values(createNewCustomer).some(value => value === '');
 
-  const handleCreateNewCustomer = (event: any) => {
+  const handleCreateNewCustomer = async (event: any) => {
     event.preventDefault();
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      console.log("All date Not Verified handleCreateNewCustomer");
+    if (form.checkValidity() === false) { 
       event.stopPropagation();
-    } else {
-     props?.closeModal(false);
-      axios.post(`http://localhost:8000/createcustomer`, createNewCustomer).then((response) => {
-         
-      if (response.status === 200) {
-        setStatusCode("success")
-        setshowToast(true)
-      } else if (response.status === 201) { 
-        setStatusCode("success")
-        setshowToast(true)
-      } else { 
-        setStatusCode("success")
-        setshowToast(true)
-      }
-    }).catch((error) => {
-      setStatusCode("danger")
-      setshowToast(true)
-      console.log("failed with", error)
-    })
- 
-      
+    } else { 
+     await _post('/createcustomer', createNewCustomer);
+     props?.closeModal(false)
     }
-     
+
   }
  
   useEffect(() => {

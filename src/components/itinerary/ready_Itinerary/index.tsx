@@ -9,16 +9,19 @@ import { faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-ico
 import Button from '../../buttons'
 import CommonSearch from '../../../Utilities/commonSearch'
 import { itinerarySearch, itineraryStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { SetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate'
 
 const ReadyItinerary = () => {
+    const { id } = useParams();
     const [navigateUrl, setNavigateUrlUrl] = useState("")
     const [selectedStatus, setSelectedStatus] = useState("All" as any)
     const [rowdata,setRowData] = useState([] as any)
     const [data, setData] = useState([])
     const [searchResults, setSearchResults] = useState("");
     const navigate = useNavigate(); 
-    
+    const location = useLocation();
+ 
     const {
       createLead,
       manageLead,
@@ -41,23 +44,41 @@ const ReadyItinerary = () => {
     setSearchResults(query) 
     filterData(selectedStatus, query)
   };
+  useEffect(() => {
+    // This runs when the component mounts and when the route changes
+    return () => {
+      SetSessionStorageWithoutExcryption("previouspage", location.pathname);
+    };
+}, []);
 
-
-    useEffect(() => {
-      axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-      const customer = res.data;
-      setData(customer);
-      setRowData(customer)
-    });
+  useEffect(() => {
+       
+        axios.get('http://localhost:8000/createitinerary').then((res: any) => {
+          const customer = res.data;
+          setData(customer);
+          setRowData(customer)
+ 
+        });
   },[])
+
+  useEffect(() => {
+    if(id === "" || id === undefined || id === null) {
+    } else {
+      axios.get('http://localhost:8000/createitinerary').then((res: any) => {
+        const customer = res?.data?.filter((item: any) => Number(item.global_id) === Number(id));
+ 
+        setData(customer);
+        setRowData(customer)
+      });
+    }
+  }, [id]);
 
   const handleSelectedStatus = (e: any) => {
     setSelectedStatus(e.target.value) 
     filterData(e.target.value, searchResults)
   }
 
-  const filterData = (dropdownValue: any, searchValue: any) => {
-    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const filterData = (dropdownValue: any, searchValue: any) => { 
     const results = data.filter((item: any) => {
       const matchesSearch = searchValue ? itinerarySearch(item, searchValue) : true;
       const matchesDropdown = dropdownValue ? itineraryStatusFilter(item, dropdownValue) : true;

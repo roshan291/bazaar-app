@@ -82,8 +82,7 @@ const UpdateCustomer = (props: any) => {
       const value = target.value;
       const name = target.name;
     
-      console.log("target.value", target.value)
-
+  
       setCreateNewCustomer({
         ...createNewCustomer,
         [name]: value
@@ -96,7 +95,7 @@ const UpdateCustomer = (props: any) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      console.log("All date Not Verified handleCreateNewCustomer");
+     
       event.stopPropagation();
     } else {
     //  props?.closeModal(false);
@@ -117,7 +116,7 @@ const UpdateCustomer = (props: any) => {
     }).catch((error) => {
       setStatusCode("danger")
       setshowToast(true)
-      console.log("failed with", error)
+       
     })
     }
   }
@@ -129,7 +128,6 @@ const UpdateCustomer = (props: any) => {
   });
 },[])
 
-  console.log("id", id, createNewCustomer);
  
   useEffect(() => {
     return () => {

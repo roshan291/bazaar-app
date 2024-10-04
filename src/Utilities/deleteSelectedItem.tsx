@@ -5,13 +5,14 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import CustomToast from './CustomToast';
 import Button from '../components/buttons';
+import { _delete, BASE_URL_DEFAULT } from '../API/useApi';
 
 const DeleteSelectedItem = (props: any) => {
 
 const [statusCode, setStatusCode] = useState("" as any) 
 const [showToast, setshowToast] = useState(false) 
 
-console.log("DeleteSelectedItem", props)
+ 
 
 const dynamicURL = () => {
   let endpointurl = ""
@@ -22,15 +23,18 @@ const dynamicURL = () => {
   if(props?.journey === "invoice") {
     endpointurl = "createinvoice";
   }
+  if(props?.journey === "itinerary") {
+    endpointurl = "createitinerary";
+  }
   
   return endpointurl;
 }
+
 const handleDelete = async (id: any) => {
-    // console.log(id, journey)
     props?.closeModal(false);
     try {
-        const response = await axios.delete(`http://localhost:8000/${dynamicURL()}/${id}`);
-        console.log('Resource deleted:', response.data);
+      
+        const response = await _delete(`${BASE_URL_DEFAULT}/${dynamicURL()}/${id}`);
         if (response.status === 200) {
           setStatusCode("success")
           setshowToast(true)
