@@ -5,8 +5,8 @@ import styles from "./invoice.module.css"
 import { generateCurrentDateAndTime, generateUniqueId } from '../../../Utilities/Utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { navigationURL } from '../../../constants'
-import axios from 'axios'
 import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.'
+import { _get, _patch, _post } from '../../../API/useApi'
 
 const CreateInvoice = () => {
   
@@ -20,7 +20,7 @@ const CreateInvoice = () => {
     if(id === "" || id === "undefined" || id === null) {
       return "";
     } else {
-      return id;
+      return id; 
     }
   }
   
@@ -40,18 +40,26 @@ const CreateInvoice = () => {
 })
 
 useEffect(() => {
-  axios.get('http://localhost:8000/createcustomer').then((res: any) => {
-  const customer = res.data;
-  setUserList(customer);
-});
+//   axios.get('http://localhost:8000/createcustomer').then((res: any) => {
+//   const customer = res.data;
+//   setUserList(customer);
+// });
+fetchData();
 },[])
+
+const fetchData = async() => {
+  const response = await _get('/createcustomer');
+  setUserList(response?.data);
+}
+
+const fetchDataById = async() => {
+  const response = await _get(`/createcustomer/${slag}`);
+  setCreateInvoice(response?.data);
+}
 
 useEffect(() => {
   if(!!slag) {
-    axios.get(`http://localhost:8000/createinvoice/${slag}`).then((res: any) => {
-      const selectedInvoice = res.data;
-      setCreateInvoice(selectedInvoice);
-    });
+    fetchDataById();
   }
 },[slag])
 
@@ -98,7 +106,7 @@ const handleChangeCurrency = (e: any) => {
   )
 }
 
-const handleSubmit = (event: any) => {
+const handleSubmit = async(event: any) => {
   event.preventDefault(); 
   countGrandTotal()
   const form = event.currentTarget;
@@ -106,9 +114,11 @@ const handleSubmit = (event: any) => {
     event.stopPropagation(); 
   }  else {
     if(slag) {
-      axios.patch(`http://localhost:8000/createinvoice/${slag}`, createInvoice);
+      // axios.patch(`http://localhost:8000/createinvoice/${slag}`, createInvoice);
+      await _patch(`/createinvoice/${slag}`, createInvoice);
     } else {
-      axios.post(`http://localhost:8000/createinvoice`, createInvoice);
+      await _post(`/createinvoice`, createInvoice);
+      // axios.post(`http://localhost:8000/createinvoice`, createInvoice);
     }    
   }
   setValidated(true);

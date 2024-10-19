@@ -7,10 +7,10 @@ import Button from '../../buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { Col, Form, Row } from 'react-bootstrap';
 import CommonSearch from '../../../Utilities/commonSearch';
 import { invoiceSearch, invoiceStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
+import { _get } from '../../../API/useApi';
 const Invoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
   const [invoiceRowData, setInvoiceRowData] = useState([] as any)
@@ -43,12 +43,14 @@ const Invoice = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-    const invoiceData = filterIfPageParamExit(res.data);
-    setInvoiceRowData(invoiceData);
-    setrowData(invoiceData);
-  });
+    fetchDataCustomer();
   },[])
+
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createinvoice');
+    setInvoiceRowData(response?.data);
+    setrowData(response?.data)
+  }
 
   const filterIfPageParamExit = (data: any) => {
       if(id === "" || id === undefined || id === null) {
@@ -58,11 +60,10 @@ const Invoice = () => {
       }
   }
   
-  const updateParentState = () => {
-    axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-      const invoiceData = filterIfPageParamExit(res.data);
-      setInvoiceRowData(invoiceData); 
-    });
+  const updateParentState = async() => {
+    const response = await _get('/createinvoice');
+    const invoiceData = filterIfPageParamExit(response.data);
+    setInvoiceRowData(invoiceData);
 };
 
 const handleInvoceStatus = (e: any) => {

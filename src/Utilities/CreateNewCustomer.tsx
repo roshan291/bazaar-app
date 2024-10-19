@@ -11,9 +11,9 @@ import CustomDropdown from './CustomDropdown';
 import { selectCountries } from '../constants/countries';
 import CustomNumberInput from './CustomNumberInput';
 import { generateCurrentDateAndTime, generateUniqueId, onKeyPress } from './Utils';
-import axios from 'axios';
+ 
 import Spinner from 'react-bootstrap/Spinner';
-import CustomToast from './CustomToast';  
+// import CustomToast from './CustomToast';  
 import apiRequest from '../API/apiClient';
 import { _post } from '../API/useApi';
 
@@ -76,16 +76,11 @@ const CreateNewCustomer = (props: any) => {
 
   }
  
-  useEffect(() => {
   
-    return () => {
-      setshowToast(false)
-    }
-   }, [])
 
   return (
     <>
-    <CustomToast showToast = {showToast} variantType = {statusCode}/>
+    {/* <CustomToast showToast = {showToast} variantType = {statusCode}/> */}
     <Modal
       {...props}
       size="xl"

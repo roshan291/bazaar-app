@@ -1,8 +1,8 @@
 import apiClient from "./apiClient";
 
-export const BASE_URL_DEFAULT = 'http://localhost:8000';
+// export const BASE_URL_DEFAULT = 'http://localhost:8000';
 // Define common API methods
-const _get = (url: any, config = {}) => {
+const _get = async (url: any, config = {}) => {
   return apiClient.get(url, config);
 };
 

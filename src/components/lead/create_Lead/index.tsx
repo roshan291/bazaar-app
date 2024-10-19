@@ -18,13 +18,12 @@ import CustomNumberInput from '../../../Utilities/CustomNumberInput';
 import CreateServiceIncluded from '../../../Utilities/CreateServiceIncluded';
 import CreateNewCustomer from '../../../Utilities/CreateNewCustomer';
 import { onKeyPress } from '../../../Utilities/Utils'; 
-import CustomToast from '../../../Utilities/CustomToast';
+// import CustomToast from '../../../Utilities/CustomToast';
 import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.';
 // import CopyLineIcon from "../../../assets/icons/copy-line-icon.svg";
-
-import axios from 'axios';
 import { selectCountries } from '../../../constants/countries';
 import { useParams } from 'react-router-dom';
+import { _get, _post, _put } from '../../../API/useApi';
 // import { useNavigate } from 'react-router-dom';
 
 const CreateLead = () => {
@@ -145,35 +144,16 @@ const [statusCode, setStatusCode] = useState("" as any)
 const [showToast, setshowToast] = useState(false) 
 const [customerData, setCustomerData] = useState([])
 
-const handleSubmit = (event: any) => {
+const handleSubmit = async (event: any) => {
   event.preventDefault();
   const form = event.currentTarget;
   if (form.checkValidity() === false) {
     event.stopPropagation();
   } else {
     if(!!id) {
-      axios.put(`http://localhost:8000/createlead/${id}`, createLead);
+     await _put(`/createlead/${id}`, createLead);
     } else {
-      axios.post(`http://localhost:8000/createlead`, createLead).then((response: any) => {
-     
-        if (response.status === 200) {
-       
-          setStatusCode("success")
-          setshowToast(true)
-        } else if (response.status === 201) {
-        
-          setStatusCode("success")
-          setshowToast(true)
-        } else {
-          
-          setStatusCode("danger")
-          setshowToast(true)
-        }
-    }).catch(function (error) {
- 
-      setStatusCode("danger")
-      setshowToast(true)
-    });
+      await _post('/createlead', createLead);
     }  
     
  
@@ -203,19 +183,19 @@ const handleSubmit = (event: any) => {
 
 
   }
-      
-  useEffect(() => {
-    axios.get('http://localhost:8000/createcustomer').then((res: any) => {
-    const customer = res.data;
-    setCustomerData(customer);
-  });
-  },[])
+  
+
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createcustomer');
+    setCustomerData(response.data);
+  }
 
   useEffect(() => {
-    axios.get('http://localhost:8000/createcustomer').then((res: any) => {
-    const customer = res.data;
-    setCustomerData(customer);
-  });                                 
+    fetchDataCustomer()
+  },[])
+
+  useEffect(() => {                           
+    fetchDataCustomer()    
   },[createNewCustomerModalShow])
 
   const handleCreateNewCustomer = () => {
@@ -251,14 +231,18 @@ const handleSubmit = (event: any) => {
  }, [])
 
  
-
+const fetchLead = async() => {
+  const getSelectedLead = await _get(`/createlead/${id}`);
+  setCreateLead(getSelectedLead?.data);
+}
  useEffect(() => {
   if(!!id) {
-    axios.get(`http://localhost:8000/createlead/${id}`).then((res: any) => {
-      const selectedLead = res.data;
+    fetchLead()
+    // axios.get(`http://localhost:8000/createlead/${id}`).then((res: any) => {
+    //   const selectedLead = res.data;
      
-      setCreateLead(selectedLead);
-    });
+    //   setCreateLead(selectedLead);
+    // });
   }
 },[])
   
@@ -276,16 +260,29 @@ const handleSubmit = (event: any) => {
             </label>
         
         ))}  */}
-        <div>Update lead {id}</div>
-    <CustomToast showToast = {showToast} variantType = {statusCode}/>
+        {/* <div>Update lead {id}</div> */}
+    {/* <CustomToast showToast = {showToast} variantType = {statusCode}/> */}
 
     <CreateServiceIncluded show={serviceIncludedModalShow} onHide={() => setServiceIncludedModalShow(false)} />
     <CreateNewCustomer closeModal = {setCreateNewCustomerModalShow} show = {createNewCustomerModalShow} onHide={() => setCreateNewCustomerModalShow(false)} />
-
+    <div className="page_top_banner">
+        <div className={`container`}>
+          <Row style={{alignItems: "center"}}>
+          <Col className="top_banner_left_panel">
+            <h5>
+              Create lead
+            </h5>
+        </Col>
+        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+         
+        </Col>
+        </Row>
+        </div>
+    </div>
     <div className='manage_top_view'>
       {/* <CopyLineIcon /> */}
       <Container>
-        <Row className={styles.lead_wrapper}>
+        <div className={styles.lead_wrapper}>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Row className="mb-6">
                 <Form.Group as={Col} md="6" controlId="validationCustom">
@@ -533,7 +530,7 @@ const handleSubmit = (event: any) => {
               </Button>
               <br /> <br />
           </Form>
-        </Row>
+        </div>
       </Container>
     </div>
     </>

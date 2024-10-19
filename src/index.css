@@ -136,7 +136,7 @@ body {
 }
 
 .manage_top_view {
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .display_table_main_wrapper {
@@ -591,4 +591,12 @@ li.nav-item.disabled {
 }
 .pageloader img {
   width: 100px;
+}
+.logo img {
+  max-width: 58px;
+  cursor: pointer;
+}
+
+.top_banner_left_panel h5 {
+  margin-bottom: 0;
 }

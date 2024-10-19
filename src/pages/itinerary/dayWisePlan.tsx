@@ -254,7 +254,7 @@ const Daywiseplan = (props:any) => {
                             <View style={styles.leftColumn}>
                                 <View style={styles.transportationDetailsInner}>
                                     {
-                                        !!list ? list?.map((list: any) => <>
+                                        !!list ? list?.map((list: any, index: any) => <View key= {index}>
                                         <Text style={styles.transportationDetailsInnerTitle}>
                                             Transportation Title: <Text style={styles.transportationDetailsTop}>{!!list?.transportationTitle ? list?.transportationTitle : "--"}</Text>
                                         </Text>
@@ -276,7 +276,7 @@ const Daywiseplan = (props:any) => {
                                         <Text style={styles.transportationDetailsInnerTitleBottom}>
                                             Reporting Time: <Text style={styles.transportationDetailsTop}>{!!list?.reportingTime ? list?.reportingTime : "--"}</Text>
                                         </Text>
-                                        </>) : <></>
+                                        </View>) : <></>
                                     }
                                     
                                 </View>
@@ -284,7 +284,7 @@ const Daywiseplan = (props:any) => {
                             <View style={styles.rightColumn}>
                                 <View style={styles.transportationDetailsInner}>
                                 {
-                                        !!list ? list?.map((list: any) => <>
+                                        !!list ? list?.map((list: any, index: any) => <View key= {index}>
                                         <Text style={styles.transportationDetailsInnerTitle}>
                                             Transportation Mode: <Text style={styles.transportationDetailsTop}>{!!list?.transpotationMode ? list?.transpotationMode : "--"}</Text>
                                         </Text>
@@ -307,7 +307,7 @@ const Daywiseplan = (props:any) => {
                                         <Text style={styles.transportationDetailsInnerTitleBottom}>
                                             Transportation Note: <Text style={styles.transportationDetailsTop}>{!!list?.transpotationNote ? list?.transpotationNote : "--"}</Text>
                                         </Text>
-                                        </>) : <></>
+                                        </View>) : <></>
                                     }
                                 </View>
                             </View>
@@ -346,7 +346,7 @@ const Daywiseplan = (props:any) => {
                         <Text>Meal Description: {meal.mealDescription}</Text>
                         <Text style={{marginTop: 5}}>Selected Meals:</Text>
                         {meal.selecdtMeal.filter((m: any) => m.isChecked).map((selected: any) => (
-                            <View>
+                            <View key={index}>
                                 <Text style={styles.dot}></Text><Text key={selected.id} style={{ paddingLeft: 15 }}>
                                 {selected.selectMealType}
                             </Text>
@@ -365,8 +365,8 @@ const Daywiseplan = (props:any) => {
             <View>
                 <Text style={styles.daywiseMealTitle}>Hotel Details</Text>
                 {
-                    hotels?.map((hotel: any) =>(
-                        <View style={styles.hotelDetails}>
+                    hotels?.map((hotel: any, index: any) => (
+                        <View key = {index} style={styles.hotelDetails}>
                             <Text style={styles.listColorLabel}>Hotel check-In Date & Time: <Text style={styles.listColor}>{hotel?.checkInDate}, {hotel?.checkInTime}</Text></Text>
                             <Text style={styles.listColorLabel}>Audus: <Text style={styles.listColor}>{hotel?.adults}</Text></Text>
                             <Text style={styles.listColorLabel}>Chilldrens: <Text style={styles.listColor}>{hotel?.childs}</Text></Text>
@@ -426,9 +426,9 @@ const Daywiseplan = (props:any) => {
                         <Text style={styles.inclusionTitle}>Inclusion</Text>
                         <View style={styles.inclusionWrapper}>
                             {
-                                serviceList?.filter((item:any) => item.isChecked)?.map((list: any) => <>
-                                <Text style={styles.leftColumn}>- {list.serviceName}</Text>
-                                </>)
+                                serviceList?.filter((item:any) => item.isChecked)?.map((list: any, index: any) => 
+                                <Text style={styles.leftColumn} key={index}>- {list.serviceName}</Text>
+                                )
                             }
                         </View>
                     </View>

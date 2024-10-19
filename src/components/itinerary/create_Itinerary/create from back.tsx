@@ -28,8 +28,8 @@ import NextDay from '../../../pages/itinerary/addNextDay';
 import { selectCountries } from '../../../constants/countries';
 import Daywiseplan from '../../../pages/itinerary/dayWisePlan';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import axios from 'axios';
 import RichTextEditor from '../../../Utilities/CreateRichTextEditor';
+import { _post } from '../../../API/useApi';
 
 const CreateItinerary = () => {
     const uniqueId = useId(); 
@@ -153,7 +153,7 @@ const CreateItinerary = () => {
     } = createItinerary;
     
  
-    const handleSubmit = (event: any) => { 
+    const handleSubmit = async(event: any) => { 
         event.preventDefault();
         
         // const form = event.currentTarget;
@@ -161,13 +161,7 @@ const CreateItinerary = () => {
         //   event.stopPropagation();
    
         // } else {
-     
-            axios.post(`http://localhost:8000/createitinerary`, createItinerary).then((response) => {
-                 setLoading(response?.status === 201 ? false : true)
-            }).catch((error) => {
-                setLoading(false)
-                 
-            })
+            await _post('/createitinerary', createItinerary);
             setValidated(true);
     //   };
     }

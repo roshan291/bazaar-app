@@ -4,7 +4,6 @@ import { Container, Row } from 'react-bootstrap';
 import CustomTable from '../../pages/customTable.tsx';
 import { invoiceStatusCommon, leadStatus } from '../../constants/global';
 import SampleCarousel from '../../pages/sampleCarousel';
-import axios from 'axios';
 import { navigationURL } from '../../constants';
 import { _get } from '../../API/useApi';
 // import invoice from '../billing/invoice';

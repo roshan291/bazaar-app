@@ -5,14 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { selectToastMessage } from '../constants';
+// import { res } from '../API/apiClient';
+// import { setToastCallback } from '../API/apiClient';
 
 const CustomToast = (props: any) => {
  
-  const [show, setShow] = useState(props?.showToast);
-
-  useEffect(() => {
-    setShow(props?.showToast)
-  }, [props?.showToast])
+  const [toastStatus, setToastStatus] = useState(props?.showToast);
+  const [toastType, setToastType] = useState(props?.variantType);
 
   const renderTitles = (variantType: any) => {
     return variantType ? selectToastMessage?.success : selectToastMessage?.failed
@@ -22,15 +21,29 @@ const CustomToast = (props: any) => {
     return variantType ? selectToastMessage?.successMessage : selectToastMessage?.failedMessage
   }
 
+  console.log(props)
+
   return (
-    <ToastContainer position="top-end" className="p-3" style={{ zIndex: 9 }}>
-      <Toast bg={props?.variantType ? "success": "danger"} onClose={() => setShow(false)} show={show} delay={5000} autohide>
+    <>
+    {
+      <ToastContainer position="top-end" className="p-3" style={{ zIndex: 9 }}>
+      <Toast bg={toastType} onClose={() => setToastStatus(false)} show={toastStatus} delay={5000} autohide>
+        <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">{renderTitles(toastType)}</strong>
+            <small>5 Seconds ago</small>
+        </Toast.Header>
         <Toast.Body className={'text-white'} style={{ "paddingLeft": 20}}>
-          <h5>{renderTitles(props?.variantType)}</h5>
-          <label>{renderDescription(props?.variantType)}</label>
+          <label>{renderDescription(toastType)}</label>
         </Toast.Body>
       </Toast>
     </ToastContainer>
+    }
+    </>
   );
 }
 

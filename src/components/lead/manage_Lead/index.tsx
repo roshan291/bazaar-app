@@ -13,11 +13,11 @@ import ManageLeadSideNavMore from '../../../Utilities/ManageLeadSideNavMore';
 import UpdateLeadStatus from '../../../Utilities/UpdateLeadStatus';
 import Collapse from 'react-bootstrap/Collapse';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { NoDataFound } from '../../../pages/NoDataFound';
 import { dateDifference, dateFormat } from '../../../Utilities/Utils';
 import CommonSearch from '../../../Utilities/commonSearch';
 import { itineraryStatusFilter, leadSearch, leadStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
+import { _get } from '../../../API/useApi';
 
 const ManageLead = () => {
 
@@ -42,13 +42,19 @@ const ManageLead = () => {
   const [globalId, setGlobalId] =  useState("" as any)
 
   useEffect(() => {
-    axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
+    fetchDataCustomer()
+    // axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
   }, [])
 
   useEffect(() => {
-    axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
+    fetchDataCustomer()
+    // axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
   }, [chnageLeadStatusModalshow])
 
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createlead');
+    setLeadData(response?.data);
+  }
 
 
 
@@ -179,12 +185,18 @@ const handleLeadsMoreList = (listItem: any, id: any, globalID: any) => {
   }
 }
 
+const fetchItinerayData = async() => {
+  const response = await _get('/createitinerary');
+  const itineraryData = response?.data?.filter((item: any) => item.global_id === "17167").length;  
+  setitineraryCount(itineraryData)
+}
 useEffect(() => {
-  axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-    const itineraryData = res?.data?.filter((item: any) => item.global_id === "17167").length;
+  fetchItinerayData();
+  // axios.get('http://localhost:8000/createitinerary').then((res: any) => {
+  //   const itineraryData = res?.data?.filter((item: any) => item.global_id === "17167").length;
     
-    setitineraryCount(itineraryData)
-  })
+  //   setitineraryCount(itineraryData)
+  // })
 },[])
 
 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import { navigationURL } from "../../constants";
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import LOGO from "../../assets/images/logo1.png"
 
 function NavigationBar() {
 
@@ -120,7 +121,8 @@ const clearInvpocepageStorate = () => {
       
       
       <div className={styles.navleftwrapper}>
-      <div className="logo" onClick={navigateToHome}>MyLogo  
+      <div className="logo" onClick={navigateToHome}>
+        <img src= {LOGO} alt = "logo" />
       </div>
       <ul className="nav-menu">
         <li

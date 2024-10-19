@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import Table from 'react-bootstrap/esm/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare, faSquarePlus, faXmark, faEye, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import CreateNewCustomer from '../../../Utilities/CreateNewCustomer';
 import LoadingSpinner from '../../../Utilities/LoadingSpinner';
 import Button from '../../buttons';
@@ -27,6 +26,7 @@ const MyCustomer = () => {
   const [selectedJourney, setSelectedJourney] = useState<string>("");
   const [selectedId, setselectedId] = useState<string>("");
   const [_searchResults, setSearchResults] = useState(""); 
+
   const navigate = useNavigate();
 
  
@@ -46,7 +46,7 @@ const MyCustomer = () => {
       setLading(false);
     }
   };
-  
+
   useEffect(() => {
     fetchData();
   }, [changeModalshow, createNewCustomerModalShow])
@@ -84,6 +84,7 @@ const MyCustomer = () => {
     {
       loading ? <PageLoader /> : ""
     }
+    {/* <CustomToast data = {res} /> */}
     <ViewMyCustomer show = {viewCustomer} onHide = {handleViewClose} data = {viewCustomerData} />
     <DeleteSelectedItem closeModal = {setChangeModalShow} show = {changeModalshow} onHide = {handleChangeClose} journey = {selectedJourney} id = {selectedId} />
     <div className=''>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../buttons';
 import ViewInvoice from '../../../Utilities/ViewInvoice';
-import axios from 'axios';
 import { navigationURL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import styles from "../invoice/invoice.module.css"
@@ -10,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import CommonSearch from '../../../Utilities/commonSearch';
 import { invoiceSearch, invoiceStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
+import { _get } from '../../../API/useApi';
 
 const ProformaInvoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
@@ -39,24 +39,34 @@ const ProformaInvoice = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-    const customer = res.data;
-    setInvoiceRowData(customer);
-    setrowData(customer);
-  });
+    fetchDataCustomer();
   },[])
+
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createinvoice');
+    setInvoiceRowData(response?.data);
+    setrowData(response?.data)
+  }
 
   const handleInvoceStatus = (e: any) => {
     const selected = e.target.value;
     setSelectedStatus(selected);
     filterData(selected, searchResults)
   }
-  const updateParentState = () => {
+  const id = ""
+  const filterIfPageParamExit = (data: any) => {
+    if(id === "" || id === undefined || id === null) {
+        return data;
+    } else {
+        return data?.filter((item: any) => item.global_id === id)
+    }
+}
+
+  const updateParentState = async() => {
    
-    axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-      const customer = res.data;
-      setInvoiceRowData(customer); 
-    });
+    const response = await _get('/createinvoice');
+    const invoiceData = filterIfPageParamExit(response.data);
+    setInvoiceRowData(invoiceData);
 };
 
 const handleSearch = (query: any) => {

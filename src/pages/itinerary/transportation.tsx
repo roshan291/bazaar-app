@@ -10,6 +10,8 @@ import { selectVehicleType } from '../../constants';
 import CustomeTextarea from '../../Utilities/CustomeTextarea';
 import { selectCountries } from '../../constants/countries';
 import CustomDropdown from '../../Utilities/CustomDropdown';
+import CustomDatePicker from '../../Utilities/CustomDatePicker';
+import CustomTimePicker from '../../Utilities/CustomTimePicker';
 
 const Transportation = (props: any) => {
     const uniqueId = useId(); 
@@ -113,19 +115,19 @@ const Transportation = (props: any) => {
                             </Form.Group> 
                             <Form.Group as={Col} controlId="validationCustom" className='mb-2'>
                                 <Form.Label>Depart date</Form.Label>
-                                <CustomTextInput required = {true} value = {departDate} onChange = {handleChangetransportation} name = "departDate" />
+                                <CustomDatePicker required = {true} value = {departDate} onChange = {handleChangetransportation} name = "departDate" minDate = {new Date().toISOString().split("T")[0]} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="validationCustom" className='mb-2'>
                                 <Form.Label>Actual departure time</Form.Label>
-                                <CustomTextInput required = {true} value = {actualDepartureTime} onChange = {handleChangetransportation} name = "actualDepartureTime" />
+                                <CustomTimePicker required = {true} value = {actualDepartureTime} onChange = {handleChangetransportation} name = "actualDepartureTime" />
                             </Form.Group>
                             <Form.Group as={Col} controlId="validationCustom" className='mb-2'>
                                 <Form.Label>Reporting time</Form.Label>
-                                <CustomTextInput required = {true} value = {reportingTime} onChange = {handleChangetransportation} name = "reportingTime" />
+                                <CustomTimePicker required = {true} value = {reportingTime} onChange = {handleChangetransportation} name = "reportingTime" />
                             </Form.Group>
                             <Form.Group as={Col} controlId="validationCustom" className='mb-2'>
                                 <Form.Label>Actual arrival time</Form.Label>
-                                <CustomTextInput required = {true} value = {actualArrivalTime} onChange = {handleChangetransportation} name = "actualArrivalTime" />
+                                <CustomTimePicker required = {true} value = {actualArrivalTime} onChange = {handleChangetransportation} name = "actualArrivalTime" />
                             </Form.Group>
                             </Col>
                             <Col>
@@ -149,7 +151,7 @@ const Transportation = (props: any) => {
                             </Form.Group>
                             <Form.Group as={Col} controlId="validationCustom" className='mb-2'>
                                 <Form.Label>Arrival date</Form.Label>
-                                <CustomTextInput required = {true} value = {arrialDate} onChange = {handleChangetransportation} name = "arrialDate" />
+                                <CustomDatePicker required = {true} value = {arrialDate} onChange = {handleChangetransportation} name = "arrialDate" minDate = {new Date().toISOString().split("T")[0]} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="validationCustom" className='mb-2'>
                             <Form.Label>Transpotation Note</Form.Label>

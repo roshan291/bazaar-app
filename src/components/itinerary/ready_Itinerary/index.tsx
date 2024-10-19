@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import CustomNavigation from '../../../Utilities/CustomNavigation'
 import { itineraryStatus, navigationURL } from '../../../constants'
 import DisplayTable from '../../../pages/itinerary/displayTable'
-import axios from 'axios'
 import { Col, Form, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +10,7 @@ import CommonSearch from '../../../Utilities/commonSearch'
 import { itinerarySearch, itineraryStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { SetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate'
+import { _get } from '../../../API/useApi'
 
 const ReadyItinerary = () => {
     const { id } = useParams();
@@ -51,25 +51,27 @@ const ReadyItinerary = () => {
     };
 }, []);
 
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createitinerary');
+    setData(response?.data);
+    setRowData(response?.data)
+  }
+
   useEffect(() => {
-       
-        axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-          const customer = res.data;
-          setData(customer);
-          setRowData(customer)
- 
-        });
+    fetchDataCustomer()
   },[])
+
+  const fetchItinerayData = async() => {
+    const response = await _get('/createitinerary');
+    const itineraryData = response?.data?.filter((item: any) => item.global_id === Number(id));  
+    setData(itineraryData);
+    setRowData(itineraryData)
+  }
 
   useEffect(() => {
     if(id === "" || id === undefined || id === null) {
     } else {
-      axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-        const customer = res?.data?.filter((item: any) => Number(item.global_id) === Number(id));
- 
-        setData(customer);
-        setRowData(customer)
-      });
+      fetchItinerayData()
     }
   }, [id]);
 
@@ -102,7 +104,7 @@ const ReadyItinerary = () => {
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>
             {
-              itineraryStatus?.map((list: any) => <option value={list}>{list}</option>)
+              itineraryStatus?.map((list: any, index: any) => <option key = {index} value={list}>{list}</option>)
             }
           </Form.Select>
         </div>

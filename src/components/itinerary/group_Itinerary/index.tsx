@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import DisplayTable from '../../../pages/itinerary/displayTable'
-import axios from 'axios'
 import { Col, Form, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +9,7 @@ import CommonSearch from '../../../Utilities/commonSearch'
 import { itinerarySearch, itineraryStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate'
+import { _get } from '../../../API/useApi'
 
 const GroupItinerary = () => {
   const [selectedStatus, setSelectedStatus] = useState("All" as any);
@@ -35,17 +35,19 @@ const GroupItinerary = () => {
   } = navigationURL;
 
   const handleNavigation = () => {
-      navigate(`${createItinerary}`);
+    navigate(`${createItinerary}`);
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-    const customer = res.data;
-    setData(customer);
-    setRowData(customer)
-  });
+    fetchDataCustomer();
   },[])
 
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createitinerary');
+    setData(response?.data);
+    setRowData(response?.data)
+  }
+  
   const handleSearch = (query: any) => {
     setSearchResults(query) 
     filterData(selectedStatus, query)
@@ -87,7 +89,7 @@ const GroupItinerary = () => {
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>
             {
-              itineraryStatus?.map((list: any) => <option value={list}>{list}</option>)
+              itineraryStatus?.map((list: any, index: any) => <option key = {index}  value={list}>{list}</option>)
             }
           </Form.Select>
         </div>

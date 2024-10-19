@@ -28,10 +28,10 @@ import NextDay from '../../../pages/itinerary/addNextDay';
 import { selectCountries } from '../../../constants/countries';
 import Daywiseplan from '../../../pages/itinerary/dayWisePlan';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import axios from 'axios';
 import RichTextEditor from '../../../Utilities/CreateRichTextEditor';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { GetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate';
+import { _get, _post } from '../../../API/useApi';
 
 const CreateItinerary = () => {
     const uniqueId = useId(); 
@@ -214,8 +214,8 @@ const CreateItinerary = () => {
           event.stopPropagation();
           setValidated(true);
         } else {
-          
-            axios.post(`http://localhost:8000/createitinerary`, createItinerary).then((response) => {
+            
+            _post('/createItinerary', createItinerary).then((response) => {
                  setLoading(response?.status === 201 ? false : true)
                  if(response?.status === 201) {
                     const page = sessionStorage.getItem("previouspage");
@@ -230,12 +230,15 @@ const CreateItinerary = () => {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:8000/createlead").then((response: any) => {
-            setLeadFilterData(response?.data);
-        })
+        leadData();
     }, [])
 
-    useEffect(() => {
+    const leadData = async() => {
+        const response = await _get('/createcustomer');
+        setLeadFilterData(response.data);
+    }
+
+     useEffect(() => {
         setOpeNextDay(false);
     },[nextDayData])
 
@@ -710,9 +713,9 @@ useEffect(() => {
                                     }
                                 </div>
                                 <div className={styles.dayTransportation}>
-                                    <label><strong>Transportation Details</strong></label>
                                     {
                                         item?.transportation?.map((transport: any) => <>
+                                         <label><strong>Transportation Details</strong></label>
                                             <Row>
                                                 <Col>
                                                     <div>
@@ -782,9 +785,9 @@ useEffect(() => {
                                     }
                                 </div>
                                 <div className={styles.dayHotel}>
-                                <label><strong>Hotel Details</strong></label>
                                     {
                                         item?.hotel?.map((motal: any) => <>
+                                        <label><strong>Hotel Details</strong></label>
                                             <Row>
                                                 <Col className={styles.dayHotelItemWrapper}>
                                                     <div className={styles.dayHotelItemBlock}>
