@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 
-const BASE_URL = 'https://webservice-y4qv.onrender.com/';
+const BASE_URL = 'https://webservice-y4qv.onrender.com';
 // const BASE_URL = 'http://localhost:8000';
 
 const apiClient = axios.create({
