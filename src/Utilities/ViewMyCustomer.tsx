@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 const ViewMyCustomer = (props: any) => {
-    console.log("props", props?.data)
-
     const {customerFirstName, customerLastName, customerMobile, customerEmail, city, state, country, zipcode} = props?.data;
   return (
     <Modal

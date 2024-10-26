@@ -7,10 +7,10 @@ import Button from '../../buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSquarePlus, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { Col, Form, Row } from 'react-bootstrap';
 import CommonSearch from '../../../Utilities/commonSearch';
 import { invoiceSearch, invoiceStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
+import { _get } from '../../../API/useApi';
 const Invoice = () => {
   const [navigateUrl, setNavigateUrlUrl] = useState("");
   const [invoiceRowData, setInvoiceRowData] = useState([] as any)
@@ -24,8 +24,6 @@ const Invoice = () => {
   const navigate = useNavigate(); 
 
   const { id } = useParams();
-
-  console.log(" Invoice id", id)
   
   const {
     createLead,
@@ -45,34 +43,32 @@ const Invoice = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-    const customer = res.data;
-    setInvoiceRowData(customer);
-    setrowData(customer);
-  });
+    fetchDataCustomer();
   },[])
 
-  
-  // useEffect(() => {
-  //   axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-  //     const customer = res.data;
-  //     setInvoiceRowData(customer);
-  //     console.log("_____________________________________",isDeleted)
-  //   });
-  // },[isDeleted])
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createinvoice');
+    setInvoiceRowData(response?.data);
+    setrowData(response?.data)
+  }
 
-  const updateParentState = () => {
-   
-    axios.get('http://localhost:8000/createinvoice').then((res: any) => {
-      const customer = res.data;
-      setInvoiceRowData(customer); 
-    });
+  const filterIfPageParamExit = (data: any) => {
+      if(id === "" || id === undefined || id === null) {
+          return data;
+      } else {
+          return data?.filter((item: any) => item.global_id === id)
+      }
+  }
+  
+  const updateParentState = async() => {
+    const response = await _get('/createinvoice');
+    const invoiceData = filterIfPageParamExit(response.data);
+    setInvoiceRowData(invoiceData);
 };
 
 const handleInvoceStatus = (e: any) => {
   
-  const selected = e.target.value;
-  console.log("handleInvoceStatus", selected);
+  const selected = e.target.value; ;
   setSelectedStatus(selected);
   handleStatusClick(selected);
   if (typeof(Storage) !== "undefined") {
@@ -92,8 +88,7 @@ let currentSelectedFilter : any;
     currentSelectedFilter = localStorage.getItem("invoice_page");
   }
   useEffect(() => { 
-    setSelectedStatus(currentSelectedFilter)
-    console.log("currentSelectedFilter", currentSelectedFilter)
+    setSelectedStatus(currentSelectedFilter) 
     handleStatusClick(currentSelectedFilter);
   }, [currentSelectedFilter, invoiceRowData])
 
@@ -102,8 +97,7 @@ let currentSelectedFilter : any;
     filterData(selectedStatus, query)
   };
   
-  const filterData = (dropdownValue: any, searchValue: any) => {
-    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const filterData = (dropdownValue: any, searchValue: any) => { 
     const results = invoiceRowData.filter((item: any) => {
       const matchesSearch = searchValue ? invoiceSearch(item, searchValue) : true;
       const matchesDropdown = dropdownValue ? invoiceStatusFilter(item, dropdownValue) : true;

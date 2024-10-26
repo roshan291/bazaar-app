@@ -104,7 +104,7 @@ const CreateItinerary = () => {
     } = createItinerary;
     
 
-    console.log("createItinerary", createItinerary)
+ 
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const form = event.currentTarget;
@@ -112,9 +112,9 @@ const CreateItinerary = () => {
           event.stopPropagation();
         } else {
         //   axios.post(`http://localhost:8001/createLead`, createLead).then((response: any) => {
-         console.log("onAddCustomerSubmit")
+         
         // })
-          console.log("handleSubmit");
+          
           // handleClose();
           // history("/lead-board/supervise")
         }

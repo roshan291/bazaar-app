@@ -16,6 +16,7 @@ import { selectStatesInIndia } from '../../constants/states';
 import { selectCountries } from '../../constants/countries';
 import { stateCitiesMap } from '../../constants/cities';
 import AddOwnHotel from './addOwnHotel';
+import CustomTimePicker from '../../Utilities/CustomTimePicker';
 
 const Hotel = (props: any) => {
 
@@ -97,14 +98,13 @@ const {
 
   const handleHotelSearch = (e: any) => {
     e.preventDefault();
-    console.log("searchHotel", searchHotel)
+ 
   }
 
   const onSubmitHotel = (event: any) => {
     event.preventDefault();
       const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        console.log("All date Not Verified handleCreateNewCustomer");
+      if (form.checkValidity() === false) { 
         event.stopPropagation();
       } else {
         props?.getDayHotel([hotel])
@@ -175,7 +175,7 @@ const {
                 </Form.Group>          
                 <Form.Group as={Col} md="6" controlId="validationCustom">
                   <Form.Label>CheckIn Time</Form.Label>
-                  <CustomNumberInput onKeyPress = {onKeyPress} required = {true} value = {checkInTime} onChange = {handleChangeHotel} name = "checkInTime" placeholder="Eg. 01:00 PM" />
+                  <CustomTimePicker onKeyPress = {onKeyPress} required = {true} value = {checkInTime} onChange = {handleChangeHotel} name = "checkInTime" placeholder="Eg. 01:00 PM" />
                 </Form.Group>   
                 <Form.Group as={Col} md="6" className='mt-2' controlId="validationCustom">
                   <Form.Label >No of Nights</Form.Label>

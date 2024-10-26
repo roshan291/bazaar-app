@@ -28,11 +28,16 @@ import NextDay from '../../../pages/itinerary/addNextDay';
 import { selectCountries } from '../../../constants/countries';
 import Daywiseplan from '../../../pages/itinerary/dayWisePlan';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import axios from 'axios';
 import RichTextEditor from '../../../Utilities/CreateRichTextEditor';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { GetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate';
+import { _get, _post } from '../../../API/useApi';
 
 const CreateItinerary = () => {
     const uniqueId = useId(); 
+    const { id } = useParams();
+    const navigate = useNavigate(); 
+    const location = useLocation();
     const [validated, setValidated] = useState(false);
     const [addDayCount, setAddDayCount] = useState(1);
     const [dayWisePlan, setDayWisePlan]= React.useState([] as any)
@@ -58,15 +63,37 @@ const CreateItinerary = () => {
     const [daySighseeingSelectedID, setDdaySighseeingSelectedID] = useState(Number);
     const [dayHotelSelectedID, setDdayHotelSelectedID] = useState(Number);
     const [loading, setLoading] = React.useState(false)
+    const [leadFilterData, setLeadFilterData] = useState([] as any)
     // sightseeing
 
-    console.log("nextDayData", nextDayData)
+
+
+    const appendGloabalId = () => {
+        if(id === "" || id === "undefined" || id === null) {
+          return "";
+        } else {
+          return id;
+        }
+    }
+    const isGlobalIdExit = () => {
+        return id === "" || id === "undefined" || id === null || id === undefined;
+    }
+
+    const getPreviousPage = () => {
+        let prevPageTitle = "" as any
+        const page = sessionStorage.getItem("previouspage");
+        if(page) {
+            return page.includes("ready") ? "ItineraryReady" : page.includes("group") ? "ItineraryGroup" : "ItineraryCustomised"
+        }
+        
+        return prevPageTitle;
+    }
 
     const [createItinerary, setCreateItinerary] = useState({
-        id: uniqueId,
-        iteneraryId: `HB${generateUniqueId()}`,
+        id: generateUniqueId(), 
         createdDate: generateCurrentDateAndTime(),
-        itineraryTitle: "",
+        global_id: appendGloabalId(),
+        itineraryTitle: leadFilterData.length > 0 && id !== "undefined" ? leadFilterData[0].leadTitle : "",
         destination: "",
         typeOfHoliday: "",
         noOfAdults: "",
@@ -115,6 +142,7 @@ const CreateItinerary = () => {
         thankyounote: "",
         changestatus: "",
         dayWisePlanFinal: [],
+        previousPage: getPreviousPage(),
     })
 
     const {
@@ -153,30 +181,74 @@ const CreateItinerary = () => {
         changestatus, 
     } = createItinerary;
     
+    const mergeLeadWithItinerary = (leadObj: any) => {
+        const updatedItinerary = { ...createItinerary } as any;
 
-    console.log("createItinerary", createItinerary)
+        // Merge only fields that exist in both createItinerary and leadObj
+        Object.keys(leadObj).forEach((key) => {
+            if (updatedItinerary.hasOwnProperty(key)) {
+                updatedItinerary[key] = leadObj[key]; // Update if key exists in both
+            }
+        });
+
+        return updatedItinerary;
+    };
+
+    useEffect(() => {
+        if (leadFilterData.length > 0 && id !== "undefined") {
+            const leadObj = leadFilterData.find((item: any) => Number(item.global_id) === Number(id));
+            if (leadObj) {
+                const mergedItinerary = mergeLeadWithItinerary(leadObj);
+                setCreateItinerary(mergedItinerary); // Update state with merged data
+            }
+        }
+    }, [id, leadFilterData]); // Dependency array ensures this runs when `id` or `lead` changes
+
+   
     const handleSubmit = (event: any) => {
-        console.log("createitinerary called")
+ 
         event.preventDefault();
         
-        // const form = event.currentTarget;
-        // console.log("createitinerary ------------------------", form.checkValidity())
-        // if (form.checkValidity() === false) {
-        //   event.stopPropagation();
-        //   console.log("createitinerary called if")
-        // } else {
-            console.log("createitinerary called else")
-            axios.post(`http://localhost:8000/createitinerary`, createItinerary).then((response) => {
-                console.log("onAdd create itinerary Submit", response?.status)
-                setLoading(response?.status === 201 ? false : true)
+        const form = event.currentTarget; 
+        if (form.checkValidity() === false) {
+          event.stopPropagation();
+          setValidated(true);
+        } else {
+            
+            _post('/createItinerary', createItinerary).then((response) => {
+                 setLoading(response?.status === 201 ? false : true)
+                 if(response?.status === 201) {
+                    const page = sessionStorage.getItem("previouspage");
+                    if(page) {
+                        return page.includes("ready") ? navigate(`/itinerary/ready`) : page.includes("group") ? navigate(`/itinerary/group`) : navigate(`/itinerary/customised`);
+                    }
+                 }
             }).catch((error) => {
-                setLoading(false)
-                console.log("failed with", error)
+                setLoading(false) 
             })
-            setValidated(true);
-    //   };
+      };
     }
-      
+
+    useEffect(() => {
+        leadData();
+    }, [])
+
+    const leadData = async() => {
+        const response = await _get('/createcustomer');
+        setLeadFilterData(response.data);
+    }
+
+     useEffect(() => {
+        setOpeNextDay(false);
+    },[nextDayData])
+
+    useEffect(() => {
+        setOpenDescription(false)
+    }, [daydescription])
+    
+    useEffect(() => { setOpenTransportation(false)}, [dayTransportation]);
+    useEffect(() => { setOpenHotel(false)}, [dayHotel]);
+    useEffect(() => { setOpenMeal(false)}, [dayMeal]);
 
     const MyDoc = () => (
         <Document>
@@ -302,7 +374,7 @@ useEffect(() => {
     setOpeNextDay(true)
    }
 
-   console.log("Roshan clicked on next day", dayWisePlan);
+ 
 
     const handleAddDayDescription = (selectedItem: any) => {
         setDdayDescriptionSelectedItemID(selectedItem)
@@ -386,15 +458,15 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column className='d-flex align-items-start justify-content-start'>Itinerary Title<span className='required'>*</span></Form.Label>
                             <Col>
-                                <CustomTextInput required = {false} value = {itineraryTitle} onChange = {handleChangeItinerary} name = "itineraryTitle" />
+                                <CustomTextInput required = {true} value = {itineraryTitle} onChange = {handleChangeItinerary} name = "itineraryTitle" />
                             </Col>
                         </Form.Group>
                     </Col>
                     <Col sm="4">
                         <Form.Group className="mb-1" controlId="Itinerary Title">
-                            <Form.Label column className='d-flex align-items-start justify-content-start'>Destination</Form.Label>
+                            <Form.Label column className='d-flex align-items-start justify-content-start'>Destination<span className='required'>*</span></Form.Label>
                             <Col>
-                                <CustomTextInput required = {false} value = {destination} onChange = {handleChangeItinerary} name = "destination" />
+                                <CustomTextInput required = {true} value = {destination} onChange = {handleChangeItinerary} name = "destination" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -402,7 +474,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column className='d-flex align-items-start justify-content-start'>Type of Holidays<span className='required'>*</span></Form.Label>
                             <Col>
-                            <CustomDropdown required = {false} value = {typeOfHoliday} onChange = {handleChangeItinerary} name = "typeOfHoliday" dropdownData = {selectTypeOfHoliday} />
+                            <CustomDropdown required = {true} value = {typeOfHoliday} onChange = {handleChangeItinerary} name = "typeOfHoliday" dropdownData = {selectTypeOfHoliday} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -506,9 +578,9 @@ useEffect(() => {
                         <Col sm="4">
                         <Form.Group className="mb-4" controlId="Itinerary Title">
                             <br />
-                            <Form.Label column className='d-flex align-items-start justify-content-start'>Welcome Note</Form.Label>
+                            <Form.Label column className='d-flex align-items-start justify-content-start'>Welcome Note<span className='required'>*</span></Form.Label>
                             <Col> 
-                                <CustomDropdown required = {false} value = {welcomenote} onChange = {handleChangeItinerary} name = "welcomenote" dropdownData = {selectWelcomeNote} />
+                                <CustomDropdown required = {true} value = {welcomenote} onChange = {handleChangeItinerary} name = "welcomenote" dropdownData = {selectWelcomeNote} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -614,6 +686,7 @@ useEffect(() => {
                     {
                         dayWisePlan?.filter((item: any) => item.day !== "").map((item:any, index: any) => <div key = {item.index} className={styles.daywise_block_wrapper}>
                         <Row>
+                        <br />
                             <Col sm="10">
                                 {/* {JSON.stringify(item)} */}
                                 <div className={styles.dayPlan}>{item?.day} <FontAwesomeIcon icon={faPenToSquare} /></div>
@@ -625,6 +698,7 @@ useEffect(() => {
                                         </>)
                                     }
                                 </div>
+                                
                                 <div className={styles.dayMeal}>
                                     {
                                         item?.meal?.map((meal: any) => <>
@@ -641,6 +715,7 @@ useEffect(() => {
                                 <div className={styles.dayTransportation}>
                                     {
                                         item?.transportation?.map((transport: any) => <>
+                                         <label><strong>Transportation Details</strong></label>
                                             <Row>
                                                 <Col>
                                                     <div>
@@ -712,41 +787,42 @@ useEffect(() => {
                                 <div className={styles.dayHotel}>
                                     {
                                         item?.hotel?.map((motal: any) => <>
+                                        <label><strong>Hotel Details</strong></label>
                                             <Row>
-                                                <Col>
-                                                    <div>
+                                                <Col className={styles.dayHotelItemWrapper}>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>CheckIn Date: </span>
                                                         <label>{motal?.checkInDate}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>CheckIn Time: </span>
                                                         <label>{motal?.checkInTime}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Number Of Nights: </span>
                                                         <label>{motal?.numberOfNights}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Adults: </span>
                                                         <label>{motal?.adults}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Rooms: </span>
                                                         <label>{motal?.rooms}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Childs: </span>
                                                         <label>{motal?.childs}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Extra bed: </span>
                                                         <label>{motal?.extrabed}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Room Types: </span>
                                                         <label>{motal?.roomTypes}</label>
                                                     </div>
-                                                    <div>
+                                                    <div className={styles.dayHotelItemBlock}>
                                                         <span className='custom_label_color'>Note: </span>
                                                         <label>{motal?.noteText}</label>
                                                     </div>
@@ -836,15 +912,15 @@ useEffect(() => {
                     </Row>
                 <div className="p-2 mb-3 tab_default_style">Thank you</div>
                     <Form.Group className="mb-3" controlId="Itinerary Title">
-                        <Form.Label column sm="2" className='d-flex align-items-end justify-content-start'>Thank you Note</Form.Label>
+                        <Form.Label column sm="2" className='d-flex align-items-end justify-content-start'>Thank you Note<span className='required'>*</span></Form.Label>
                         <Col sm="6"> 
-                            <CustomDropdown required = {false} value = {thankyounote} onChange = {handleChangeItinerary} name = "thankyounote" dropdownData = {selectThankyouNote} />
+                            <CustomDropdown required = {true} value = {thankyounote} onChange = {handleChangeItinerary} name = "thankyounote" dropdownData = {selectThankyouNote} />
                         </Col>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="Itinerary Title">
-                        <Form.Label column sm="2" className='d-flex align-items-end justify-content-start'>Change Status</Form.Label>
+                        <Form.Label column sm="2" className='d-flex align-items-end justify-content-start'>Change Status<span className='required'>*</span></Form.Label>
                         <Col sm="6"> 
-                            <CustomDropdown required = {false} value = {changestatus} onChange = {handleChangeItinerary} name = "changestatus" dropdownData = {itineraryStatus} />
+                            <CustomDropdown required = {true} value = {changestatus} onChange = {handleChangeItinerary} name = "changestatus" dropdownData = {itineraryStatus} />
                         </Col>
                     </Form.Group>
                     <br />

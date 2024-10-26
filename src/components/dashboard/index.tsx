@@ -4,8 +4,8 @@ import { Container, Row } from 'react-bootstrap';
 import CustomTable from '../../pages/customTable.tsx';
 import { invoiceStatusCommon, leadStatus } from '../../constants/global';
 import SampleCarousel from '../../pages/sampleCarousel';
-import axios from 'axios';
 import { navigationURL } from '../../constants';
+import { _get } from '../../API/useApi';
 // import invoice from '../billing/invoice';
  
 
@@ -17,14 +17,14 @@ const Dashboard = () => {
   const [invoiceStatusData, setInvoiceStatusData] = useState([] as any)
 
   useEffect(() => {
-    axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
+    const fetchData = async () => {
+      const responseLead = await _get('/createlead');
+      setLeadData(responseLead.data);
+      const responseInvoice = await _get('/createinvoice');
+      setInvoiceData(responseInvoice.data);
+    }
+    fetchData();
   }, [])
-
-  useEffect(() => {
-    axios.get("http://localhost:8000/createinvoice").then((response: any) => setInvoiceData(response?.data))
-  }, [])
-
-  console.log("leadDataRow", leadData)
 
   useEffect(() => {
     const allcount = leadData?.length; 
@@ -115,8 +115,7 @@ const Dashboard = () => {
   }, [leadData])
 
   useEffect(() => {
-    const allcount = invoiceData?.length; 
-    console.log("invoiceData" ,invoiceData)
+    const allcount = invoiceData?.length;  
     const generatedCount = invoiceData?.filter((all: any) => all.invoieStatus === invoiceStatusCommon?.gnerated).length;
     const senttocustomerCount = invoiceData?.filter((all: any) => all.invoieStatus === invoiceStatusCommon?.sentToCustomer).length;
     const partpaidCount = invoiceData?.filter((all: any) => all.invoieStatus ===invoiceStatusCommon?.partPaid).length;

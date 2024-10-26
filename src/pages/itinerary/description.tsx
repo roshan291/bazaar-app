@@ -42,10 +42,9 @@ const Description = (props: any) => {
       event.preventDefault();
       const form = event.currentTarget;
       if (form.checkValidity() === false) {
-        console.log("All date Not Verified handleCreateNewCustomer");
+    
         event.stopPropagation();
       } else {
-        // console.log("onSubmitCreateNewDay", daySelect) ;
          props?.getDayDescription([dayDescription])
   
         // setDaysList([...daysList, daySelect]);  

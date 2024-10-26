@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import DisplayTable from '../../../pages/itinerary/displayTable'
-import axios from 'axios'
 import { Col, Form, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +7,9 @@ import Button from '../../buttons'
 import { itineraryStatus, navigationURL } from '../../../constants'
 import { itinerarySearch, itineraryStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch'
 import CommonSearch from '../../../Utilities/commonSearch'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { SetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate'
+import { _get } from '../../../API/useApi'
 
 const CustomisedItinerary = () => {
   const [selectedStatus, setSelectedStatus] = useState("All" as any);
@@ -17,6 +18,7 @@ const CustomisedItinerary = () => {
   const [rowdata,setRowData] = useState([] as any)
   const [searchResults, setSearchResults] = useState("");
   const navigate = useNavigate(); 
+  const location = useLocation();
   
   const {
     createLead,
@@ -41,21 +43,22 @@ const CustomisedItinerary = () => {
     filterData(selectedStatus, query)
   };
 
-    useEffect(() => {
-      axios.get('http://localhost:8000/createitinerary').then((res: any) => {
-      const customer = res.data;
-      setData(customer);
-      setRowData(customer)
-    });
+  useEffect(() => {
+    fetchDataCustomer();
   },[])
+
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createitinerary');
+    setData(response?.data);
+    setRowData(response?.data)
+  }
 
   const handleSelectedStatus = (e: any) => {
     setSelectedStatus(e.target.value) 
     filterData(e.target.value, searchResults)
   }
   
-  const filterData = (dropdownValue: any, searchValue: any) => {
-    console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+  const filterData = (dropdownValue: any, searchValue: any) => { 
     const results = data.filter((item: any) => {
       const matchesSearch = searchValue ? itinerarySearch(item, searchValue) : true;
       const matchesDropdown = dropdownValue ? itineraryStatusFilter(item, dropdownValue) : true;
@@ -63,6 +66,14 @@ const CustomisedItinerary = () => {
     });
     setRowData(results);
   }
+
+
+  useEffect(() => {
+    // This runs when the component mounts and when the route changes
+    return () => {
+      SetSessionStorageWithoutExcryption("previouspage", location.pathname);
+    };
+}, []);
 
   return (
     <>
@@ -79,7 +90,7 @@ const CustomisedItinerary = () => {
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>
             {
-              itineraryStatus?.map((list: any) => <option value={list}>{list}</option>)
+              itineraryStatus?.map((list: any, index: any) => <option key = {index} value={list}>{list}</option>)
             }
           </Form.Select>
         </div>

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';  
 import Form from 'react-bootstrap/Form';
 import { changeLeadStatus, selectHotelPreferences } from '../constants';
-import axios from 'axios';
-import CustomToast from './CustomToast';
+// import CustomToast from './CustomToast';
 import Button from '../components/buttons';
 import CustomDropdown from './CustomDropdown';
+import { _delete, _patch } from '../API/useApi';
 
 const UpdateLeadStatus = (props: any) => { 
 
@@ -19,25 +19,13 @@ const UpdateLeadStatus = (props: any) => {
   //   axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
   // }, [])
 
-  // console.log("leadData ------", leadData)
 
   const handleUpdateLead = async (updateLead: any) => {
     props?.closeModal(false);
     try {
-      const response = await axios.patch(`http://localhost:8000/createlead/${updateLead}`, {
-          leadstatus: leadstatus
-      });
-
-      if (response.status === 200) {
-        setStatusCode("success")
-        setshowToast(true)
-      } else if (response.status === 201) { 
-        setStatusCode("success")
-        setshowToast(true)
-      } else { 
-        setStatusCode("success")
-        setshowToast(true)
-      }
+      const response = await _patch(`/createlead/${updateLead}`, {
+        leadstatus: leadstatus
+    })
     } catch (error) {
       setStatusCode("danger")
       setshowToast(true)
@@ -45,27 +33,11 @@ const UpdateLeadStatus = (props: any) => {
     }
   }
 
-  // const handleRemoveLead = (deleteLead: any) => {
-  //   console.log("deleteLead", deleteLead)
-  //   const updatedLeads = leadData.filter((lead: any) => lead.id !== deleteLead);
-  //   setLeadData(updatedLeads);
-  // }
 
   async function handleRemoveLead(deleteLead: any) {
     props?.closeModal(false);
     try {
-        const response = await axios.delete(`http://localhost:8000/createlead/${deleteLead}`);
-        console.log('Resource deleted:', response.data);
-        if (response.status === 200) {
-          setStatusCode("success")
-          setshowToast(true)
-        } else if (response.status === 201) { 
-          setStatusCode("success")
-          setshowToast(true)
-        } else { 
-          setStatusCode("danger")
-          setshowToast(true)
-        }
+        await _delete(`/createlead/${deleteLead}`);
     } catch (error) { 
         setStatusCode("danger")
         setshowToast(true)
@@ -78,7 +50,7 @@ const handleOnchangeStatus = (e: any) => {
     setLeadstatus(value);
 }
 
-console.log("leadSelectedData", leadstatus, props)
+ 
 useEffect(() => {
   
   return () => {
@@ -86,11 +58,9 @@ useEffect(() => {
   }
  }, [])
 
-  // console.log("leadData from delete", leadData)
 
   return (
     <>
-    <CustomToast showToast = {showToast} variantType = {statusCode}/>
     <Modal show={props?.show} onHide={props?.onHide}>
         { props?.selectedItem?.navTitle === "Change Lead Status" ? <><Modal.Header closeButton>
           <Modal.Title><h5>Change the lead status - {props?.id}</h5></Modal.Title>

@@ -20,9 +20,7 @@ const NavigationBar = () => {
     const [invoiceActive, setInvoiceActive] = useState(false)
     const navigate = useNavigate(); 
 
-    useEffect(() => {
-      console.log("test menu...................")
-    } ,[])
+ 
     
     const handleDashboardActive = () => {
       navigate(dashboard); 
@@ -34,7 +32,7 @@ const NavigationBar = () => {
       setItineraryActive(false);    
     }
     const handleLeadActive = () => {
-      console.log("test menu...................")
+   
       if (window.location.href.indexOf("/lead/") > -1) {
         setleadActive(true);
       }

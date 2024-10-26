@@ -10,10 +10,9 @@ const CustomEmailInput = (props: any) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
   };
-  console.log("validateEmail",  props)
+ 
   useEffect(() => {
     setIsValidEmail(validateEmail(props?.value));
-    console.log("validateEmail",  props)
   }, [value])
 
   return (

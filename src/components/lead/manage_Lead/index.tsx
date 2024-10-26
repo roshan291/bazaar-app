@@ -13,11 +13,11 @@ import ManageLeadSideNavMore from '../../../Utilities/ManageLeadSideNavMore';
 import UpdateLeadStatus from '../../../Utilities/UpdateLeadStatus';
 import Collapse from 'react-bootstrap/Collapse';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { NoDataFound } from '../../../pages/NoDataFound';
 import { dateDifference, dateFormat } from '../../../Utilities/Utils';
 import CommonSearch from '../../../Utilities/commonSearch';
 import { itineraryStatusFilter, leadSearch, leadStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
+import { _get } from '../../../API/useApi';
 
 const ManageLead = () => {
 
@@ -38,15 +38,23 @@ const ManageLead = () => {
   const [chnageLeadStatusModalshow, setChnageLeadStatusModalShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchResults, setSearchResults] = useState("");
+  const [itineraryCount, setitineraryCount] = useState("");
+  const [globalId, setGlobalId] =  useState("" as any)
 
   useEffect(() => {
-    axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
+    fetchDataCustomer()
+    // axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
   }, [])
 
   useEffect(() => {
-    axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
+    fetchDataCustomer()
+    // axios.get("http://localhost:8000/createlead").then((response: any) => setLeadData(response?.data))
   }, [chnageLeadStatusModalshow])
 
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createlead');
+    setLeadData(response?.data);
+  }
 
 
 
@@ -82,7 +90,7 @@ const ManageLead = () => {
     if(status === "All") { 
       setLeadDataRow(leadData);
     } else {
-      console.log("filterData status", status, searchResults)
+      
       filterData(status, searchResults)
     }
     setActiveSideViewOfLead(false)
@@ -95,8 +103,7 @@ const ManageLead = () => {
     currentSelectedFilter = localStorage.getItem("page");
   }
   useEffect(() => {
-    console.log("currentSelectedFilter", currentSelectedFilter)
-    setActiveStatus(currentSelectedFilter)
+     setActiveStatus(currentSelectedFilter)
     filterData(currentSelectedFilter, searchResults)
   }, [currentSelectedFilter, leadData])
 
@@ -111,7 +118,7 @@ const ManageLead = () => {
 
   const handleCloseButton = () => {
     setActiveSideViewOfLead(false)
-    console.log("activeFullViewOfLead", activeFullViewOfLead)
+ 
     // setActiveFullViewOfLead(!activeFullViewOfLead)
     // activeFullViewOfLead ? setActiveSideViewOfLead(false) : setActiveSideViewOfLead(true)
   }
@@ -140,6 +147,8 @@ const ManageLead = () => {
     createLead,
     updateLead,
     invoice,
+    readyItinerary,
+    createItinerary,
 } = navigationURL;
 
 const handleSearch = (query: any) => {
@@ -148,7 +157,7 @@ const handleSearch = (query: any) => {
 };
 
 const filterData = (dropdownValue: any, searchValue: any) => {
-  console.log("dropdownValue", dropdownValue,  "searchValue", searchValue);
+ 
   const results = leadData.filter((item: any) => {
     const matchesSearch = searchValue ? leadSearch(item, searchValue) : true;
     const matchesDropdown = dropdownValue ? leadStatusFilter(item, dropdownValue) : true;
@@ -158,17 +167,44 @@ const filterData = (dropdownValue: any, searchValue: any) => {
 }
 
 
-const handleLeadsMoreList = (listItem: any, id: any) => {
-  console.log("listItem", listItem, id);
-  if(listItem?.navTitle === "Change Lead Status" || listItem?.navTitle === "Remove Lead" ) {
+const handleLeadsMoreList = (listItem: any, id: any, globalID: any) => {
+    if(listItem?.navTitle === "Change Lead Status" || listItem?.navTitle === "Remove Lead" ) {
     handleLeadStatusChangeShow(listItem, id)
   } 
   if(listItem?.navTitle === "Edit Lead") {
     navigate(`${updateLead}/${id}`);
   }
   if(listItem?.navTitle === "Invoices") {
-    navigate(`${invoice}/${id}`);
+    navigate(`${invoice}/${globalID}`);
   }
+  if(listItem?.navTitle === "Add New Itinerary") {
+    navigate(`${createItinerary}/${globalID}`);
+  }
+  if(listItem?.navTitle === "View Itinerary") {
+    navigate(`${readyItinerary}/${globalID}`);
+  }
+}
+
+const fetchItinerayData = async() => {
+  const response = await _get('/createitinerary');
+  const itineraryData = response?.data?.filter((item: any) => item.global_id === "17167").length;  
+  setitineraryCount(itineraryData)
+}
+useEffect(() => {
+  fetchItinerayData();
+  // axios.get('http://localhost:8000/createitinerary').then((res: any) => {
+  //   const itineraryData = res?.data?.filter((item: any) => item.global_id === "17167").length;
+    
+  //   setitineraryCount(itineraryData)
+  // })
+},[])
+
+
+const getItineraryCount = () => {
+  return itineraryCount;
+}
+const getInvoiceCount = () => {
+  return 1;
 }
   return (
     <>
@@ -248,9 +284,12 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
       <Container className={styles.managelead_items_wrapper}>
         { activeFullViewOfLead ? <></> : <div className={`${styles.managelead_main_left} ${activeSideViewOfLead ? styles.managelead_main_left_dynamic : ""}`}>
         {
-          leadDataRow?.map((item: any, index: any) => <div className={`${styles.managelead_content_wrapper} align-items-end ${selectedIndex === index ? styles.manageLeadActive : ""}`} key ={index} onClick={() => handleLeadClick(index, item)}>
+          leadDataRow?.map((item: any, index: any) => <div className={`${styles.managelead_content_wrapper} align-items-end ${selectedIndex === index ? styles.manageLeadActive : ""}`} key ={index} onClick={() => {
+            handleLeadClick(index, item);
+            setGlobalId(item?.global_id);
+            }}>
             <div className={`${styles.managelead_item_left} ${activeSideViewOfLead ? styles.sideViewEnabled : styles.fullwidthViewEnabled}`}>
-              <h6>{item?.id} - {item?.leadTitle} {item?.leadstatus}</h6>
+              <h6>{item?.id} - {item?.leadTitle} {item?.leadstatus} - {item?.global_id}</h6>
               <ul>
                 {
                   activeSideViewOfLead ? <>
@@ -261,7 +300,7 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
                     INR {item?.budgetForTrip !== "" ? item?.budgetForTrip : notApplicable}
                   </li>
                   <li><label>Itinerary</label>
-                    0
+                    {getItineraryCount()}
                   </li>
                   </> : <>
                   <li>
@@ -284,7 +323,7 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
                     INR {item?.budgetForTrip !== "" ? item?.budgetForTrip : notApplicable}
                   </li>
                   <li><label>Itinerary</label>
-                    0
+                    {getItineraryCount()}
                   </li>
                   </>
                 }
@@ -320,7 +359,7 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
                     manageLeadSideNavMoreList?.map((navList: any, index: any) => 
                     <Col xs={6} md={4} key = {index}>
                         {
-                          <h6 onClick={()=>handleLeadsMoreList(navList, showSingleView["id"])}><span>{navList.icon} &nbsp;</span>{navList?.navTitle}</h6> 
+                          <h6 onClick={()=>handleLeadsMoreList(navList, showSingleView["id"], showSingleView["global_id"])}><span>{navList.icon} &nbsp;</span>{navList?.navTitle}</h6> 
                         }
                         {/* { navList?.navTitle === "Change Lead Status" ? <h6 
                           onClick = {() => handleLeadStatusChangeShow(navList?.navTitle, showSingleView["id"])}>
@@ -343,7 +382,7 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
                   <li><span>Kids</span>{!!showSingleView?.noOfKids ? showSingleView?.noOfKids : "-"}</li>
                   <li><span>Infants</span>{!!showSingleView?.noOfDays ? showSingleView?.noOfDays : "-"}</li>
                   <li><span>Budge / Cost</span>{showSingleView?.budgetForTrip} /-</li>
-                  <li><span>Itinerary</span>{0}</li>
+                  <li><span>Itinerary</span>{getItineraryCount()}</li>
                   <li onClick={() => handleViewMore()} style={{cursor: "pointer"}}>More <FontAwesomeIcon icon={faAngleDown} /></li>
                 </ul>
               </Col>}
@@ -396,6 +435,12 @@ const handleLeadsMoreList = (listItem: any, id: any) => {
                 </Col>
                 <Col xs={6} md={4} className={`${styles.defaultViewItems} mb-2`}>
                   <span>Currency</span> {!!showSingleView?.currencyType ? showSingleView?.currencyType : "-"}
+                </Col>
+                <Col xs={6} md={4} className={`${styles.defaultViewItems} mb-2`}>
+                  <span>Itenerary</span> {getItineraryCount()}
+                </Col>
+                <Col xs={6} md={4} className={`${styles.defaultViewItems} mb-2`}>
+                  <span>Invoce</span> {getInvoiceCount()}
                 </Col>
                 <Col xs={12} md={12} className={`${styles.defaultViewItems} mb-2`}>
                   <span>Short Note</span> {!!showSingleView?.shortNote ? showSingleView?.shortNote : "-"}

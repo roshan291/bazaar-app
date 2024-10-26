@@ -17,6 +17,8 @@ import CreateInvoice from './components/billing/invoice/create';
 import UpdateCustomer from './components/billing/customer/update';
 import UpdateLead from './components/lead/update_Lead';
 import EncryptionDemo from './components/encryption';
+import ViewAllItinerary from './components/lead/view-all-itinerary';
+import ViewItinerary from './components/itinerary/view_itinerary';
 
 
 function App() {
@@ -59,11 +61,15 @@ function App() {
       {/* <Route path={navigationURL.createinvoice} element={<CreateInvoice />}/> */}
       <Route path="/customer/create" element={<MyCustomer />} />
       <Route path="/itinerary/create" element={<CreateItinerary />}/> 
+      <Route path="/itinerary/create/:id" element={<CreateItinerary />}/> 
       <Route path="/itinerary/customised" element={<CustomisedItinerary />}/>
       <Route path="/itinerary/group" element={<GroupItinerary />}/>
       <Route path="/itinerary/ready" element={<ReadyItinerary />}/>
-      <Route path="/customer/update/:id" element={<UpdateCustomer />}/>
+      <Route path="/itinerary/ready/:id" element={<ReadyItinerary />}/>
+      <Route path="/customer/update/:id" element={<UpdateCustomer />}/> 
       <Route path="/encryption" element = {<EncryptionDemo />} />
+      {/* <Route path="/itineray/view" element = {<ViewAllItinerary />} /> */}
+      <Route path="/itineray/view" element = {<ViewItinerary />} />
       {/* <Route path="/" element={<Dashboard />}/>
       <Route path="/" element={<Dashboard />}/>
       <Route path="/" element={<Dashboard />}/>

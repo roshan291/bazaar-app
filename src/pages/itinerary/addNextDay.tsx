@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/esm/Row';
 import { selectMeal } from '../../constants';
 import Col from 'react-bootstrap/esm/Col';
 import CustomDatePicker from '../../Utilities/CustomDatePicker';
+import moment from 'moment';
 
 const NextDay = (props: any) => {
   const uniqueId = useId(); 
@@ -22,7 +23,7 @@ const NextDay = (props: any) => {
   const [daySelect, setDaySelect] = useState({
     id: uniqueId,
     dayTitle: "",
-    dayDate: "",
+    dayDate: new Date(),
 })
 
 const {dayTitle, dayDate} = daySelect;
@@ -33,7 +34,7 @@ const handleChangeDaySelect = (e: any) => {
     const value = target.value;
     const name = target.name;
   
-    console.log("target.value", target.value)
+    
 
     setDaySelect({
       ...daySelect,
@@ -45,12 +46,10 @@ const onSubmitCreateNewDay = (event: any) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      console.log("All date Not Verified handleCreateNewCustomer");
+    
       event.stopPropagation();
     } else {
-      // console.log("onSubmitCreateNewDay", daySelect) ;
-       props?.getnextDayData(`${dayTitle} | ${dayDate}`)
-
+        props?.getnextDayData(`${dayTitle} | ${dayDate}`)
       // setDaysList([...daysList, daySelect]);  
       // props?.getnextDayData([...daysList, daySelect]); 
       // setDaySelect({ dayTitle: "", dayDate: "" }); 

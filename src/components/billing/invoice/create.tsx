@@ -5,23 +5,29 @@ import styles from "./invoice.module.css"
 import { generateCurrentDateAndTime, generateUniqueId } from '../../../Utilities/Utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { navigationURL } from '../../../constants'
-import axios from 'axios'
 import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.'
+import { _get, _patch, _post } from '../../../API/useApi'
 
 const CreateInvoice = () => {
   
   let navigate = useNavigate(); 
   const history = useNavigate();
   const { slag, id } = useParams();
-
-  console.log("CreateInvoice", id)
-
   const [validated, setValidated] = useState(false);
   const [userList, setUserList] = useState([] as any);
+
+  const appendGloabalId = () => {
+    if(id === "" || id === "undefined" || id === null) {
+      return "";
+    } else {
+      return id; 
+    }
+  }
   
   const [createInvoice, setCreateInvoice] = useState({
     currencyType: "",
     paymentMode: "",
+    global_id: appendGloabalId(),
     customerName: "",
     invoieStatus: "",
     invoiceParticulars: [] as any,
@@ -31,25 +37,31 @@ const CreateInvoice = () => {
     billingNote: "",
     invoiceId: `HB${generateUniqueId()}`,
     createdDate: generateCurrentDateAndTime(),
-    invoiceType: ""
 })
 
 useEffect(() => {
-  axios.get('http://localhost:8000/createcustomer').then((res: any) => {
-  const customer = res.data;
-  setUserList(customer);
-});
+//   axios.get('http://localhost:8000/createcustomer').then((res: any) => {
+//   const customer = res.data;
+//   setUserList(customer);
+// });
+fetchData();
 },[])
+
+const fetchData = async() => {
+  const response = await _get('/createcustomer');
+  setUserList(response?.data);
+}
+
+const fetchDataById = async() => {
+  const response = await _get(`/createcustomer/${slag}`);
+  setCreateInvoice(response?.data);
+}
 
 useEffect(() => {
   if(!!slag) {
-    axios.get(`http://localhost:8000/createinvoice/${slag}`).then((res: any) => {
-      const selectedInvoice = res.data;
-      console.log("selectedInvoice", selectedInvoice)
-      setCreateInvoice(selectedInvoice);
-    });
+    fetchDataById();
   }
-},[])
+},[slag])
 
 const { 
   currencyType, 
@@ -85,9 +97,6 @@ const navigateToBack = () => {
 
 const handleChangeCurrency = (e: any) => {
   const target = e.target;
-
-  console.log("target", target)
-
   const value = target.type === 'checkbox' ? target.checked : target.value;
   const name = target.name;
 
@@ -97,26 +106,24 @@ const handleChangeCurrency = (e: any) => {
   )
 }
 
-const handleSubmit = (event: any) => {
+const handleSubmit = async(event: any) => {
   event.preventDefault(); 
   countGrandTotal()
   const form = event.currentTarget;
   if (form.checkValidity() === false) {
-    event.stopPropagation();
-    console.log("validattin")
+    event.stopPropagation(); 
   }  else {
-    if(!id === undefined) {
-      axios.patch(`http://localhost:8000/createinvoice/${id}`, createInvoice);
+    if(slag) {
+      // axios.patch(`http://localhost:8000/createinvoice/${slag}`, createInvoice);
+      await _patch(`/createinvoice/${slag}`, createInvoice);
     } else {
-      axios.post(`http://localhost:8000/createinvoice`, createInvoice);
+      await _post(`/createinvoice`, createInvoice);
+      // axios.post(`http://localhost:8000/createinvoice`, createInvoice);
     }    
-    console.log("handleSubmit", createInvoice);
   }
   setValidated(true);
-//  console.log("grandTotal",grandTotal)
 };
-console.log("handleSubmit 1", createInvoice);
-console.log("Roshan slag", !!slag)
+
 const addNewParticular = () => {
 
   const updatedParticulars = {
@@ -167,8 +174,7 @@ const countGrandTotal = () => {
 
   const findBasicAmount = ((particularTotalRateFinalValue * particularTotalQuantityFinalValue) - particularTotalDiscountFinalValue) + particularTotalHSNFinalValue;
   const calculateGST = findBasicAmount * particularTotalGSTFinalValue / 100;
-  const grandTotal = (findBasicAmount + calculateGST) + particularTotalAmountFinalValue
-  console.log("findBasicAmount", findBasicAmount, calculateGST, grandTotal  )
+  const grandTotal = (findBasicAmount + calculateGST) + particularTotalAmountFinalValue;
 
   // setGrandTotal(grandTotal);
   setCreateInvoice({ ...createInvoice, grandTotalAmount: grandTotal })

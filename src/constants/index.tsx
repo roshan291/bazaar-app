@@ -116,8 +116,8 @@ export const helpChild = ["+91 9727338866"]
 export const navigationConstant = [ "Dashboard", "Leads", "My Itinerary", "Customer & Billing", "Hotels", "Tools", "Help"]
 
 export const selectToastMessage = {
-    success: "Success !!",
-    failed: "Failed !!",
+    success: "Success",
+    failed: "Failed",
     successMessage: "Request sumitted successful.",
     failedMessage: "Request failed to sumitted."
 }

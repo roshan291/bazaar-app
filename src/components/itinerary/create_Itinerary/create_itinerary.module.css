@@ -98,5 +98,16 @@
 }
 
 .dayHotel {
-    
+    margin: .5rem 0 2rem 0;
+}
+.dayHotel h5 {
+    margin-bottom: 0;
+}
+.dayHotelItemWrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.dayHotelItemBlock {
+    width: 25%;
 }

@@ -9,11 +9,10 @@ import Col from 'react-bootstrap/Col';
 // import CustomDropdown from './CustomDropdown';
 // import { selectCountries } from '../constants/countries';
 // import CustomNumberInput from './CustomNumberInput';
-// import { generateCurrentDateAndTime, generateUniqueId, onKeyPress } from './Utils';
-import axios from 'axios';
+// import { generateCurrentDateAndTime, generateUniqueId, onKeyPress } from './Utils'
 import Spinner from 'react-bootstrap/Spinner';
 import { generateCurrentDateAndTime, generateUniqueId, onKeyPress } from '../../../Utilities/Utils';
-import CustomToast from '../../../Utilities/CustomToast';
+// import CustomToast from '../../../Utilities/CustomToast';
 import CustomTextInput from '../../../Utilities/CustomTextInput';
 import CustomNumberInput from '../../../Utilities/CustomNumberInput';
 import CustomDropdown from '../../../Utilities/CustomDropdown';
@@ -26,6 +25,7 @@ import { faArrowRight, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { navigationURL } from '../../../constants';
 import { useParams } from 'react-router-dom';
+import { _get, _put } from '../../../API/useApi';
 // import CustomToast from './CustomToast';  
 // import Button from '../components/buttons';
 
@@ -82,8 +82,7 @@ const UpdateCustomer = (props: any) => {
       const value = target.value;
       const name = target.name;
     
-      console.log("target.value", target.value)
-
+  
       setCreateNewCustomer({
         ...createNewCustomer,
         [name]: value
@@ -96,40 +95,29 @@ const UpdateCustomer = (props: any) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      console.log("All date Not Verified handleCreateNewCustomer");
+     
       event.stopPropagation();
     } else {
     //  props?.closeModal(false);
-      axios.put(`http://localhost:8000/createcustomer/${id}`, createNewCustomer).then((response) => {
-         
-      if (response.status === 200) {
-        setStatusCode("success")
-        setshowToast(true)
-        handleBackToCustomer()
-      } else if (response.status === 201) { 
-        setStatusCode("success")
-        setshowToast(true)
-        handleBackToCustomer()
-      } else { 
-        setStatusCode("danger")
-        setshowToast(true)
-      }
-    }).catch((error) => {
-      setStatusCode("danger")
-      setshowToast(true)
-      console.log("failed with", error)
-    })
+      putCustomerData(id, createNewCustomer);
+      handleBackToCustomer();
     }
+    setValidated(true)
+  }
+
+  const putCustomerData = async(id: any, createNewCustomer: any) => {
+    await _put(`/createcustomer/${id}`, createNewCustomer); 
+  }
+
+  const getCustomerData = async() => {
+    const response = await _get(`/createcustomer/${id}`);
+    setCreateNewCustomer(response?.data);
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/createcustomer/${id}`).then((res: any) => {
-    const customer = res.data;
-    setCreateNewCustomer(customer);
-  });
-},[])
+    getCustomerData();
+  },[])
 
-  console.log("id", id, createNewCustomer);
  
   useEffect(() => {
     return () => {
@@ -143,7 +131,7 @@ const UpdateCustomer = (props: any) => {
 
   return (
     <>
-    <CustomToast showToast = {showToast} variantType = {statusCode}/>
+    {/* <CustomToast showToast = {showToast} variantType = {statusCode}/> */}
      <div className={styles.update_customer}>
         <div className={styles.update_customer_header}>
         <h5>Update Customer</h5>   

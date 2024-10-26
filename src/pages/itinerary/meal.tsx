@@ -18,8 +18,6 @@ const Meal = (props: any) => {
       setShow(props?.show)
     }, [props])
 
-    // console.log("Meal", props)
-
     const [meal, setMeal] = useState({
         id: uniqueId,
         mealTitle: "",
@@ -66,14 +64,13 @@ const Meal = (props: any) => {
     const onSubmitMeal = (event: any) => {
       event.preventDefault();
       const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        console.log("All date Not Verified handleCreateNewCustomer");
+      if (form.checkValidity() === false) { 
         event.stopPropagation();
       } else {
         props?.getDayMeal([meal])
       }
     }
-    console.log("meal", meal)
+ 
   return (
     <>
     <Modal
