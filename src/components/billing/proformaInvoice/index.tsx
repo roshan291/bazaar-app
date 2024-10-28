@@ -42,10 +42,13 @@ const ProformaInvoice = () => {
     fetchDataCustomer();
   },[])
 
+  const filterProfomaInvoice = (data: any) => {
+    return data?.filter((list: any) => list.invoiceType === true)
+  }
   const fetchDataCustomer = async () => {
     const response = await _get('/createinvoice');
-    setInvoiceRowData(response?.data);
-    setrowData(response?.data)
+    setInvoiceRowData(filterProfomaInvoice(response?.data));
+    setrowData(filterProfomaInvoice(response?.data))
   }
 
   const handleInvoceStatus = (e: any) => {

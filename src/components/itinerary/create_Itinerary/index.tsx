@@ -79,6 +79,8 @@ const CreateItinerary = () => {
         return id === "" || id === "undefined" || id === null || id === undefined;
     }
 
+    console.log("page params", id)
+
     const getPreviousPage = () => {
         let prevPageTitle = "" as any
         const page = sessionStorage.getItem("previouspage");
@@ -195,6 +197,7 @@ const CreateItinerary = () => {
     };
 
     useEffect(() => {
+        console.log("leadFilterData", leadFilterData.length > 0 && id !== "undefined", leadFilterData)
         if (leadFilterData.length > 0 && id !== "undefined") {
             const leadObj = leadFilterData.find((item: any) => Number(item.global_id) === Number(id));
             if (leadObj) {
@@ -214,8 +217,7 @@ const CreateItinerary = () => {
           event.stopPropagation();
           setValidated(true);
         } else {
-            
-            _post('/createItinerary', createItinerary).then((response) => {
+            _post('/createitinerary', createItinerary).then((response) => {
                  setLoading(response?.status === 201 ? false : true)
                  if(response?.status === 201) {
                     const page = sessionStorage.getItem("previouspage");
@@ -234,8 +236,8 @@ const CreateItinerary = () => {
     }, [])
 
     const leadData = async() => {
-        const response = await _get('/createcustomer');
-        setLeadFilterData(response.data);
+        const response = await _get('/createlead');
+        setLeadFilterData(response?.data);
     }
 
      useEffect(() => {
@@ -409,12 +411,12 @@ useEffect(() => {
 <div className="page_top_banner">
         <div className={`container`}>
           <Row style={{alignItems: "center"}}>
-          <Col className="top_banner_left_panel" xs={12} md={4}>
+          <Col className="top_banner_left_panel" xs={12} md={3}>
             <h5>
                 Your Tour Itinerary
             </h5>
         </Col>
-        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <Col className="top_banner_right_panel" xs={12} md={9} style ={{display: "flex", justifyContent: "end"}}>
         <div className="top_banner_dropdown">
           {/* <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>

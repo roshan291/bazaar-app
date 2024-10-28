@@ -20,6 +20,7 @@ const DownloadBill = (props: any) => {
     gstNummber, 
     billingNote,  
     createdDate,
+    invoiceType,
     id,
     grandTotalAmount,
   } = rowData;
@@ -137,7 +138,7 @@ const DownloadBill = (props: any) => {
         <Page style={styles.page}>
             <Header />
             <View style={styles.heading}>
-                <Text style={styles.title_center}>Invoice</Text> 
+                <Text style={styles.title_center}>{invoiceType ? "Proforma Invoice" : "Invoice"}</Text> 
             </View>
             <View style={styles.bottom_line}>
                 <Text></Text>

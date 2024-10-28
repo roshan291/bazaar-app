@@ -42,10 +42,14 @@ const GroupItinerary = () => {
     fetchDataCustomer();
   },[])
 
+  const getonlyRedyItinerary = (data: any) => {
+    return data?.filter((list: any) => list.previousPage === "ItineraryGroup");
+  }
+
   const fetchDataCustomer = async () => {
     const response = await _get('/createitinerary');
-    setData(response?.data);
-    setRowData(response?.data)
+    setData(getonlyRedyItinerary(response?.data));
+    setRowData(getonlyRedyItinerary(response?.data));
   }
   
   const handleSearch = (query: any) => {
@@ -79,12 +83,12 @@ const GroupItinerary = () => {
       <div className="page_top_banner">
         <div className={`container`}>
           <Row style={{alignItems: "center"}}>
-          <Col className="top_banner_left_panel" xs={12} md={4}>
+          <Col className="top_banner_left_panel" xs={12} md={3}>
             <h5>
               Group Itinerary
             </h5>
         </Col>
-        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <Col className="top_banner_right_panel" xs={12} md={9} style ={{display: "flex", justifyContent: "end"}}>
         <div className="top_banner_dropdown">
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>

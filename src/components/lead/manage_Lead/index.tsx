@@ -216,12 +216,12 @@ const getInvoiceCount = () => {
       <div className="page_top_banner">
         <div className={`container`}>
           <Row style={{alignItems: "center"}}>
-          <Col className="top_banner_left_panel" xs={12} md={4}>
+          <Col className="top_banner_left_panel" xs={12} md={3}>
             <h5>
               Manage lead
             </h5>
         </Col>
-        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <Col className="top_banner_right_panel" xs={12} md={9} style ={{display: "flex", justifyContent: "end"}}>
         <div className="top_banner_dropdown">
           <Form.Select aria-label="Default select example" value = {activeStatus} onChange={(e) => handleStatusClick(e)}>
             {

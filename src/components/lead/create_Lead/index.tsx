@@ -5,7 +5,7 @@ import CustomDatePicker from '../../../Utilities/CustomDatePicker';
 import CustomTextInput from '../../../Utilities/CustomTextInput';
 import CustomeTextarea from '../../../Utilities/CustomeTextarea';
 
-import { createNewCustomer, selectHotelPreferences, modeOfPayment, selectCouple, selectCurrency, selectRequirement, selectRequirementDefault, selectServiceIncluded, selectTypeOfHoliday, selectVehicleType } from '../../../constants';
+import { createNewCustomer, selectHotelPreferences, modeOfPayment, selectCouple, selectCurrency, selectRequirement, selectRequirementDefault, selectServiceIncluded, selectTypeOfHoliday, selectVehicleType, navigationURL } from '../../../constants';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/esm/Form';
@@ -24,9 +24,13 @@ import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.';
 import { selectCountries } from '../../../constants/countries';
 import { useParams } from 'react-router-dom';
 import { _get, _post, _put } from '../../../API/useApi';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CreateLead = () => {
+  const navigate = useNavigate(); 
+  const {
+    manageLead, 
+} = navigationURL;
 
 const { id } = useParams();
  
@@ -152,8 +156,10 @@ const handleSubmit = async (event: any) => {
   } else {
     if(!!id) {
      await _put(`/createlead/${id}`, createLead);
+     navigate(manageLead)
     } else {
       await _post('/createlead', createLead);
+      navigate(manageLead)
     }  
     
  
@@ -268,12 +274,12 @@ const fetchLead = async() => {
     <div className="page_top_banner">
         <div className={`container`}>
           <Row style={{alignItems: "center"}}>
-          <Col className="top_banner_left_panel">
+          <Col className="top_banner_left_panel" md={3}>
             <h5>
               Create lead
             </h5>
         </Col>
-        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <Col className="top_banner_right_panel" xs={12} md={9} style ={{display: "flex", justifyContent: "end"}}>
          
         </Col>
         </Row>

@@ -47,12 +47,16 @@ const CustomisedItinerary = () => {
     fetchDataCustomer();
   },[])
 
-  const fetchDataCustomer = async () => {
-    const response = await _get('/createitinerary');
-    setData(response?.data);
-    setRowData(response?.data)
+  const getonlyRedyItinerary = (data: any) => {
+    return data?.filter((list: any) => list.previousPage === "ItineraryCustomised");
   }
 
+  const fetchDataCustomer = async () => {
+    const response = await _get('/createitinerary');
+    setData(getonlyRedyItinerary(response?.data));
+    setRowData(getonlyRedyItinerary(response?.data));
+  }
+  console.log("rowdata", rowdata)
   const handleSelectedStatus = (e: any) => {
     setSelectedStatus(e.target.value) 
     filterData(e.target.value, searchResults)
@@ -80,12 +84,12 @@ const CustomisedItinerary = () => {
       <div className="page_top_banner">
         <div className={`container`}>
           <Row style={{alignItems: "center"}}>
-          <Col className="top_banner_left_panel" xs={12} md={4}>
+          <Col className="top_banner_left_panel" xs={12} md={3}>
             <h5>
             Customised Itinerary
             </h5>
         </Col>
-        <Col className="top_banner_right_panel" xs={12} md={8} style ={{display: "flex", justifyContent: "end"}}>
+        <Col className="top_banner_right_panel" xs={12} md={9} style ={{display: "flex", justifyContent: "end"}}>
         <div className="top_banner_dropdown">
           <Form.Select aria-label="Default select example" value = {selectedStatus} onChange={(e) => handleSelectedStatus(e)}>
             <option value="All">All</option>

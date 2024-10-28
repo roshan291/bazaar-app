@@ -46,10 +46,14 @@ const Invoice = () => {
     fetchDataCustomer();
   },[])
 
+  const filterInvoice = (data: any) => {
+    return data?.filter((list: any) => list.invoiceType !== true)
+  }
+
   const fetchDataCustomer = async () => {
     const response = await _get('/createinvoice');
-    setInvoiceRowData(response?.data);
-    setrowData(response?.data)
+    setInvoiceRowData(filterInvoice(response?.data));
+    setrowData(filterInvoice(response?.data));
   }
 
   const filterIfPageParamExit = (data: any) => {

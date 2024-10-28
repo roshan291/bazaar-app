@@ -35,6 +35,7 @@ const CreateInvoice = () => {
     gstNummber: "36AAPCS5625R1ZE",
     panNummber: "BLUPA2358A",
     billingNote: "",
+    invoiceType: "",
     invoiceId: `HB${generateUniqueId()}`,
     createdDate: generateCurrentDateAndTime(),
 })
@@ -53,7 +54,7 @@ const fetchData = async() => {
 }
 
 const fetchDataById = async() => {
-  const response = await _get(`/createcustomer/${slag}`);
+  const response = await _get(`/createinvoice/${slag}`);
   setCreateInvoice(response?.data);
 }
 
@@ -75,6 +76,7 @@ const {
   createdDate,
   invoiceId,
   grandTotalAmount,
+  invoiceType,
 } = createInvoice;
 
 const {
@@ -116,9 +118,11 @@ const handleSubmit = async(event: any) => {
     if(slag) {
       // axios.patch(`http://localhost:8000/createinvoice/${slag}`, createInvoice);
       await _patch(`/createinvoice/${slag}`, createInvoice);
+      navigate(invoice)
     } else {
       await _post(`/createinvoice`, createInvoice);
       // axios.post(`http://localhost:8000/createinvoice`, createInvoice);
+      navigate(invoice)
     }    
   }
   setValidated(true);
@@ -332,9 +336,20 @@ const countGrandTotal = () => {
             </Form.Group>
             </Row>
             <Row>
+            <Form.Group className="mb-3" controlId="validationCustom10">
+            <Form.Check // prettier-ignore
+              type="checkbox" 
+              label={`Proforma Invoice`}
+              value={invoiceType} name='invoiceType' onChange={handleChangeCurrency}
+            />
+            </Form.Group>
+            </Row>
+            <Row>
               <div className={styles.actionButtons}> 
                 <Button variant="secondary" type="button" onClick={navigateToBack}>Cancel</Button>
-                <Button variant="primary" type="submit" className={styles.primaryButton}>Submit</Button>
+                <Button variant="primary" type="submit" className={styles.primaryButton}>{
+                  !!slag ? "Update" : "Submit"
+                  }</Button>
               </div>
             </Row>
           </Form>

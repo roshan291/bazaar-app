@@ -30,7 +30,7 @@ const Dashboard = () => {
     const allcount = leadData?.length; 
     const newCount = leadData?.filter((all: any) => all.leadstatus === "New").length;
     const pendingCount = leadData?.filter((all: any) => all.leadstatus === "Pending").length;
-    const inprogressCount = leadData?.filter((all: any) => all.leadstatus === "In Progress").length;
+    const inprogressCount = leadData?.filter((all: any) => all.leadstatus === "Inprogress").length;
     const confirmedCount = leadData?.filter((all: any) => all.leadstatus === "Confirmed").length;
     const completedCount = leadData?.filter((all: any) => all.leadstatus === "Completed").length;
     const cancelledCount = leadData?.filter((all: any) => all.leadstatus === "Cancelled").length;

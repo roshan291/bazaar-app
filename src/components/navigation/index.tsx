@@ -6,7 +6,7 @@ import { navigationURL } from "../../constants";
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import LOGO from "../../assets/images/logo1.png"
 
-function NavigationBar() {
+function NavigationBar(props: any) {
 
 const navigate = useNavigate(); 
 
@@ -124,111 +124,111 @@ const clearInvpocepageStorate = () => {
       <div className="logo" onClick={navigateToHome}>
         <img src= {LOGO} alt = "logo" />
       </div>
-      <ul className="nav-menu">
-        <li
-          className={`nav-item ${activeMenu === "home" ? "active" : ""}`}
-          onClick={() => {
-            handleMenuClick("home")
-            navigateToHome();
-        }}
-        >
-          <a  className="nav-link">
-          Dashboard            
-          </a>
-        </li>
-        <li
-          className={`nav-item ${activeMenu === "lead" || isSubMenuOpen ? "active" : ""}`}
-          onClick={() => handleMenuClick("lead")}
-        >
-            
-          <a  className="nav-link">
-            Lead { activeMenu === "lead" ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} />  }
-          </a>
-          <ul className={`sub-menu ${activeMenu === "lead" ? "open" : ""}`}>
-            {
-                ["Create new lead", "Manage leads"].map((subItem: any, index: any) => <li key = {index} className={`sub-link ${isActiveLeadSubItem === subItem ? "subMenuActive" : ""}`} 
-                onClick={() => {
-                    setIsActiveLeadSubItem(subItem);
-                    handleSubMenuClick();
-                    handleLeadNavigation(subItem);
-                    clearpageStorate()
-                }}
-                >
-                    {subItem}
-                </li>)
-            }
-          </ul>
-        </li>
-        <li
-          className={`nav-item ${activeMenu === "itinerary" || isSubMenuOpen1 ? "active" : ""}`}
-          onClick={() => handleMenuClick("itinerary")}
-        >
-          <a  className="nav-link">
-          My Itinerary  { activeMenu === "itinerary" ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
-          </a>
-          <ul className={`sub-menu ${activeMenu === "itinerary" ? "open" : ""}`}>
-            {
-                ["Customized Itinerary", "Group Itinerary", " Ready Itinerary" ].map((subItem: any, index: any) => <li key ={index} className={`sub-link ${isActiveItinerarySubItem === subItem ? "subMenuActive" : ""}`} onClick={() => {
-                    setIsActiveItinerarySubItem(subItem);
-                    handleSubMenuClick();
-                    handleItineraryNavigation(subItem);
-                }}> {subItem}
-                </li>)
-            }
-             
-          </ul>
-        </li>
-         <li
-          className={`nav-item ${activeMenu === "billing" || isSubMenuOpen2 ? "active" : ""}`}
-          onClick={() => handleMenuClick("billing")}
-        >
-          <a className="nav-link">
-          Customer & Billing { activeMenu === "billing" ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
-          </a>
-          <ul className={`sub-menu ${activeMenu === "billing" ? "open" : ""}`}>
-            {
-                ["Invoice", "Proforma Invoice","My Customers"].map((subItem: any, index: any) => <li key = {index} className={`sub-link ${isActiveBillingSubItem === subItem ? "subMenuActive" : ""}`} 
-                onClick={() => {
-                    setIsActiveBillingSubItem(subItem);
-                    handleSubMenuClick();
-                    handleBillingNavigation(subItem);
-                    clearInvpocepageStorate();
-                }}
-                >
-                    {subItem}
-                </li>)
-            }
-          </ul>
-        </li>
-        <li
-          className={`nav-item disabled ${activeMenu === "tools" ? "active" : ""}`}
-          onClick={() => handleMenuClick("tools")}
-        >
-          <a className="nav-link">
-          Tools
-          </a>
-        </li>
-        <li
-          className={`nav-item disabled ${activeMenu === "help" ? "active" : ""}`}
-          onClick={() => handleMenuClick("help")}
-        >
-          <a  className="nav-link">
-          Help
-          </a>
-        </li>
-      </ul>
-        </div>
-        
-     
+        <ul className="nav-menu">
+          <li
+            className={`nav-item ${activeMenu === "home" ? "active" : ""}`}
+            onClick={() => {
+              handleMenuClick("home")
+              navigateToHome();
+          }}
+          >
+            <a  className="nav-link">
+            Dashboard            
+            </a>
+          </li>
+          <li
+            className={`nav-item ${activeMenu === "lead" || isSubMenuOpen ? "active" : ""}`}
+            onClick={() => handleMenuClick("lead")}
+          >
+              
+            <a  className="nav-link">
+              Lead { activeMenu === "lead" ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} />  }
+            </a>
+            <ul className={`sub-menu ${activeMenu === "lead" ? "open" : ""}`}>
+              {
+                  ["Create new lead", "Manage leads"].map((subItem: any, index: any) => <li key = {index} className={`sub-link ${isActiveLeadSubItem === subItem ? "subMenuActive" : ""}`} 
+                  onClick={() => {
+                      setIsActiveLeadSubItem(subItem);
+                      handleSubMenuClick();
+                      handleLeadNavigation(subItem);
+                      clearpageStorate()
+                  }}
+                  >
+                      {subItem}
+                  </li>)
+              }
+            </ul>
+          </li>
+          <li
+            className={`nav-item ${activeMenu === "itinerary" || isSubMenuOpen1 ? "active" : ""}`}
+            onClick={() => handleMenuClick("itinerary")}
+          >
+            <a  className="nav-link">
+            My Itinerary  { activeMenu === "itinerary" ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
+            </a>
+            <ul className={`sub-menu ${activeMenu === "itinerary" ? "open" : ""}`}>
+              {
+                  ["Customized Itinerary", "Group Itinerary", " Ready Itinerary" ].map((subItem: any, index: any) => <li key ={index} className={`sub-link ${isActiveItinerarySubItem === subItem ? "subMenuActive" : ""}`} onClick={() => {
+                      setIsActiveItinerarySubItem(subItem);
+                      handleSubMenuClick();
+                      handleItineraryNavigation(subItem);
+                  }}> {subItem}
+                  </li>)
+              }
+              
+            </ul>
+          </li>
+          <li
+            className={`nav-item ${activeMenu === "billing" || isSubMenuOpen2 ? "active" : ""}`}
+            onClick={() => handleMenuClick("billing")}
+          >
+            <a className="nav-link">
+            Customer & Billing { activeMenu === "billing" ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
+            </a>
+            <ul className={`sub-menu ${activeMenu === "billing" ? "open" : ""}`}>
+              {
+                  ["Invoice", "Proforma Invoice","My Customers"].map((subItem: any, index: any) => <li key = {index} className={`sub-link ${isActiveBillingSubItem === subItem ? "subMenuActive" : ""}`} 
+                  onClick={() => {
+                      setIsActiveBillingSubItem(subItem);
+                      handleSubMenuClick();
+                      handleBillingNavigation(subItem);
+                      clearInvpocepageStorate();
+                  }}
+                  >
+                      {subItem}
+                  </li>)
+              }
+            </ul>
+          </li>
+          <li
+            className={`nav-item disabled ${activeMenu === "tools" ? "active" : ""}`}
+            onClick={() => handleMenuClick("tools")}
+          >
+            <a className="nav-link">
+            Tools
+            </a>
+          </li>
+          <li
+            className={`nav-item disabled ${activeMenu === "help" ? "active" : ""}`}
+            onClick={() => handleMenuClick("help")}
+          >
+            <a  className="nav-link">
+            Help
+            </a>
+          </li>
+        </ul>
+      </div>
       <div className="login-buttons">
         <a  className="btn login">
           Login
         </a>
-         
       </div>
-      <div className="menu-toggle" onClick={toggleMenu}>
+      {
+        !props?.isMobile ? <div className="menu-toggle" onClick={toggleMenu}>
         ☰
-      </div>
+      </div> : <></>
+      }
+      
     </nav>
   );
 }

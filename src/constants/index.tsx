@@ -27,7 +27,7 @@ export const leadStatus = [
     "All",
     "New",
     "Pending",
-    "In Progress",
+    "Inprogress",
     "Confirmed",
     "Completed",
     "Canceled", 

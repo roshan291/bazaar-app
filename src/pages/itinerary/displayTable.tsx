@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Table from 'react-bootstrap/esm/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCopy, faEye, faDownload, faXmark, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faCopy, faEye, faDownload, faXmark, faFloppyDisk, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import Daywiseplan from './dayWisePlan';
 import { NoDataFound } from '../NoDataFound';
@@ -33,7 +33,13 @@ const DisplayTable = (props: any) => {
     }
     const handleChangeClose = () => setChangeModalShow(false);
 
-   
+   const handleUpdateItinerary = (id: any) => {
+    console.log("handleUpdateItinerary", id)
+   }
+
+   const handleDuplicateItinerary = (id: any) => {
+    console.log("handleDuplicateItinerary", id)
+   }
 
   return (
     <>
@@ -64,7 +70,8 @@ const DisplayTable = (props: any) => {
                     <td>{item.budgetForTrip}</td>
                     <td>{item.changestatus === "In process" ? "In Progress" : item.changestatus === "new" ? "New" : item.changestatus === "pending" ? "Pending" : item.changestatus === "confirmed" ? "Confirmed" : item.changestatus === "completed" ? "Completed" : "Canceled"}</td>
                     <td className='itinerary_actin_wrapper'>
-                        <FontAwesomeIcon icon={faCopy} />
+                        <FontAwesomeIcon icon={faCopy} onClick = {() =>handleDuplicateItinerary(item.id)} />
+                        <FontAwesomeIcon icon={faPenToSquare} onClick = {() => handleUpdateItinerary(item.id)}/>
                         <FontAwesomeIcon icon={faEye} onClick={() => handleView(item)}/>
                         <PDFDownloadLink document={<MyDoc pdfdata = {item} />} fileName={item.itineraryTitle}>
                             {({ loading }) =>

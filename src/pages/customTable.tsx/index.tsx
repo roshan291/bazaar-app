@@ -24,7 +24,7 @@ const CustomTable = (props: any) => {
       // const encrypt = encryptMessage(title)
  
         if(props?.title === "Lead") {
-          localStorage.setItem("page", title)
+          localStorage.setItem("page", title === "In Progress" ? "Inprogress" : title)
         } else {
           localStorage.setItem("invoice_page", title)
         }
