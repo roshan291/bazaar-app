@@ -85,7 +85,7 @@ const CreateItinerary = () => {
         let prevPageTitle = "" as any
         const page = sessionStorage.getItem("previouspage");
         if(page) {
-            return page.includes("ready") ? "ItineraryReady" : page.includes("group") ? "ItineraryGroup" : "ItineraryCustomised"
+            return page.includes("ready") || page.includes("manageLead") ? "ItineraryReady" : page.includes("group") ? "ItineraryGroup" : "ItineraryCustomised"
         }
         
         return prevPageTitle;
@@ -222,7 +222,7 @@ const CreateItinerary = () => {
                  if(response?.status === 201) {
                     const page = sessionStorage.getItem("previouspage");
                     if(page) {
-                        return page.includes("ready") ? navigate(`/itinerary/ready`) : page.includes("group") ? navigate(`/itinerary/group`) : navigate(`/itinerary/customised`);
+                        return page.includes("ready") || page.includes("manageLead")? navigate(`/itinerary/ready`) : page.includes("group") ? navigate(`/itinerary/group`) : navigate(`/itinerary/customised`);
                     }
                  }
             }).catch((error) => {

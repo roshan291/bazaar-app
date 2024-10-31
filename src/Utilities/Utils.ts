@@ -35,6 +35,9 @@ export const onKeyPress= (e: any) => {
     return moment(date).format("DD/MM/YYYY");
   }
 
+  const getGlobalIdsByUniqueId = (id: any, data: any) => {
+    return data?.filter((item: any) => item?.id === id)?.map((list: any) => list?.global_id).length;
+  }
 
 
   export {
@@ -42,4 +45,5 @@ export const onKeyPress= (e: any) => {
     generateCurrentDateAndTime,
     dateDifference,
     dateFormat, 
+    getGlobalIdsByUniqueId,
   }

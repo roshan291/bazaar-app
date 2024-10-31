@@ -12,17 +12,18 @@ import { faSquarePlus, faAngleUp, faXmark, faExpand, faAngleDown, faCheck, faMin
 import ManageLeadSideNavMore from '../../../Utilities/ManageLeadSideNavMore';
 import UpdateLeadStatus from '../../../Utilities/UpdateLeadStatus';
 import Collapse from 'react-bootstrap/Collapse';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NoDataFound } from '../../../pages/NoDataFound';
-import { dateDifference, dateFormat } from '../../../Utilities/Utils';
+import { dateDifference, dateFormat, getGlobalIdsByUniqueId } from '../../../Utilities/Utils';
 import CommonSearch from '../../../Utilities/commonSearch';
 import { itineraryStatusFilter, leadSearch, leadStatusFilter } from '../../../Utilities/commonSearch/itinerarySearch';
 import { _get } from '../../../API/useApi';
+import { SetSessionStorageWithoutExcryption } from '../../../Utilities/storages/sessionStorate';
 
 const ManageLead = () => {
 
   const navigate = useNavigate(); 
-  
+  const location = useLocation();
   const [activeStatus, setActiveStatus] = useState<string>("All");
   const [selectedNavItem, setselectedNavItem] = useState<string>("");
   const [selectedId, setselectedId] = useState<string>("");
@@ -38,8 +39,9 @@ const ManageLead = () => {
   const [chnageLeadStatusModalshow, setChnageLeadStatusModalShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchResults, setSearchResults] = useState("");
-  const [itineraryCount, setitineraryCount] = useState("");
+  const [itineraryCount, setitineraryCount] = useState(0);
   const [globalId, setGlobalId] =  useState("" as any)
+
 
   useEffect(() => {
     fetchDataCustomer()
@@ -187,10 +189,13 @@ const handleLeadsMoreList = (listItem: any, id: any, globalID: any) => {
 
 const fetchItinerayData = async() => {
   const response = await _get('/createitinerary');
-  const itineraryData = response?.data?.filter((item: any) => item.global_id === "17167").length;  
+  const itineraryData = response?.data;
+  // console.log("fetchItinerayData", itineraryData1)
+  //.filter((item: any) => item.global_id === "17167").length;  
   setitineraryCount(itineraryData)
 }
 useEffect(() => {
+  SetSessionStorageWithoutExcryption("previouspage", location.pathname);
   fetchItinerayData();
   // axios.get('http://localhost:8000/createitinerary').then((res: any) => {
   //   const itineraryData = res?.data?.filter((item: any) => item.global_id === "17167").length;
@@ -200,9 +205,6 @@ useEffect(() => {
 },[])
 
 
-const getItineraryCount = () => {
-  return itineraryCount;
-}
 const getInvoiceCount = () => {
   return 1;
 }
@@ -300,7 +302,7 @@ const getInvoiceCount = () => {
                     INR {item?.budgetForTrip !== "" ? item?.budgetForTrip : notApplicable}
                   </li>
                   <li><label>Itinerary</label>
-                    {getItineraryCount()}
+                    {getGlobalIdsByUniqueId(item?.id, itineraryCount)}
                   </li>
                   </> : <>
                   <li>
@@ -323,7 +325,7 @@ const getInvoiceCount = () => {
                     INR {item?.budgetForTrip !== "" ? item?.budgetForTrip : notApplicable}
                   </li>
                   <li><label>Itinerary</label>
-                    {getItineraryCount()}
+                    {getGlobalIdsByUniqueId(item?.id, itineraryCount)}
                   </li>
                   </>
                 }
@@ -382,7 +384,7 @@ const getInvoiceCount = () => {
                   <li><span>Kids</span>{!!showSingleView?.noOfKids ? showSingleView?.noOfKids : "-"}</li>
                   <li><span>Infants</span>{!!showSingleView?.noOfDays ? showSingleView?.noOfDays : "-"}</li>
                   <li><span>Budge / Cost</span>{showSingleView?.budgetForTrip} /-</li>
-                  <li><span>Itinerary</span>{getItineraryCount()}</li>
+                  <li><span>Itinerary</span>{getGlobalIdsByUniqueId(showSingleView["id"], itineraryCount)}</li>
                   <li onClick={() => handleViewMore()} style={{cursor: "pointer"}}>More <FontAwesomeIcon icon={faAngleDown} /></li>
                 </ul>
               </Col>}
@@ -437,7 +439,7 @@ const getInvoiceCount = () => {
                   <span>Currency</span> {!!showSingleView?.currencyType ? showSingleView?.currencyType : "-"}
                 </Col>
                 <Col xs={6} md={4} className={`${styles.defaultViewItems} mb-2`}>
-                  <span>Itenerary</span> {getItineraryCount()}
+                  <span>Itenerary</span> {getGlobalIdsByUniqueId(showSingleView["id"], itineraryCount)}
                 </Col>
                 <Col xs={6} md={4} className={`${styles.defaultViewItems} mb-2`}>
                   <span>Invoce</span> {getInvoiceCount()}
