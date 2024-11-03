@@ -241,8 +241,18 @@ const Daywiseplan = (props:any) => {
         });
       };
 
-      const transportationData =  dayWisePlanFinal?.map((item: any) => item?.transportation?.length > 0 && item.transportation); 
+      const hasEmptyFalse = (item: any) => {
+        return Array.isArray(item) && item.length === 1 && item[0] === false;
+      }
+
+      const transportationData =  dayWisePlanFinal?.filter((item: any) => hasEmptyFalse(item.transportation)); 
       const filteredDayWisePlan = dayWisePlanFinal?.filter((item: any) => hasNonEmptyValues(item));
+
+      console.log("Roshan", transportationData, filteredDayWisePlan, filteredDayWisePlan?.length > 0, transportationData?.length)
+
+    //   if (Array.isArray(transportationData) && transportationData.length === 1 && transportationData[0] === false) {
+    //     console.log("Value is [false]");
+    //   }
     //   console.log("transportationData 1", filteredDayWisePlan)
 
       const renderTransportData = (list: any) => {
@@ -462,7 +472,7 @@ const Daywiseplan = (props:any) => {
             )
         }
         {
-            transportationData?.length > 0 ?
+            transportationData?.length > 0  && transportationData !== false ?
             <Page>
             <View style={styles.innerTop}>
                 <Image src={transportImage} style={styles.image} />

@@ -296,8 +296,11 @@ const CreateItinerary = () => {
     meal: [],
   }
 
+  console.log("dayWisePlan create",nextDayData === "")
   useEffect(() => {
-    setDayWisePlan([...dayWisePlan, addPlan])
+    if(nextDayData !== "") {
+        setDayWisePlan([...dayWisePlan, addPlan])
+    }
   }, [nextDayData])
 
 //   useEffect(() => {
